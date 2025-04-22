@@ -1,89 +1,149 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Maitai Marketing Site (v2)
 
-## Project Overview
+This repository contains the source code for the rebuilt [trymaitai.ai](https://trymaitai.ai) marketing website, based on the technical blueprint (Version 0.1 / 2025-04-21).
 
-This repository contains the source code for the Maitai marketing website (v2), built to showcase the Maitai platform's features and benefits.
+## 1. Technology Stack
 
-## Tech Stack
+| Layer          | Choice                    | Notes                                           |
+|----------------|---------------------------|-------------------------------------------------|
+| Framework      | Next.js 13 (App Router)   | React + file-system routing, edge-ready         |
+| Language       | TypeScript 5.x          | Strict mode (`"strict": true`)                 |
+| Styling        | Tailwind CSS v3           | Custom theme in `tailwind.config.js`            |
+| UI Primitives  | Radix UI                  | Accessible, unstyled base components            |
+| Component Kit  | shadcn/ui                 | Radix-powered, Tailwind-themed wrappers         |
+| Icons          | lucide-react              | 1-stroke icon set                               |
+| Animations     | Framer Motion v10         | Scroll/entrance + micro-interactions            |
+| Forms          | React-Hook-Form + Zod     | Client validation + schema sharing              |
+| Fonts          | Greycliff CF (local OTF)  | Loaded via `next/font/local` in `app/layout.tsx` |
+| Images         | next/image                | Automatic srcset / WebP / lazy                  |
+| Email          | SendGrid v3               | Triggered by `/api/demo` route                   |
+| Anti-spam      | reCAPTCHA v3              | Token verified in API route (`@google-recaptcha/react`) |
+| SEO            | next-seo                  | Per-page Open Graph & meta                      |
+| Error Tracking | Sentry                    | `@sentry/nextjs`                                |
+| CI/CD          | GitHub Actions → Vercel   | Lint → type-check → test → preview              |
 
-- **Framework:** [Next.js](https://nextjs.org/) (App Router)
-- **UI Library:** [React](https://reactjs.org/)
-- **Language:** [TypeScript](https://www.typescriptlang.org/)
-- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
-- **Animation:** [Framer Motion](https://www.framer.com/motion/)
-- **Fonts:** [next/font](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) (for Geist Sans/Mono and local Greycliff CF)
+## 2. Repository File Tree (Condensed)
 
-## Getting Started
+```
+maitai-site-v2/
+├── app/
+│   ├── layout.tsx                  # Root layout (Greycliff font, global styles)
+│   ├── page.tsx                    # Home page (/)
+│   ├── pricing/page.tsx            # Pricing page (/pricing)
+│   ├── careers/page.tsx            # Careers page (/careers)
+│   ├── demo/page.tsx               # Demo page (/demo)
+│   └── api/
+│       └── demo/route.ts           # API route for demo requests
+├── components/
+│   ├── Header.tsx                  # Placeholder
+│   ├── Footer.tsx                  # Placeholder
+│   ├── Hero.tsx                    # Placeholder
+│   ├── Metrics.tsx                 # Placeholder
+│   ├── FeaturesGrid.tsx            # Placeholder
+│   ├── QuickStart.tsx              # Placeholder
+│   ├── PricingTable.tsx            # Placeholder
+│   └── ui/                         # shadcn-generated primitives (e.g., button, dialog)
+├── content/
+│   └── trymaitai_content.md        # Placeholder for Markdown/JSON content
+├── lib/
+│   ├── mailer.ts                   # Placeholder for SendGrid helper
+│   ├── recaptcha.ts                # Placeholder for reCAPTCHA verify helper
+│   └── utils.ts                    # shadcn/ui utility (cn function)
+├── public/
+│   ├── fonts/Greycliff-*.otf     # Local font files
+│   ├── logos/                      # Site logos
+│   ├── icons/                      # Placeholder for icon assets
+│   └── animations/                 # Animation assets
+├── styles/
+│   └── globals.css                 # Tailwind base + shadcn CSS variables
+├── .github/workflows/
+│   └── ci.yml                      # GitHub Actions CI pipeline (Lint, Build, Test)
+├── .gitignore
+├── components.json                 # shadcn/ui CLI configuration
+├── next-env.d.ts
+├── next.config.js                  # Next.js configuration
+├── next-seo.config.mjs             # Default next-seo configuration
+├── package.json
+├── package-lock.json / node_modules/
+├── postcss.config.mjs              # PostCSS configuration (for Tailwind)
+├── README.md                       # This file
+├── tailwind.config.js              # Tailwind CSS configuration (custom theme)
+└── tsconfig.json                   # TypeScript configuration (strict mode)
+```
 
-First, run the development server:
+## 3. Getting Started
+
+### Prerequisites
+
+- Node.js (v20 or later recommended)
+- npm (comes with Node.js)
+
+### Installation
+
+1.  Clone the repository:
+    ```bash
+    git clone <repository-url>
+    cd maitai-site-v2
+    ```
+2.  Install dependencies:
+    ```bash
+    npm install
+    ```
+
+### Running the Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Environment Variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Create a `.env.local` file in the root directory by copying `.env.example` (if one exists) or creating it from scratch. Add the following variables based on the blueprint:
 
-## Project Structure
+```
+NEXT_PUBLIC_RECAPTCHA_SITE_KEY=xxx
+RECAPTCHA_SECRET_KEY=xxx
+SENDGRID_API_KEY=SG.xxx
+SENDGRID_FROM=demo@trymaitai.ai
+SENTRY_DSN=https://...
+```
 
-- **/app:** Contains the core application code using the Next.js App Router.
-  - `layout.tsx`: Root layout, loads global styles and fonts.
-  - `page.tsx`: Main landing page content.
-  - `globals.css`: Global stylesheets and Tailwind directives.
-  - **/components:** Reusable UI components shared across the application.
-- **/public:** Static assets.
-  - **/fonts:** Local font files (e.g., Greycliff CF).
-- `tailwind.config.ts`: Tailwind CSS configuration file.
-- `postcss.config.mjs`: PostCSS configuration (used by Tailwind).
-- `next.config.mjs`: Next.js configuration file.
+Obtain the actual keys from the respective services (Google reCAPTCHA, SendGrid, Sentry).
 
-## Styling
+## 4. Key Configuration Files & Concepts
 
-Styling is primarily handled using **Tailwind CSS**. Key aspects include:
+- **`app/layout.tsx`**: Defines the root HTML structure, loads global CSS (`styles/globals.css`), and configures the primary font (`Greycliff CF`) using `next/font/local`. The font is available via the `--font-greycliff` CSS variable.
+- **`tailwind.config.js`**: Configures Tailwind CSS. Includes paths for purging, defines the `fontFamily.sans` to use `--font-greycliff`, and sets up theme extensions (colors, border radius, keyframes) compatible with `shadcn/ui`.
+- **`styles/globals.css`**: Imports Tailwind's base, components, and utilities. Defines root CSS variables for colors and theming, used by `shadcn/ui` components.
+- **`components.json`**: Configures the `shadcn/ui` CLI, specifying paths for components, utils, Tailwind config, and global CSS.
+- **`components/ui/`**: This directory will contain UI primitives added via the `shadcn/ui` CLI (e.g., `npx shadcn@latest add button`). These components are built using Radix UI and styled with Tailwind.
+- **`lib/utils.ts`**: Contains the `cn` utility function for conditionally applying Tailwind classes, commonly used with `shadcn/ui`.
+- **`next-seo.config.mjs`**: Sets default SEO metadata (title, description, Open Graph tags) used by `next-seo`.
+- **`.github/workflows/ci.yml`**: Defines the continuous integration pipeline run on GitHub Actions for pull requests and pushes to `main`. It installs dependencies, lints, builds, and runs tests.
 
-- **Utility Classes:** Tailwind utility classes are used directly in components for most styling.
-- **Custom Theme:** A custom theme is defined in `tailwind.config.ts`, including:
-  - **Brand Colors:** `maitai-lagoon`, `maitai-lime`, `maitai-pineapple`, etc.
-  - **Custom Font Family:** `font-greycliff` is defined, mapping to the locally hosted Greycliff CF font.
-  - **Typography Scale:** Custom font sizes (`display`, `h1`, `h2`, etc.) are defined.
-  - **Animations/Keyframes:** Custom animations like `overlayShow` and `contentShow` are configured.
-- **Global Styles:** `app/globals.css` imports Tailwind base, components, and utilities. It also defines base `:root` CSS variables (though Tailwind handles dark mode primarily via `dark:` prefixes) and minimal `body` styles.
-- **Font Loading:** The primary brand font, **Greycliff CF**, is loaded locally using `next/font/local` in `app/layout.tsx`. It's made available globally via the CSS variable `--font-greycliff`, which is referenced in `tailwind.config.ts`.
-- **Dynamic Styling & Safelisting:** Some dynamic styles, particularly for the sticky header's color transitions (`app/components/Header.tsx`), are handled using conditional classes applied directly in the component. To prevent Tailwind from purging these dynamically generated classes during production builds, relevant classes are explicitly added to the `safelist` array in `tailwind.config.ts`.
+## 5. Scripts & Tooling
 
-## Key Components
+| Command          | What it Does                                  |
+|------------------|-----------------------------------------------|
+| `npm run dev`    | Starts the Next.js dev server (localhost:3000) |
+| `npm run build`  | Builds the application for production + type-check |
+| `npm run start`  | Starts the production server                  |
+| `npm run lint`   | Runs ESLint and Prettier checks               |
+| `npm run format` | Formats code with Prettier                    |
+| `npm run test`   | Runs unit tests with Vitest                   |
+| `npm run analyze`| Runs bundle analyzer (requires build profile) |
 
-- `Header.tsx`: Site navigation header with sticky scroll behavior.
-- `Footer.tsx`: Site footer.
-- `DemoModal.tsx`: Modal component for requesting a demo.
-- `MetricsStrip.tsx`: Component displaying key metrics/benefits.
-- `QuickStart.tsx`: Section outlining steps to get started.
-- `PricingSection.tsx`: Component displaying pricing plans.
+## 6. Contribution Workflow
 
-## Learn More
+Follow the workflow outlined in the technical blueprint (Section 8):
+1.  Branch from `main` (`feat/<topic>`).
+2.  Commit using Conventional Commits (`feat:`, `fix:`, `chore:`, etc.).
+3.  Open a Pull Request against `main`. CI checks (lint, build, test) will run automatically. Vercel preview deployment should be configured.
+4.  Require at least one approval + green CI to merge.
+5.  Merging to `main` triggers production deployment via Vercel.
 
-To learn more about Next.js, take a look at the following resources:
+## 7. Deployment
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-
-## Deployment
-
-This Next.js application is typically deployed on [Vercel](https://vercel.com), the creators of Next.js. The project is configured for easy deployment on their platform.
+Deployment is handled via Vercel, connected to this GitHub repository. See the blueprint (Section 9) for Vercel project setup and environment variable configuration.

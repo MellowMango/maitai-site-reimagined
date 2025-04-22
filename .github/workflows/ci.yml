@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+jobs:
+  build_and_test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # Or your project's node version
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Type check
+        run: npm run build # next build includes type checking via tsc
+
+      - name: Run tests
+        run: npm run test
+
+      # Add Vercel preview deployment step here if needed
+      # Example using Vercel CLI (requires VERCEL_ORG_ID, VERCEL_PROJECT_ID, VERCEL_TOKEN secrets)
+      # - name: Deploy to Vercel Preview
+      #   if: github.event_name == 'pull_request'
+      #   run: npx vercel deploy --prebuilt --token=$ {{ secrets.VERCEL_TOKEN }}
+      #   env:
+      #     VERCEL_ORG_ID: $ {{ secrets.VERCEL_ORG_ID }}
+      #     VERCEL_PROJECT_ID: $ {{ secrets.VERCEL_PROJECT_ID }} 
