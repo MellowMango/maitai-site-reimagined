@@ -49,24 +49,24 @@ SEGMENT 2  | HERO + METRICS STRIP
 files: components/Hero.tsx, components/Metrics.tsx
 
 Hero.tsx
-  • Two‑column (`lg:grid-cols-2`) inside container
-  • Left: H1 48 px "AI With An Immune System"
-           Subhead 18 px (concise copy)
-           CTA buttons (reuse Header Button.tsx)
-  • Right: `<motion.img />` immune‑system.svg fade/slide in
-  • Mobile: columns stack (image below copy)
+  [✓] Two‑column (`lg:grid-cols-2`) inside container - Changed to single centered column
+  [✓] Left: H1 48 px "AI With An Immune System"
+  [✓] Subhead 18 px (concise copy)
+  [✓] CTA buttons (reuse Header Button.tsx) - Adjusted variants for light bg
+  [✓] Right: `<motion.img />` immune‑system.svg fade/slide in - Removed image for now
+  [✓] Mobile: columns stack (image below copy) - N/A (single column)
 
 Metrics.tsx
-  • Dark background #090F0D, full‑width section
-  • Horizontal scroll container (`overflow-x-auto` + `snap-x`)
-  • Three cards (Threat Accuracy 99.9%, < 50 ms, 70 % cost ↓)
-        card: 240 w, rounded-lg shadow-lg bg-[#111]
-  • Icons from lucide-react (Shield, Clock, BarChart)
-  • `whileInView` pop‑in stagger (Framer)
+  [✓] Dark background #090F0D, full‑width section - Used bg-maitai-vampire-black
+  [✓] Horizontal scroll container (`overflow-x-auto` + `snap-x`) - Implemented w/ scrollbar-hide
+  [✓] Three cards (Threat Accuracy 99.9%, < 50 ms, 70 % cost ↓) - Implemented
+        card: 240 w, rounded-lg shadow-lg bg-[#111] - Used w-60/w-72, bg-gray-900/60
+  [✓] Icons from lucide-react (ShieldCheck, Clock, BarChart)
+  [✓] `whileInView` pop‑in stagger (Framer) - Implemented
 
 Checklist
-☐ Cards snap‑stop on mobile
-☐ A11y: `role="region" aria-label="Performance metrics"`
+[✓] Cards snap‑stop on mobile - Used snap-mandatory
+[✓] A11y: `role="region" aria-label="Performance metrics"` - Added
 
 ────────────────────────────────────────────────────────────────────────────
 SEGMENT 3  | FEATURES GRID
@@ -183,3 +183,20 @@ SEGMENT 10  | PERFORMANCE & DEPLOY
 [ ] Reviewer checklist satisfied
 
 # End of sprint.md
+
+# New segment added 2024-05-16 based on UI Clip recommendations
+────────────────────────────────────────────────────────────────────────────
+SEGMENT 11 | UI ANIMATION CLIPS (Hero/Features)
+────────────────────────────────────────────────────────────────────────────
+Goal: Replace static hero image/placeholder with short, polished UI video clips.
+
+Approach:
+[ ] Record short (3-5s) UI flow clips (60fps, WebM/MP4).
+[ ] Create static poster frame for each clip.
+[ ] Embed clips using `<video>` tag (autoplay, muted, loop, playsInline).
+[ ] Implement lazy-loading for videos.
+[ ] Add UI chrome (device frame) around video using React component.
+[ ] Add Framer Motion entrance animation (fade/scale) to frame.
+[ ] Optional: Add tiny Lottie/CSS overlay animations for clicks/feedback.
+[ ] Ensure responsive video sizing.
+[ ] Performance Check: Verify WebM usage, lazy-loading, poster fallback.

@@ -61,6 +61,18 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Added 2024-05-16 for Metrics component scrollbar */
+.scrollbar-hide {
+  /* IE and Edge */
+  -ms-overflow-style: none;
+  /* Firefox */
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  /* Chrome, Safari, Opera */
+  display: none;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
