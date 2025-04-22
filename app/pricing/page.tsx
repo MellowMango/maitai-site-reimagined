@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import DemoModal from '../components/DemoModal';
-import { CheckIcon } from '@heroicons/react/20/solid'; // Import CheckIcon
+import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/20/solid'; // Import Chevron icons
 
 const tiers = [
   {
@@ -18,6 +18,8 @@ const tiers = [
       'Model fallback strategies',
       'Realtime autocorrections & observability',
       '24/7 support',
+      'Up to 1 Million API Calls/Month',
+      'Community Support',
     ],
     buttonText: 'Get Started',
     mostPopular: false,
@@ -37,6 +39,8 @@ const tiers = [
       'Dedicated legal, compliance, and onboarding support',
       'Advanced observability integrations',
       'High-traffic scaling support',
+      'Unlimited API Calls',
+      'Dedicated Support & SLA',
     ],
     buttonText: 'Contact Us',
     mostPopular: false, // Or true if you want to highlight it
@@ -45,6 +49,8 @@ const tiers = [
 
 export default function PricingPage() {
   const [demoModalOpen, setDemoModalOpen] = useState(false);
+  const [proFeaturesExpanded, setProFeaturesExpanded] = useState(false);
+  const [enterpriseFeaturesExpanded, setEnterpriseFeaturesExpanded] = useState(false);
 
   const handleButtonClick = (tierName: string) => {
     // You could potentially pass the tier name to the modal if needed
@@ -84,14 +90,42 @@ export default function PricingPage() {
                      <p className="mt-1 text-sm leading-6 text-gray-500">{tier.subPrice}</p>
                   )}
                   <p className="mt-6 text-base leading-7 text-gray-600">{tier.description}</p>
-                  <ul role="list" className="mt-8 space-y-3 text-sm leading-6 text-gray-600 sm:mt-10">
-                    {tier.features.map((feature) => (
-                      <li key={feature} className="flex gap-x-3">
-                        <CheckIcon className="h-6 w-5 flex-none text-maitai-lime" aria-hidden="true" />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
+                  {/* Feature Toggle Button */}
+                  <div className="mt-8 border-t border-gray-200 pt-4">
+                    <button
+                      type="button"
+                      onClick={() => tier.name === 'Professional' ? setProFeaturesExpanded(!proFeaturesExpanded) : setEnterpriseFeaturesExpanded(!enterpriseFeaturesExpanded)}
+                      className="flex w-full items-center justify-between text-sm font-semibold leading-6 text-gray-700 hover:text-gray-900"
+                    >
+                      <span>What&apos;s included</span>
+                      {tier.name === 'Professional' ? (
+                        proFeaturesExpanded ? (
+                          <ChevronUpIcon className="h-5 w-5" aria-hidden="true" />
+                        ) : (
+                          <ChevronDownIcon className="h-5 w-5" aria-hidden="true" />
+                        )
+                      ) : (
+                        enterpriseFeaturesExpanded ? (
+                          <ChevronUpIcon className="h-5 w-5" aria-hidden="true" />
+                        ) : (
+                          <ChevronDownIcon className="h-5 w-5" aria-hidden="true" />
+                        )
+                      )}
+                    </button>
+                  </div>
+                  {/* Conditionally Rendered Features */}
+                  <div
+                    className={`overflow-hidden transition-all duration-300 ease-in-out ${tier.name === 'Professional' ? (proFeaturesExpanded ? 'max-h-96 mt-6' : 'max-h-0') : (enterpriseFeaturesExpanded ? 'max-h-96 mt-6' : 'max-h-0')}`}
+                  >
+                    <ul role="list" className="space-y-3 text-sm leading-6 text-gray-600">
+                      {tier.features.map((feature) => (
+                        <li key={feature} className="flex gap-x-3">
+                          <CheckIcon className="h-6 w-5 flex-none text-maitai-lime" aria-hidden="true" />
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
                 <button
                   type="button"

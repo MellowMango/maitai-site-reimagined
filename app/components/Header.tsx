@@ -1,137 +1,100 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import { Dialog, DialogPanel } from '@headlessui/react'; // Keep for potential mobile menu/modal
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'; // Keep for potential mobile menu
-import DemoModal from './DemoModal'; // Import the modal component
-
-// TODO: Update navigation links as per brief
-const navigation = [
-  { name: 'Features', href: '/#features' },
-  { name: 'Pricing', href: '/pricing' },
-  { name: 'Docs', href: '#' }, // TODO: Add external docs link
-  { name: 'Careers', href: '/careers' },
-];
+import Link from "next/link";
+import Image from "next/image"; // Using Next/Image instead of <img> for optimization
+import { useState, useEffect } from "react";
 
 export default function Header() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [demoModalOpen, setDemoModalOpen] = useState(false); // State for demo modal
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 50);
+    // Add passive: true for potentially better scroll performance
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    // Initial check on mount
+    handleScroll(); // Run check on mount
+    // Cleanup listener
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Define navigation items array for easier mapping
+  const navigation = [
+    { name: 'Features', href: '/#features' }, // Assuming Features section is on homepage
+    { name: 'Pricing', href: '/#pricing' }, // Assuming Pricing section is on homepage
+    { name: 'Docs', href: 'https://docs.trymaitai.ai', external: true }, // External link
+    { name: 'Careers', href: '/careers' },
+  ];
 
   return (
-    <>
-      <header className="bg-white sticky top-0 z-50 border-b border-gray-200">
-        <nav className="mx-auto flex max-w-7xl items-center justify-between p-4 lg:px-8" aria-label="Global">
-          {/* Logo */}
-          <div className="flex lg:flex-1">
-            <Link href="/" className="-m-1.5 p-1.5">
-              <span className="sr-only">Maitai</span>
-              {/* Use the primary logo - Assuming logo-black-resized.svg is the primary */}
-              <Image 
-                className="h-8 w-auto" // Adjust size as needed
-                src="/logos/logo-black-resized.svg" 
-                alt="Maitai Logo" 
-                width={100} // Intrinsic width
-                height={32} // Intrinsic height (adjust based on actual logo aspect ratio)
-                priority 
-              />
+    <header
+      className={`
+        fixed top-0 left-0 w-full z-50 transition-all duration-300
+        ${scrolled ? "bg-white shadow-md" : "bg-transparent"} // Revert to direct bg change
+      `}
+    >
+      <div className="container mx-auto px-6 lg:px-8 flex items-center justify-between h-16">
+        {/* Logo */}
+        <Link href="/">
+          <Image // Using Next/Image
+            src={scrolled ? "/logos/logo-black-resized.svg" : "/logos/logo-all-white.svg"} // Use correct logos for each state
+            alt="Maitai Logo"
+            width={120} // Specify width
+            height={32} // Specify height (h-8 = 32px)
+            className="h-8 w-auto" // Keep height class for consistency if needed
+            priority // Prioritize logo loading
+          />
+        </Link>
+
+        {/* Desktop Navigation */}
+        <nav className="space-x-8 hidden md:flex">
+          {navigation.map((item) => (
+            <Link
+              key={item.name}
+              href={item.href}
+              target={item.external ? '_blank' : undefined}
+              rel={item.external ? 'noopener noreferrer' : undefined}
+              className={`
+                font-semibold transition-colors duration-200
+                ${scrolled
+                  ? "text-maitai-vampire-black hover:text-maitai-lime"
+                  : "text-white hover:text-maitai-pineapple"}
+              `}
+            >
+              {item.name}
             </Link>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <div className="flex lg:hidden">
-            <button
-              type="button"
-              className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
-              onClick={() => setMobileMenuOpen(true)}
-            >
-              <span className="sr-only">Open main menu</span>
-              <Bars3Icon className="h-6 w-6" aria-hidden="true" />
-            </button>
-          </div>
-
-          {/* Desktop Navigation Links */}
-          <div className="hidden lg:flex lg:gap-x-12">
-            {navigation.map((item) => (
-              <Link key={item.name} href={item.href} className="text-sm font-semibold leading-6 text-gray-900 hover:text-maitai-rum">
-                {item.name}
-              </Link>
-            ))}
-          </div>
-
-          {/* Desktop CTA Button */}
-          <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-            {/* Update button onClick to open modal */}
-            <button 
-               type="button"
-               onClick={() => setDemoModalOpen(true)} // Open modal
-               className="rounded-md bg-maitai-rum px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-opacity-80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-maitai-rum"
-            >
-              Get a Demo
-            </button>
-          </div>
+          ))}
         </nav>
 
-        {/* Mobile Menu Dialog */}
-        <Dialog className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
-          <div className="fixed inset-0 z-50" />
-          <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
-            <div className="flex items-center justify-between">
-              <Link href="/" className="-m-1.5 p-1.5">
-                <span className="sr-only">Maitai</span>
-                <Image
-                  className="h-8 w-auto"
-                  src="/logos/logo-black-resized.svg"
-                  alt="Maitai Logo"
-                  width={100}
-                  height={32}
-                />
-              </Link>
-              <button
-                type="button"
-                className="-m-2.5 rounded-md p-2.5 text-gray-700"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                <span className="sr-only">Close menu</span>
-                <XMarkIcon className="h-6 w-6" aria-hidden="true" />
-              </button>
-            </div>
-            <div className="mt-6 flow-root">
-              <div className="-my-6 divide-y divide-gray-500/10">
-                <div className="space-y-2 py-6">
-                  {navigation.map((item) => (
-                    <Link
-                      key={item.name}
-                      href={item.href}
-                      onClick={() => setMobileMenuOpen(false)} // Close menu on click
-                      className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                    >
-                      {item.name}
-                    </Link>
-                  ))}
-                </div>
-                <div className="py-6">
-                  {/* Mobile CTA Button - Update onClick */}
-                  <button 
-                    type="button"
-                    onClick={() => { 
-                      setMobileMenuOpen(false); // Close mobile menu
-                      setDemoModalOpen(true); // Open demo modal
-                    }}
-                    className="w-full rounded-md bg-maitai-rum px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-opacity-80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-maitai-rum"
-                  >
-                    Get a Demo
-                  </button>
-                </div>
-              </div>
-            </div>
-          </DialogPanel>
-        </Dialog>
-      </header>
+        {/* Desktop CTAs */}
+        <div className="flex items-center space-x-4">
+          {/* Get a Demo Button */}
+          <Link
+            href="#" // Placeholder href
+            className={`
+              px-4 py-2 rounded-lg font-medium transition
+              bg-maitai-pineapple hover:bg-maitai-pineapple/90
+              ${scrolled ? "text-maitai-vampire-black" : "text-maitai-vampire-black"} // Always black text
+            `}
+          >
+            Get a Demo
+          </Link>
+          {/* Start Trial Button */}
+          <Link
+            href="#" // Placeholder href
+            className={`
+              px-4 py-2 rounded-lg font-medium border-2 transition
+              ${scrolled
+                ? "border-maitai-lime text-maitai-lime hover:bg-maitai-lime/10"
+                : "border-white text-white hover:bg-white/10"}
+            `}
+          >
+            Start Trial
+          </Link>
+        </div>
 
-      {/* Render the Demo Modal */}
-      <DemoModal open={demoModalOpen} setOpen={setDemoModalOpen} />
-    </>
+        {/* Add Mobile Menu Toggle Here if needed */} 
+
+      </div>
+    </header>
   );
 }

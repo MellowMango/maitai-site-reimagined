@@ -1,95 +1,143 @@
 'use client';
 
 import React, { useState } from 'react';
-import Link from 'next/link';
-import DemoModal from './components/DemoModal';
-import { ShieldCheckIcon, BoltIcon, BanknotesIcon, LockClosedIcon } from '@heroicons/react/24/outline';
+import { motion } from 'framer-motion'; // Import motion
+import DemoModal from './components/DemoModal'; // Ensure DemoModal is imported
+import MetricsStrip from './components/MetricsStrip'; // Import MetricsStrip
+import QuickStart from './components/QuickStart'; // Import QuickStart
+import PricingSection from './components/PricingSection'; // Import PricingSection
+import { ShieldCheckIcon, BoltIcon, BanknotesIcon, CpuChipIcon } from '@heroicons/react/24/outline'; 
 
-export default function Home() {
+export default function HomePage() {
   const [demoModalOpen, setDemoModalOpen] = useState(false);
+
+  const handleDemoClick = () => {
+    setDemoModalOpen(true);
+  };
 
   const features = [
     {
       name: 'Robustness',
-      description: 'Deploy AI that handles edge cases and unforeseen inputs gracefully.',
+      description: 'AI Immune System detects and neutralizes threats, ensuring reliable performance even with corrupted inputs.',
       icon: ShieldCheckIcon,
     },
     {
       name: 'Speed',
-      description: 'Achieve faster inference times without compromising on accuracy.',
+      description: 'Optimized inference pipelines deliver low-latency results without sacrificing accuracy.',
       icon: BoltIcon,
     },
     {
       name: 'Cost-Effectiveness',
-      description: 'Optimize your AI workloads for lower operational costs.',
+      description: 'Efficient resource utilization reduces compute costs, making advanced AI more accessible.',
       icon: BanknotesIcon,
     },
     {
-      name: 'Security',
-      description: 'Protect your AI models and data with built-in security measures.',
-      icon: LockClosedIcon,
+      name: 'Observability & Control',
+      description: 'Real-time monitoring and fine-grained controls provide insight and allow for immediate intervention.',
+      icon: CpuChipIcon, 
     },
   ];
 
   return (
-    <>
-      {/* Hero Section */}
-      <div className="relative isolate px-6 pt-14 lg:px-8">
-        <div className="mx-auto max-w-2xl py-24 sm:py-32 lg:py-36">
-          <div className="text-center">
-            <h1 className="text-4xl font-bold tracking-tight text-maitai-vampire-black sm:text-6xl">
+    <div className="bg-maitai-mint-cream overflow-hidden"> {/* Added overflow-hidden for animation */}
+      {/* Demo Modal Triggered by State */}
+      <DemoModal open={demoModalOpen} setOpen={setDemoModalOpen} />
+
+      {/* Hero Section - Updated Layout */}
+      {/* Apply standard padding py-16 lg:py-24 */}
+      <section className="mx-auto max-w-7xl px-6 lg:px-8 py-16 lg:py-24">
+        {/* Standardize grid gap gap-8 lg:gap-12 */}
+        <div className="lg:grid lg:grid-cols-2 gap-8 lg:gap-x-12 lg:items-center">
+          {/* Left Column: Text Content & CTAs */}
+          <div className="text-center lg:text-left">
+            <h1 className="font-greycliff text-4xl font-bold tracking-tight text-maitai-vampire-black sm:text-5xl lg:text-6xl">
               AI With An Immune System
             </h1>
-            <p className="mt-6 text-lg leading-8 text-gray-600">
-              Stop babysitting unreliable AI. Deploy robust, fast, and cost-effective inference for your apps.
+            {/* Updated text contrast & Hero subhead copy */}
+            <p className="mt-6 text-lg leading-8 font-greycliff text-gray-900 max-w-xl mx-auto lg:mx-0">
+              Stop babysitting unreliable AI—Maitai delivers robust, low‑latency inference with built‑in observability.
             </p>
-            <div className="mt-10 flex items-center justify-center gap-x-6">
+            <div className="mt-10 flex flex-col items-center gap-y-4 sm:flex-row sm:justify-center lg:justify-start sm:gap-x-4">
               <button
                 type="button"
-                onClick={() => setDemoModalOpen(true)}
-                className="rounded-md bg-maitai-rum px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-opacity-80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-maitai-rum"
+                onClick={handleDemoClick}
+                className="w-full sm:w-auto rounded-lg bg-maitai-pineapple px-5 py-2.5 text-sm font-semibold text-maitai-vampire-black shadow-sm hover:brightness-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-maitai-pineapple"
               >
                 Get a Demo
               </button>
-              <Link href="/docs" className="text-sm font-semibold leading-6 text-maitai-vampire-black">
-                Learn more <span aria-hidden="true">→</span>
-              </Link>
+              <a
+                href="#" // TODO: Link to Start Trial page/flow
+                className="w-full sm:w-auto rounded-lg px-5 py-2.5 text-sm font-semibold text-maitai-lime shadow-sm ring-1 ring-inset ring-maitai-lime hover:bg-maitai-lime/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-maitai-lime"
+              >
+                Start Trial
+              </a>
             </div>
           </div>
+
+          {/* Right Column: Visual Placeholder with Animation */}
+          <motion.div
+            className="mt-16 h-80 lg:mt-0 lg:h-full" // Adjust height as needed
+            initial={{ opacity: 0, x: 50 }} // Start invisible and slightly to the right
+            animate={{ opacity: 1, x: 0 }} // Fade in and slide to final position
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
+            <div className="h-full w-full bg-gradient-to-br from-maitai-lagoon/20 to-maitai-lime/20 rounded-lg flex items-center justify-center">
+              <span className="text-gray-400 italic">[Hero Illustration Placeholder]</span>
+            </div>
+          </motion.div>
         </div>
-      </div>
+      </section>
+
+      {/* Metrics Strip Section */}
+      <MetricsStrip />
 
       {/* Features Section */}
-      <div id="features" className="bg-white py-24 sm:py-32">
+      {/* Apply standard padding py-16 lg:py-24 */}
+      <section id="features" className="py-16 lg:py-24">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl lg:text-center">
-            <h2 className="text-base font-semibold leading-7 text-maitai-lime">Deploy with confidence</h2>
-            <p className="mt-2 text-3xl font-bold tracking-tight text-maitai-vampire-black sm:text-4xl">
+            {/* Added micro-heading */}
+            <h2 className="text-base font-semibold leading-7 text-maitai-lagoon font-pineapple uppercase tracking-wider">Everything you need</h2>
+            <h2 className="text-base font-semibold leading-7 text-maitai-lagoon">Features</h2>
+            <p className="mt-2 text-3xl font-bold tracking-tight text-maitai-vampire-black sm:text-4xl font-greycliff">
               Everything you need for reliable AI
             </p>
-            <p className="mt-6 text-lg leading-8 text-gray-600">
-              Maitai provides the tools and infrastructure to ensure your AI applications are robust, fast, secure, and cost-effective from day one.
+            {/* Updated text contrast */}
+            <p className="mt-6 text-lg leading-8 text-gray-900">
+              Stop babysitting unreliable AI. Maitai provides the core infrastructure and tools to ensure your models perform reliably, efficiently, and securely in production.
             </p>
           </div>
+
+          {/* Updated Feature Grid Layout */}
           <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">
-            <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-4">
+            {/* Standardize grid gap gap-8 lg:gap-12 */}
+            <dl className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-12">
               {features.map((feature) => (
-                <div key={feature.name} className="flex flex-col">
-                  <dt className="flex items-center gap-x-3 text-base font-semibold leading-7 text-maitai-vampire-black">
-                    <feature.icon className="h-5 w-5 flex-none text-maitai-lime" aria-hidden="true" />
+                <div key={feature.name} className="rounded-lg bg-white p-6 shadow-sm">
+                  <dt className="flex items-center gap-x-3 text-base font-semibold leading-7 text-gray-900">
+                    {feature.icon && <feature.icon className="h-8 w-8 flex-none text-maitai-lagoon" aria-hidden="true" />}
                     {feature.name}
                   </dt>
-                  <dd className="mt-4 flex flex-auto flex-col text-base leading-7 text-gray-600">
+                  <dd className="mt-4 flex flex-auto flex-col text-base leading-7 text-gray-900">
                     <p className="flex-auto">{feature.description}</p>
+                    {/* Optional: Add a 'Learn more' link here if needed */}
+                    {/* <p className="mt-6">
+                      <a href="#" className="text-sm font-semibold leading-6 text-maitai-lagoon">Learn more <span aria-hidden="true">→</span></a>
+                    </p> */}
                   </dd>
                 </div>
               ))}
             </dl>
           </div>
         </div>
-      </div>
+      </section>
 
-      <DemoModal open={demoModalOpen} setOpen={setDemoModalOpen} />
-    </>
+      {/* Quick Start Section */}
+      <QuickStart />
+
+      {/* Pricing Section */}
+      <PricingSection />
+
+    </div>
   );
 }

@@ -37,8 +37,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Maitai - AI With An Immune System",
-  description: "Reliable, fast, and cost-effective AI inference for your apps.",
+  title: "Maitai – Enterprise AI with an Immune System",
+  description: "Stop babysitting unreliable AI. Maitai provides robust, fast, and cost-effective inference with built-in observability and control.",
 };
 
 export default function RootLayout({
@@ -47,12 +47,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={greycliff.variable}>
+    <html lang="en" className={greycliff.variable} suppressHydrationWarning={true}>
       <body
         className={`bg-maitai-mint-cream text-maitai-vampire-black ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Header />
-        <main>{children}</main>
+        <main id="main-content" className={`flex-grow pt-16`}>{children}</main>
         <Footer />
       </body>
     </html>

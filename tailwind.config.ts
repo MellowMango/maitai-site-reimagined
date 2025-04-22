@@ -6,6 +6,23 @@ const config: Config = {
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  safelist: [
+    'bg-white', 
+    'bg-transparent',
+    'shadow-md', 
+    // Safelist text colors for scrolled and non-scrolled states
+    'text-white',
+    'text-maitai-vampire-black',
+    'hover:text-maitai-lime',
+    'hover:text-maitai-pineapple',
+    // Safelist border/bg for 'Start Trial' button
+    'border-white',
+    'hover:bg-white/10',
+    'border-maitai-lime',
+    'text-maitai-lime',
+    'hover:bg-maitai-lime/10',
+    // Safelist bg for 'Get Demo' button (already uses maitai-pineapple)
+  ],
   theme: {
     extend: {
       fontFamily: {
@@ -33,6 +50,22 @@ const config: Config = {
         // Add Brand Gradients if needed (using CSS variables or direct values)
         // Example:
         // 'maitai-gradient-a': 'linear-gradient(to right, #250f0a 0%, #4c1f15 10%, ... , #fcece8 99%)', 
+      },
+      keyframes: {
+        overlayShow: {
+          from: { opacity: '0' },
+          to: { opacity: '1' },
+        },
+        contentShow: {
+          from: { opacity: '0', transform: 'translateY(-2%) translateX(100%)' }, // Slide from right
+          to: { opacity: '1', transform: 'translateY(0) translateX(0)' },
+        },
+        // Add keyframes for closing if needed (e.g., overlayHide, contentHide)
+      },
+      animation: {
+        overlayShow: 'overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1)',
+        contentShow: 'contentShow 300ms cubic-bezier(0.16, 1, 0.3, 1)',
+        // Add closing animations if defined
       },
       // Add typography scale from guidelines if desired (can also be applied via global CSS or utility classes)
       fontSize: {
