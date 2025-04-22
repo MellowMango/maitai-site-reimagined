@@ -19,7 +19,7 @@ const NAV_LINKS = [
   { name: 'Features', href: '/#features' }, // Example internal link
   { name: 'Pricing', href: '/pricing' },
   { name: 'Docs', href: 'https://docs.trymaitai.ai' }, // External link
-  { name: 'Careers', href: '/careers' },
+  { name: 'Careers', href: 'https://www.ycombinator.com/companies/maitai/jobs' }, // Updated Careers link to external YC page
 ];
 
 export default function Header() {

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-// import Image from 'next/image'; // Removing image for now
+import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 
@@ -38,6 +38,16 @@ export function Hero() {
                  <a>Start Trial</a>
               </Button>
             </Link>
+          </div>
+          {/* YC Badge */}
+          <div className="pt-6 flex justify-center">
+            <Image 
+              src="/logos/Backed by YC.png" 
+              alt="Backed by Y Combinator S24"
+              width={114} // Adjust width/height as needed based on original image size
+              height={32}
+              priority={false} // Not critical LCP content
+            />
           </div>
         </motion.div>
 

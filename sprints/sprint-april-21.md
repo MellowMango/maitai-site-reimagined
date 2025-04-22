@@ -127,28 +127,34 @@ SEGMENT 6  | DEMO PAGE & FORM INFRA
 ────────────────────────────────────────────────────────────────────────────
 files: app/demo/page.tsx, app/api/demo/route.ts
 
-Page
-  • Fields: Name, Email, Company, Use Case
-  • react-hook-form + zod schema (required, email pattern)
-  • reCAPTCHA v3 token request `execute('demo_submit')`
-  • On submit → `/api/demo` POST JSON
+Page (`app/demo/page.tsx`)
+  [✓] Fields defined based on screenshot (First/Last Name, Email, Company, Size, SDRs+AEs, Why Maitai)
+  [✓] react-hook-form + zod schema implemented
+  [✓] Two-column layout with dark form inspired by screenshot
+  [✓] Added tooltip for SDRs + AEs label
+  [ ] TODO: reCAPTCHA v3 integration (`execute('demo_submit')`)
+  [ ] TODO: Implement submit handler logic (call API, handle response)
 
-API route
-  • Verify token w/ Google
-  • Send email via SendGrid (template in lib/mailer)
-  • Return 200 | 400
+API route (`app/api/demo/route.ts`)
+  [ ] TODO: Verify reCAPTCHA token w/ Google
+  [ ] TODO: Send email via SendGrid (template in lib/mailer)
+  [ ] TODO: Return 200 | 400
 
 Checklist
-☐ Success state "Thank you 🎉 We'll reach out within 24 h"
-☐ Rate‑limit 3 req/IP/min (simple in‑memory Map on API route)
-☐ Pricing page CTAs link to `/demo`
+  [ ] TODO: Success state "Thank you 🎉 We'll reach out within 24 h"
+  [ ] TODO: Rate‑limit 3 req/IP/min (simple in‑memory Map on API route)
+  [✓] Pricing page CTAs link to `/demo`
+  [✓] Header CTAs link to `/demo`
+  [✓] Hero CTAs link to `/demo`
 
 ────────────────────────────────────────────────────────────────────────────
-SEGMENT 7  | DOCS & CAREERS ROUTES
+SEGMENT 7  | DOCS & CAREERS ROUTES (Revised)
 ────────────────────────────────────────────────────────────────────────────
-[✓] `/docs` external; just `router.push(external)` on click - Implemented in Header
-[ ] `/careers` page with YC link + commented Greenhouse embed snippet
-[ ] Add badge "Backed by YC S24" beside logo on careers page - Use `/public/logos/Backed by YC.png`
+[✓] `/docs` external; just `router.push(external)` on click - Implemented in Header link
+[~] `/careers` page build deferred. Link points to YC Job Page instead.
+    - [~] ~~`/careers` page with YC link + commented Greenhouse embed snippet~~ (DEFERRED)
+[ ] Add badge "Backed by YC S24" to Homepage Hero section - Use `/public/logos/Backed by YC.png`
+    - [~] ~~Add badge "Backed by YC S24" beside logo on careers page~~ (MOVED TO HERO)
 
 ────────────────────────────────────────────────────────────────────────────
 SEGMENT 8  | FOOTER FINALIZATION & SOCIAL PROOF
