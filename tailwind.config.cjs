@@ -17,7 +17,7 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        sans: ['var(--font-greycliff)', 'sans-serif'], // Placeholder for Greycliff font
+        sans: ['Greycliff CF', 'sans-serif'], // Use font family name defined in @font-face
       },
       colors: {
         // Custom Maitai Brand Colors from blueprint

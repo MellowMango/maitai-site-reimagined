@@ -1,3 +1,62 @@
+/* Greycliff CF Font Definitions */
+@font-face {
+  font-family: 'Greycliff CF';
+  src: url('/fonts/GreycliffCF-Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Greycliff CF';
+  src: url('/fonts/GreycliffCF-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Greycliff CF';
+  src: url('/fonts/GreycliffCF-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Greycliff CF';
+  src: url('/fonts/GreycliffCF-Demi-Bold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Greycliff CF';
+  src: url('/fonts/GreycliffCF-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Greycliff CF';
+  src: url('/fonts/GreycliffCF-Extra-Bold.otf') format('opentype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Greycliff CF';
+  src: url('/fonts/GreycliffCF-Heavy.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* End Font Definitions */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -67,10 +126,8 @@
 }
  
 @layer base {
-  * {
-    @apply border-border;
-  }
   body {
-    @apply bg-background text-foreground;
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
   }
 } 

@@ -7,14 +7,14 @@ This repository contains the source code for the rebuilt [trymaitai.ai](https://
 | Layer          | Choice                    | Notes                                           |
 |----------------|---------------------------|-------------------------------------------------|
 | Framework      | Next.js 13 (App Router)   | React + file-system routing, edge-ready         |
-| Language       | TypeScript 5.x          | Strict mode (`"strict": true`)                 |
-| Styling        | Tailwind CSS v3           | Custom theme in `tailwind.config.js`            |
+| Language       | TypeScript 5.x          | Strict mode (`"strict": true`), `"type": "module"` in package.json |
+| Styling        | Tailwind CSS v3           | Custom theme in `tailwind.config.cjs`           |
 | UI Primitives  | Radix UI                  | Accessible, unstyled base components            |
 | Component Kit  | shadcn/ui                 | Radix-powered, Tailwind-themed wrappers         |
 | Icons          | lucide-react              | 1-stroke icon set                               |
 | Animations     | Framer Motion v10         | Scroll/entrance + micro-interactions            |
 | Forms          | React-Hook-Form + Zod     | Client validation + schema sharing              |
-| Fonts          | Greycliff CF (local OTF)  | Loaded via `next/font/local` in `app/layout.tsx` |
+| Fonts          | Greycliff CF (local OTF)  | Loaded via `@font-face` in `styles/globals.css` |
 | Images         | next/image                | Automatic srcset / WebP / lazy                  |
 | Email          | SendGrid v3               | Triggered by `/api/demo` route                   |
 | Anti-spam      | reCAPTCHA v3              | Token verified in API route (`@google-recaptcha/react`) |
@@ -27,7 +27,7 @@ This repository contains the source code for the rebuilt [trymaitai.ai](https://
 ```
 maitai-site-v2/
 ├── app/
-│   ├── layout.tsx                  # Root layout (Greycliff font, global styles)
+│   ├── layout.tsx                  # Root layout (global styles, font application)
 │   ├── page.tsx                    # Home page (/)
 │   ├── pricing/page.tsx            # Pricing page (/pricing)
 │   ├── careers/page.tsx            # Careers page (/careers)
@@ -55,7 +55,7 @@ maitai-site-v2/
 │   ├── icons/                      # Placeholder for icon assets
 │   └── animations/                 # Animation assets
 ├── styles/
-│   └── globals.css                 # Tailwind base + shadcn CSS variables
+│   └── globals.css                 # @font-face rules, Tailwind base, shadcn variables
 ├── .github/workflows/
 │   └── ci.yml                      # GitHub Actions CI pipeline (Lint, Build, Test)
 ├── .gitignore
@@ -63,12 +63,12 @@ maitai-site-v2/
 ├── next-env.d.ts
 ├── next.config.js                  # Next.js configuration
 ├── next-seo.config.mjs             # Default next-seo configuration
-├── package.json
+├── package.json                    # Note: "type": "module"
 ├── package-lock.json / node_modules/
-├── postcss.config.mjs              # PostCSS configuration (for Tailwind)
+├── postcss.config.cjs              # PostCSS config (uses tailwindcss plugin)
 ├── README.md                       # This file
-├── tailwind.config.js              # Tailwind CSS configuration (custom theme)
-└── tsconfig.json                   # TypeScript configuration (strict mode)
+├── tailwind.config.cjs             # Tailwind CSS v3 configuration (custom theme)
+└── tsconfig.json                   # TypeScript configuration
 ```
 
 ## 3. Getting Started
@@ -114,12 +114,17 @@ Obtain the actual keys from the respective services (Google reCAPTCHA, SendGrid,
 
 ## 4. Key Configuration Files & Concepts
 
-- **`app/layout.tsx`**: Defines the root HTML structure, loads global CSS (`styles/globals.css`), and configures the primary font (`Greycliff CF`) using `next/font/local`. The font is available via the `--font-greycliff` CSS variable.
-- **`tailwind.config.js`**: Configures Tailwind CSS. Includes paths for purging, defines the `fontFamily.sans` to use `--font-greycliff`, and sets up theme extensions (colors, border radius, keyframes) compatible with `shadcn/ui`.
-- **`styles/globals.css`**: Imports Tailwind's base, components, and utilities. Defines root CSS variables for colors and theming, used by `shadcn/ui` components.
-- **`components.json`**: Configures the `shadcn/ui` CLI, specifying paths for components, utils, Tailwind config, and global CSS.
-- **`components/ui/`**: This directory will contain UI primitives added via the `shadcn/ui` CLI (e.g., `npx shadcn@latest add button`). These components are built using Radix UI and styled with Tailwind.
-- **`lib/utils.ts`**: Contains the `cn` utility function for conditionally applying Tailwind classes, commonly used with `shadcn/ui`.
+- **`package.json`**: Note the presence of `"type": "module"`. This makes Node.js treat `.js` files as ES Modules by default.
+- **Config File Extensions**: Due to `"type": "module"`, configuration files using CommonJS syntax (`module.exports`) **must** use the `.cjs` extension (e.g., `tailwind.config.cjs`, `postcss.config.cjs`).
+- **`styles/globals.css`**: 
+    - **Font Loading**: Contains standard CSS `@font-face` rules to load the local Greycliff CF font files from `/public/fonts/`. The `url()` uses absolute paths from the public root.
+    - **Tailwind**: Imports Tailwind's base, components, and utilities using `@tailwind` directives.
+    - **Theming**: Defines root CSS variables (`:root` and `.dark`) for colors and theming used by `shadcn/ui` components.
+    - **Base Styles**: Applies minimal base styles (e.g., `body` background/text color) directly using CSS properties and variables (e.g., `background-color: hsl(var(--background));`) within `@layer base`. 
+- **`tailwind.config.cjs`**: Configures Tailwind CSS v3. Includes `content` paths, defines `fontFamily.sans` using the font name (`'Greycliff CF'`) defined in `@font-face`, and sets up theme extensions (colors, etc.) compatible with `shadcn/ui`.
+- **`postcss.config.cjs`**: Configures PostCSS, correctly loading the `tailwindcss` plugin (for v3) and `autoprefixer`.
+- **`app/layout.tsx`**: Defines the root HTML structure and imports `styles/globals.css`. It does **not** use `next/font/local` for Greycliff CF due to encountered stability issues; font application relies on Tailwind's `font-sans` utility class inheriting the family defined in the config.
+- **`components.json`**: Configures the `shadcn/ui` CLI, referencing `tailwind.config.cjs`.
 - **`next-seo.config.mjs`**: Sets default SEO metadata (title, description, Open Graph tags) used by `next-seo`.
 - **`.github/workflows/ci.yml`**: Defines the continuous integration pipeline run on GitHub Actions for pull requests and pushes to `main`. It installs dependencies, lints, builds, and runs tests.
 

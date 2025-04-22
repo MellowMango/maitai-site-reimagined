@@ -1,30 +1,11 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google"; // Keep Inter as a fallback if needed
-import localFont from 'next/font/local';
+import { Inter } from "next/font/google";
 import "../styles/globals.css";
-import { cn } from "@/lib/utils"; // Import the cn utility
+import { cn } from "@/lib/utils";
 
 // Import Header and Footer
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-
-// Load Greycliff CF font from local files (adjust paths as needed)
-const fontGreycliff = localFont({
-  src: [
-    { path: '../public/fonts/GreycliffCF-Regular.otf', weight: '400', style: 'normal' },
-    { path: '../public/fonts/GreycliffCF-Medium.otf', weight: '500', style: 'normal' },
-    { path: '../public/fonts/GreycliffCF-Bold.otf', weight: '700', style: 'normal' },
-    // Add other weights/styles if available
-  ],
-  variable: '--font-greycliff', // Define CSS variable name
-  display: 'swap', 
-});
-
-// Example using Inter as a fallback or secondary font if desired
-const fontSans = Inter({ 
-  subsets: ["latin"], 
-  variable: "--font-sans" // Optional: define another variable if needed
-});
 
 export const metadata: Metadata = {
   title: "Maitai", // Default title, will be customized by next-seo
@@ -41,9 +22,7 @@ export default function RootLayout({
       <head /> 
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased", // Use font-sans from tailwind config
-          fontGreycliff.variable, // Apply Greycliff variable
-          fontSans.variable // Optional: Apply Inter variable if used
+          "min-h-screen bg-background font-sans antialiased", // font-sans will be defined in Tailwind config
         )}
       >
         <Header />

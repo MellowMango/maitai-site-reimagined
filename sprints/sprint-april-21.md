@@ -35,7 +35,7 @@ Footer.tsx
 Tailwind theme
   [✓] Colors: Lagoon #255D70, Lime #21B892, MintCream #F2FBF9,
             VampireBlack #090F0D, Pineapple #FFDB6A, Rum #EA5F40
-  [✓] Font-family.greycliff → var(--font-greycliff)
+  [✓] Font-family.sans → 'Greycliff CF' # Uses font name from @font-face
   [ ] Safelist dynamic classes for header scroll swap # Placeholder added, needs verification/population if needed
 
 Checklist
