@@ -88,14 +88,17 @@ export default function Header() {
           ))}
         </nav>
 
-        {/* Single CTA Button - Changes variant on scroll */}
-        <div className="hidden lg:flex items-center pl-4 pr-2"> {/* Added padding around button inside pill */}
-          <Button
-            size="pill" // Use new pill size
-            variant={isScrolled ? 'lightPill' : 'darkPill'} // Conditional variant
-          >
-            Get a Demo
-          </Button>
+        {/* Single CTA Button - Wrap with Link */}
+        <div className="hidden lg:flex items-center pl-4 pr-2">
+          <Link href="/demo" passHref legacyBehavior>
+            <Button
+              asChild // Use asChild for Button within Link
+              size="pill"
+              variant={isScrolled ? 'lightPill' : 'darkPill'}
+            >
+              <a>Get a Demo</a>
+            </Button>
+          </Link>
         </div>
 
         {/* Mobile Menu Button & Sheet */}
@@ -125,13 +128,14 @@ export default function Header() {
                     </Link>
                   </SheetClose>
                 ))}
-                {/* Mobile CTA - Use standard variants */}
+                {/* Mobile CTA - Wrap with Link */}
                 <div className="flex flex-col space-y-3 pt-6 border-t">
                   <SheetClose asChild>
-                    {/* Use pineapple variant for consistency in mobile menu? Or a standard one? */}
-                    <Button variant="pineapple">
-                      Get a Demo
-                    </Button>
+                    <Link href="/demo" passHref legacyBehavior>
+                      <Button asChild variant="pineapple">
+                        <a>Get a Demo</a>
+                      </Button>
+                    </Link>
                   </SheetClose>
                   {/* Maybe remove second CTA or use outline? */}
                   {/* <SheetClose asChild>

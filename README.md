@@ -54,6 +54,7 @@ maitai-site-v2/
 │   ├── logos/                      # Site logos
 │   ├── icons/                      # Placeholder for icon assets
 │   └── animations/                 # Animation assets
+│   ├── code-blocks/                # Reference images for code block styling
 ├── styles/
 │   └── globals.css                 # @font-face rules, Tailwind base, shadcn variables
 ├── .github/workflows/
@@ -70,6 +71,14 @@ maitai-site-v2/
 ├── tailwind.config.cjs             # Tailwind CSS v3 configuration (custom theme)
 └── tsconfig.json                   # TypeScript configuration
 ```
+
+### Public Assets (`/public/` directory)
+
+- **`/fonts/`**: Contains local `.otf` files for the Greycliff CF font family, loaded via `@font-face` in `styles/globals.css`.
+- **`/logos/`**: Includes primary site logos (`logo-black-resized.svg`, `logo-all-white.svg`), a favicon/icon (`icon.svg`), and the `Backed by YC.png` badge.
+- **`/animations/phonely-case-study/`**: Contains React components (`AccuracyChart.tsx`, `TTFTComparison.tsx`) used for visualizing data in the Phonely case study.
+- **`/code-blocks/`**: Holds reference images (`Code Block-1.png`, `Code Block-2.png`) that guided the styling of the code examples in the Quick Start section.
+- **Missing Assets**: Note that customer logos and compliance badges (e.g., SOC 2, GDPR) mentioned in the sprint plan need to be added to the appropriate `/public/` sub-directory.
 
 ## 3. Getting Started
 

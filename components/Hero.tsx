@@ -4,6 +4,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 // import Image from 'next/image'; // Removing image for now
 import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 export function Hero() {
   return (
@@ -25,16 +26,18 @@ export function Hero() {
           <p className="text-lg md:text-xl text-gray-700">
             Protect your AI applications from threats and ensure reliable performance with Maitai's proactive security layer.
           </p>
-          {/* Adjusted button variants for light background */}
+          {/* Wrap Buttons with Link */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            {/* Pineapple still works well, maybe make outline Lagoon? */}
-            <Button variant="pineapple" size="lg">
-              Get a Demo
-            </Button>
-            {/* Let's use a standard outline or lagoonOutline variant if defined */}
-            <Button variant="outline" size="lg" className="border-maitai-lagoon text-maitai-lagoon hover:bg-maitai-lagoon/10">
-              Start Trial
-            </Button>
+            <Link href="/demo" passHref legacyBehavior>
+              <Button asChild variant="pineapple" size="lg">
+                <a>Get a Demo</a>
+              </Button>
+            </Link>
+            <Link href="/demo" passHref legacyBehavior>
+              <Button asChild variant="outline" size="lg" className="border-maitai-lagoon text-maitai-lagoon hover:bg-maitai-lagoon/10">
+                 <a>Start Trial</a>
+              </Button>
+            </Link>
           </div>
         </motion.div>
 
