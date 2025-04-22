@@ -21,10 +21,10 @@ SEGMENT 1  | CORE LAYOUT & THEME
 files: app/layout.tsx, components/Header.tsx, components/Footer.tsx, tailwind.config.js
 
 Header.tsx
-  [✓] Fixed, z-50, transparent → white on scroll (50 px threshold)
-  [✓] Logo swap: /logos/primary-inverse.svg ↔ /logos/primary.svg
+  [✓] Fixed, z-50, transparent → dark pill on scroll (50 px threshold) - Refined 2024-05-16
+  [✓] Logo swap: /logos/primary.svg ↔ /logos/logo-all-white.svg - Refined 2024-05-16
   [✓] Nav links: Features, Pricing, Docs (external), Careers
-  [✓] Dual CTAs: Get a Demo (filled Pineapple) | Start Trial (outline Lime) # Using shadcn Button
+  [✓] Single CTA: Get a Demo (darkPill ↔ lightPill variants) - Refined 2024-05-16
   [✓] Mobile: Radix Popover slide-down menu # Using shadcn Sheet
 
 Footer.tsx

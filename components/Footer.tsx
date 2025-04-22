@@ -30,7 +30,7 @@ export default function Footer() {
           <div className="md:col-span-1 space-y-6">
             <Link href="/">
               <Image
-                src="/logos/primary-inverse.svg" // Use inverse logo on dark background
+                src="/logos/logo-all-white.svg" // Use correct white logo filename
                 alt="Maitai Logo"
                 width={120}
                 height={28}
