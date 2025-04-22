@@ -29,7 +29,7 @@ export default function Header() {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Check if scrolled past the threshold (e.g., 50px)
+      // Adjust scroll threshold if needed
       setIsScrolled(window.scrollY > 50);
     };
 
@@ -39,32 +39,38 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const logoSrc = isScrolled ? '/logos/primary.svg' : '/logos/primary-inverse.svg';
-  // Define text color based on scroll state for reuse
-  const textColorClass = isScrolled ? 'text-gray-900' : 'text-white'; 
+  // Use correct logo filenames based on public/logos/
+  const logoSrc = isScrolled ? '/logos/logo-all-white.svg' : '/logos/logo-black-resized.svg';
 
-  const headerClasses = cn(
-    'fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ease-in-out',
-    isScrolled ? 'bg-white shadow-md' : 'bg-transparent',
-    textColorClass // Apply text color class to header for inherited elements like mobile trigger
+  // Outer header controls fixed position and base styles
+  const headerBaseClasses = 'fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out';
+
+  // Inner div controls the pill effect and content alignment
+  const innerDivClasses = cn(
+    'flex items-center justify-between h-16',
+    'transition-all duration-300 ease-in-out',
+    isScrolled
+      ? 'bg-maitai-vampire-black/90 backdrop-blur-sm rounded-full max-w-fit mx-auto px-4 shadow-lg mt-2 border border-gray-700/50' // Scrolled: Pill effect
+      : 'container mx-auto px-6 lg:px-8' // Not Scrolled: Standard container
   );
 
   return (
-    <header className={headerClasses}>
-      <div className="container mx-auto px-6 lg:px-8 flex items-center justify-between h-16">
-        {/* Logo */}
-        <Link href="/" className="flex-shrink-0">
+    <header className={headerBaseClasses}>
+      {/* Apply padding only when scrolled to allow pill effect */}
+      <div className={innerDivClasses}>
+        {/* Logo - Always inverse */}
+        <Link href="/" className="flex-shrink-0 pl-2 pr-4"> {/* Added padding around logo inside pill */}
           <Image
             src={logoSrc}
             alt="Maitai Logo"
-            width={100} // Adjust size as needed
-            height={24} // Adjust size as needed
-            priority // Load logo eagerly
+            width={100}
+            height={24}
+            priority
           />
         </Link>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center space-x-8">
+        {/* Desktop Navigation - Always white text */}
+        <nav className="hidden lg:flex items-center space-x-6 xl:space-x-8"> {/* Adjusted spacing */}
           {NAV_LINKS.map((link) => (
             <Link
               key={link.name}
@@ -73,7 +79,8 @@ export default function Header() {
               rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
               className={cn(
                 'text-sm font-medium transition-colors hover:text-maitai-lime',
-                textColorClass // Use the dynamic text color class
+                // Re-introduce conditional text color
+                isScrolled ? 'text-white' : 'text-maitai-vampire-black'
               )}
             >
               {link.name}
@@ -81,60 +88,57 @@ export default function Header() {
           ))}
         </nav>
 
-        {/* Desktop CTAs */}
-        <div className="hidden lg:flex items-center space-x-4">
-          <Button 
-            size="sm" 
-            className="bg-maitai-pineapple hover:bg-maitai-pineapple/90 text-maitai-vampire-black"
+        {/* Single CTA Button - Changes variant on scroll */}
+        <div className="hidden lg:flex items-center pl-4 pr-2"> {/* Added padding around button inside pill */}
+          <Button
+            size="pill" // Use new pill size
+            variant={isScrolled ? 'lightPill' : 'darkPill'} // Conditional variant
           >
             Get a Demo
-          </Button>
-          <Button 
-            size="sm" 
-            variant="outline" 
-            className={cn(
-              'border-maitai-lime text-maitai-lime hover:bg-maitai-lime/10 hover:text-maitai-lime',
-              isScrolled ? 'border-maitai-lime' : 'border-white text-white hover:text-white' // Adjust outline button for transparent header
-            )}
-          >
-            Start Trial
           </Button>
         </div>
 
         {/* Mobile Menu Button & Sheet */}
-        <div className="lg:hidden">
+        <div className="lg:hidden"> {/* Mobile doesn't get pill effect, just trigger */}
           <Sheet>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" aria-label="Toggle menu">
-                <Menu className={cn("h-6 w-6", textColorClass)} /> 
+              {/* Apply conditional color to icon */}
+              <Button variant="ghost" size="icon" aria-label="Toggle menu" className={cn(
+                'focus-visible:ring-white/50',
+                 isScrolled ? 'text-white hover:bg-white/10' : 'text-maitai-vampire-black hover:bg-black/10'
+              )}>
+                <Menu className="h-6 w-6" />
               </Button>
             </SheetTrigger>
+            {/* Sheet content remains standard */}
             <SheetContent side="right" className="w-[300px] sm:w-[400px]">
-              <nav className="flex flex-col space-y-6 pt-8"> {/* Increased spacing and padding */}
+              <nav className="flex flex-col space-y-6 pt-8">
                 {NAV_LINKS.map((link) => (
-                  <SheetClose asChild key={link.name}> {/* Wrap link in SheetClose */}
+                  <SheetClose asChild key={link.name}>
                     <Link
                       href={link.href}
                       target={link.href.startsWith('http') ? '_blank' : '_self'}
                       rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                      className="text-lg text-gray-900 hover:text-maitai-lime" // Larger text for mobile
+                      className="text-lg text-maitai-vampire-black hover:text-maitai-lime"
                     >
                       {link.name}
                     </Link>
                   </SheetClose>
                 ))}
-                {/* Mobile CTAs */}
+                {/* Mobile CTA - Use standard variants */}
                 <div className="flex flex-col space-y-3 pt-6 border-t">
                   <SheetClose asChild>
-                    <Button className="bg-maitai-pineapple hover:bg-maitai-pineapple/90 text-maitai-vampire-black">
+                    {/* Use pineapple variant for consistency in mobile menu? Or a standard one? */}
+                    <Button variant="pineapple">
                       Get a Demo
                     </Button>
                   </SheetClose>
-                  <SheetClose asChild>
-                    <Button variant="outline" className="border-maitai-lime text-maitai-lime hover:bg-maitai-lime/10">
+                  {/* Maybe remove second CTA or use outline? */}
+                  {/* <SheetClose asChild>
+                    <Button variant="limeOutline">
                       Start Trial
                     </Button>
-                  </SheetClose>
+                  </SheetClose> */}
                 </div>
               </nav>
             </SheetContent>
