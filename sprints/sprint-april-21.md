@@ -12,7 +12,7 @@ SEGMENT 0  | REPO & ENV SETUP
 [✓] npx tailwindcss init -p   # Created tailwind.config.js & postcss.config.mjs manually
 [✓] Scaffold file tree per ✨ "Maitai Marketing Site Docs" textdoc
 [✓] Configure `next.config.js` → images domains, React strict, etc. # Created config, strict mode set
-[ ] Add `.env.example` with all keys (SendGrid, reCAPTCHA, Sentry…)
+[✓] Add `.env.example` with all keys (SendGrid, reCAPTCHA, Sentry…)
 [ ] Commit baseline & push → CI passes, Vercel preview deploys
 
 ────────────────────────────────────────────────────────────────────────────
@@ -153,7 +153,7 @@ SEGMENT 7  | DOCS & CAREERS ROUTES (Revised)
 [✓] `/docs` external; just `router.push(external)` on click - Implemented in Header link
 [~] `/careers` page build deferred. Link points to YC Job Page instead.
     - [~] ~~`/careers` page with YC link + commented Greenhouse embed snippet~~ (DEFERRED)
-[ ] Add badge "Backed by YC S24" to Homepage Hero section - Use `/public/logos/Backed by YC.png`
+[✓] Add badge "Backed by YC S24" to Homepage Hero section - Use `/public/logos/Backed by YC.png`
     - [~] ~~Add badge "Backed by YC S24" beside logo on careers page~~ (MOVED TO HERO)
 
 ────────────────────────────────────────────────────────────────────────────
