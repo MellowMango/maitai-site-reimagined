@@ -53,7 +53,7 @@ export default function PricingSection() {
             Simple, transparent pricing
           </p>
         </div>
-        <p className="mx-auto mt-6 max-w-2xl text-center text-lg leading-8 text-gray-900 font-greycliff">
+        <p className="mx-auto mt-6 max-w-2xl text-center text-lg leading-8 text-[#090F0D] font-greycliff">
           Choose the plan that best fits your needs. Scale up or down anytime.
         </p>
 
@@ -67,17 +67,17 @@ export default function PricingSection() {
                 'rounded-3xl p-8 xl:p-10 bg-white'
               )}
             >
-              <h3 id={tier.id} className="text-lg font-semibold leading-8 text-black font-greycliff">
+              <h3 id={tier.id} className="text-lg font-semibold leading-8 text-[#090F0D] font-greycliff">
                 {tier.name}
               </h3>
-              <p className="mt-4 text-sm leading-6 text-gray-900">{tier.description}</p>
+              <p className="mt-4 text-sm leading-6 text-[#090F0D]">{tier.description}</p>
               <p className="mt-6 flex items-baseline gap-x-1">
-                <span className="text-4xl font-bold tracking-tight text-gray-900">{tier.price.monthly}</span>
+                <span className="text-4xl font-bold tracking-tight text-[#090F0D]">{tier.price.monthly}</span>
                 {tier.priceSuffix && (
-                  <span className="text-sm font-semibold leading-6 text-gray-600">{tier.priceSuffix}</span>
+                  <span className="text-sm font-semibold leading-6 text-[#090F0D]">{tier.priceSuffix}</span>
                 )}
                 {!tier.priceSuffix && tier.price.monthly !== 'Contact Us' && (
-                  <span className="text-sm font-semibold leading-6 text-gray-600">/month</span>
+                  <span className="text-sm font-semibold leading-6 text-[#090F0D]">/month</span>
                 )}
               </p>
               <Link
@@ -92,7 +92,7 @@ export default function PricingSection() {
               >
                 {tier.price.monthly === 'Contact Us' ? 'Contact Sales' : tier.mostPopular ? 'Get started' : 'Select plan'}
               </Link>
-              <ul role="list" className="mt-8 space-y-3 text-sm leading-6 text-gray-900 xl:mt-10">
+              <ul role="list" className="mt-8 space-y-3 text-sm leading-6 text-[#090F0D] xl:mt-10">
                 {tier.features.map((feature) => (
                   <li key={feature} className="flex gap-x-3">
                     <CheckIcon className="h-6 w-5 flex-none text-maitai-lime" aria-hidden="true" />

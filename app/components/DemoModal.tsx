@@ -115,7 +115,7 @@ export default function DemoModal({ open, setOpen }: DemoModalProps) {
                 <div className="absolute right-0 top-0 pr-4 pt-4 sm:block">
                   <button
                     type="button"
-                    className="rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-maitai-lagoon focus:ring-offset-2"
+                    className="rounded-md bg-white text-[#090F0D] hover:text-maitai-lime focus:outline-none focus:ring-2 focus:ring-maitai-lagoon focus:ring-offset-2"
                     onClick={() => setOpen(false)}
                   >
                     <span className="sr-only">Close</span>
@@ -128,14 +128,14 @@ export default function DemoModal({ open, setOpen }: DemoModalProps) {
                   <div className="py-12 text-center">
                     {/* Basic Loading Spinner */}
                     <div className="mx-auto h-12 w-12 animate-spin rounded-full border-4 border-t-4 border-gray-200 border-t-maitai-lagoon"></div>
-                    <p className="mt-4 text-gray-600">Submitting...</p>
+                    <p className="mt-4 text-[#090F0D]">Submitting...</p>
                   </div>
                 ) : submitSuccess ? (
                   <div className="py-12 text-center">
-                    <DialogTitle as="h3" className="text-lg font-semibold leading-6 text-green-600">
+                    <DialogTitle as="h3" className="text-lg font-semibold leading-6 text-[#090F0D]">
                       Request Received!
                     </DialogTitle>
-                    <p className="mt-2 text-sm text-gray-500">
+                    <p className="mt-2 text-sm text-[#090F0D]">
                       Thank you for your interest. Our team will contact you shortly to schedule your demo.
                     </p>
                   </div>
@@ -143,11 +143,11 @@ export default function DemoModal({ open, setOpen }: DemoModalProps) {
                   // Form View
                   <div className="sm:flex sm:items-start">
                     <div className="mt-3 w-full text-center sm:ml-4 sm:mt-0 sm:text-left">
-                      <DialogTitle as="h3" className="text-lg font-semibold leading-6 text-gray-900">
+                      <DialogTitle as="h3" className="text-lg font-semibold leading-6 text-[#090F0D]">
                         Request a Demo
                       </DialogTitle>
                       <div className="mt-2">
-                        <p className="text-sm text-gray-500">
+                        <p className="text-sm text-[#090F0D]">
                           Fill out the form below and our team will be in touch shortly.
                         </p>
                       </div>
@@ -156,28 +156,28 @@ export default function DemoModal({ open, setOpen }: DemoModalProps) {
                       <form onSubmit={handleSubmit} className="mt-6 space-y-4">
                         <div className="grid grid-cols-1 gap-x-4 gap-y-4 sm:grid-cols-2">
                           <div>
-                            <label htmlFor="firstName" className="block text-sm font-medium leading-6 text-gray-900">First Name *</label>
+                            <label htmlFor="firstName" className="block text-sm font-medium leading-6 text-[#090F0D]">First Name *</label>
                             <input type="text" name="firstName" id="firstName" required value={formData.firstName} onChange={handleChange} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-maitai-lagoon focus:ring-maitai-lagoon sm:text-sm" />
                           </div>
                           <div>
-                            <label htmlFor="lastName" className="block text-sm font-medium leading-6 text-gray-900">Last Name *</label>
+                            <label htmlFor="lastName" className="block text-sm font-medium leading-6 text-[#090F0D]">Last Name *</label>
                             <input type="text" name="lastName" id="lastName" required value={formData.lastName} onChange={handleChange} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-maitai-lagoon focus:ring-maitai-lagoon sm:text-sm" />
                           </div>
                         </div>
                         <div>
-                          <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">Work Email *</label>
+                          <label htmlFor="email" className="block text-sm font-medium leading-6 text-[#090F0D]">Work Email *</label>
                           <input type="email" name="email" id="email" required value={formData.email} onChange={handleChange} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-maitai-lagoon focus:ring-maitai-lagoon sm:text-sm" />
                         </div>
                         <div>
-                          <label htmlFor="company" className="block text-sm font-medium leading-6 text-gray-900">Company Name *</label>
+                          <label htmlFor="company" className="block text-sm font-medium leading-6 text-[#090F0D]">Company Name *</label>
                           <input type="text" name="company" id="company" required value={formData.company} onChange={handleChange} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-maitai-lagoon focus:ring-maitai-lagoon sm:text-sm" />
                         </div>
                         <div>
-                          <label htmlFor="role" className="block text-sm font-medium leading-6 text-gray-900">Your Role *</label>
+                          <label htmlFor="role" className="block text-sm font-medium leading-6 text-[#090F0D]">Your Role *</label>
                           <input type="text" name="role" id="role" required value={formData.role} onChange={handleChange} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-maitai-lagoon focus:ring-maitai-lagoon sm:text-sm" />
                         </div>
                         <div>
-                          <label htmlFor="message" className="block text-sm font-medium leading-6 text-gray-900">Message (Optional)</label>
+                          <label htmlFor="message" className="block text-sm font-medium leading-6 text-[#090F0D]">Message (Optional)</label>
                           <textarea name="message" id="message" rows={3} value={formData.message} onChange={handleChange} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-maitai-lagoon focus:ring-maitai-lagoon sm:text-sm"></textarea>
                         </div>
 

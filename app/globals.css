@@ -1,21 +1,11 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff; /* Base light background */
-  --foreground: #090F0D; /* Base dark text (Vampire Black) */
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* Define dark mode colors - consider using Tailwind's dark: prefix instead */
-    --background: #090F0D; /* Vampire Black */
-    --foreground: #F2FBF9; /* Mint Cream */
-  }
-}
+/*
+  All global theming (background, text color, etc.) is handled via Tailwind classes.
+  No CSS variables for background/foreground are used. If dark mode is desired, use Tailwind's dark: classes.
+*/
 
 body {
   /* Minimal body styles - Tailwind utilities will handle most things */
-  background: var(--background);
-  color: var(--foreground);
   /* font-family will be applied via layout.tsx using Tailwind config */
 }

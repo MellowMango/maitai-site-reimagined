@@ -50,11 +50,11 @@ export default function HomePage() {
         <div className="lg:grid lg:grid-cols-2 gap-8 lg:gap-x-12 lg:items-center">
           {/* Left Column: Text Content & CTAs */}
           <div className="text-center lg:text-left">
-            <h1 className="font-greycliff text-4xl font-bold tracking-tight text-maitai-vampire-black sm:text-5xl lg:text-6xl">
+            <h1 className="font-greycliff text-4xl font-bold tracking-tight text-[#090F0D] sm:text-5xl lg:text-6xl">
               AI With An Immune System
             </h1>
             {/* Updated text contrast & Hero subhead copy */}
-            <p className="mt-6 text-lg leading-8 font-greycliff text-gray-900 max-w-xl mx-auto lg:mx-0">
+            <p className="mt-6 text-lg leading-8 font-greycliff text-[#090F0D] max-w-xl mx-auto lg:mx-0">
               Stop babysitting unreliable AI—Maitai delivers robust, low‑latency inference with built‑in observability.
             </p>
             <div className="mt-10 flex flex-col items-center gap-y-4 sm:flex-row sm:justify-center lg:justify-start sm:gap-x-4">
@@ -82,7 +82,7 @@ export default function HomePage() {
             transition={{ duration: 0.6, ease: "easeOut" }}
           >
             <div className="h-full w-full bg-gradient-to-br from-maitai-lagoon/20 to-maitai-lime/20 rounded-lg flex items-center justify-center">
-              <span className="text-gray-400 italic">[Hero Illustration Placeholder]</span>
+              <span className="text-[#090F0D] italic">[Hero Illustration Placeholder]</span>
             </div>
           </motion.div>
         </div>
@@ -99,11 +99,11 @@ export default function HomePage() {
             {/* Added micro-heading */}
             <h2 className="text-base font-semibold leading-7 text-maitai-lagoon font-pineapple uppercase tracking-wider">Everything you need</h2>
             <h2 className="text-base font-semibold leading-7 text-maitai-lagoon">Features</h2>
-            <p className="mt-2 text-3xl font-bold tracking-tight text-maitai-vampire-black sm:text-4xl font-greycliff">
+            <p className="mt-2 text-3xl font-bold tracking-tight text-[#090F0D] sm:text-4xl font-greycliff">
               Everything you need for reliable AI
             </p>
             {/* Updated text contrast */}
-            <p className="mt-6 text-lg leading-8 text-gray-900">
+            <p className="mt-6 text-lg leading-8 text-[#090F0D]">
               Stop babysitting unreliable AI. Maitai provides the core infrastructure and tools to ensure your models perform reliably, efficiently, and securely in production.
             </p>
           </div>
@@ -114,11 +114,11 @@ export default function HomePage() {
             <dl className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-12">
               {features.map((feature) => (
                 <div key={feature.name} className="rounded-lg bg-white p-6 shadow-sm">
-                  <dt className="flex items-center gap-x-3 text-base font-semibold leading-7 text-gray-900">
+                  <dt className="flex items-center gap-x-3 text-base font-semibold leading-7 text-[#090F0D]">
                     {feature.icon && <feature.icon className="h-8 w-8 flex-none text-maitai-lagoon" aria-hidden="true" />}
                     {feature.name}
                   </dt>
-                  <dd className="mt-4 flex flex-auto flex-col text-base leading-7 text-gray-900">
+                  <dd className="mt-4 flex flex-auto flex-col text-base leading-7 text-[#090F0D]">
                     <p className="flex-auto">{feature.description}</p>
                     {/* Optional: Add a 'Learn more' link here if needed */}
                     {/* <p className="mt-6">
@@ -138,6 +138,7 @@ export default function HomePage() {
       {/* Pricing Section */}
       <PricingSection />
 
+      {/* Removed bottom Read the Docs button as per user request */}
     </div>
   );
 }

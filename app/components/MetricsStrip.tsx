@@ -40,7 +40,7 @@ const cardVariants = {
 
 export default function MetricsStrip() {
   return (
-    <section className="bg-maitai-vampire-black py-16 lg:py-24">
+    <section className="bg-white py-16 lg:py-24">
       <div className="container mx-auto max-w-7xl px-6 lg:px-8">
         {/* Enable horizontal scrolling on smaller screens */}
         <div className="scrollbar-hide overflow-x-auto pb-4 -mb-4">
@@ -49,16 +49,16 @@ export default function MetricsStrip() {
             {metrics.map((metric, index) => (
               <motion.div
                 key={metric.id}
-                className="flex flex-col items-center justify-center rounded-lg bg-white/10 p-6 text-center text-white"
+                className="flex flex-col items-center justify-center rounded-lg bg-white/10 p-6 text-center"
                 variants={cardVariants}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.3 }} // Trigger when 30% visible
                 custom={index} // Stagger animation slightly if needed
               >
-                <metric.icon className="h-10 w-10 mb-4 text-maitai-pineapple" aria-hidden="true" />
-                <div className="text-4xl font-bold">{metric.value}</div>
-                <div className="mt-1 text-sm text-gray-300">{metric.label}</div>
+                <metric.icon className="h-10 w-10 mb-4 text-[#090F0D]" aria-hidden="true" />
+                <div className="text-4xl font-bold text-[#090F0D]">{metric.value}</div>
+                <div className="mt-1 text-sm text-[#090F0D]">{metric.label}</div>
               </motion.div>
             ))}
           </div>
