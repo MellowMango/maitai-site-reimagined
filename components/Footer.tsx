@@ -64,7 +64,7 @@ export default function Footer() {
                       target={link.href.startsWith('http') ? '_blank' : '_self'}
                       rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                       className="text-sm text-gray-400 hover:text-white hover:underline"
-                      legacyBehavior>
+                    >
                       {link.name}
                     </Link>
                   </li>

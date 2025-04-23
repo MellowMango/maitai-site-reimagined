@@ -28,14 +28,14 @@ export function Hero() {
           </p>
           {/* Wrap Buttons with Link */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/demo" passHref legacyBehavior>
+            <Link href="/demo">
               <Button asChild variant="pineapple" size="lg">
-                <a>Get a Demo</a>
+                <span>Get a Demo</span>
               </Button>
             </Link>
-            <Link href="/demo" passHref legacyBehavior>
+            <Link href="/demo">
               <Button asChild variant="outline" size="lg" className="border-maitai-lagoon text-maitai-lagoon hover:bg-maitai-lagoon/10">
-                 <a>Start Trial</a>
+                <span>Start Trial</span>
               </Button>
             </Link>
           </div>

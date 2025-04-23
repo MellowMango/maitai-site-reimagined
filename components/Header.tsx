@@ -82,7 +82,7 @@ export default function Header() {
                 // Re-introduce conditional text color
                 isScrolled ? 'text-white' : 'text-maitai-vampire-black'
               )}
-            >
+              >
               {link.name}
             </Link>
           ))}
@@ -123,7 +123,7 @@ export default function Header() {
                       target={link.href.startsWith('http') ? '_blank' : '_self'}
                       rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                       className="text-lg text-maitai-vampire-black hover:text-maitai-lime"
-                      legacyBehavior>
+                      >
                       {link.name}
                     </Link>
                   </SheetClose>
