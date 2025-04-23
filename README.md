@@ -18,6 +18,7 @@ This repository contains the source code for the rebuilt [trymaitai.ai](https://
 | Images         | next/image                | Automatic srcset / WebP / lazy                  |
 | Email          | SendGrid v3               | Triggered by `/api/demo` route                   |
 | Anti-spam      | reCAPTCHA v3              | Token verified in API route (`@google-recaptcha/react`) |
+| Live Chat      | Intercom                  | Via `next/script` in `app/layout.tsx`           |
 | SEO            | next-seo                  | Per-page Open Graph & meta                      |
 | Error Tracking | Sentry                    | `@sentry/nextjs`                                |
 | CI/CD          | GitHub Actions → Vercel   | Lint → type-check → test → preview              |
@@ -109,17 +110,25 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ### Environment Variables
 
-Create a `.env.local` file in the root directory by copying `.env.example` (if one exists) or creating it from scratch. Add the following variables based on the blueprint:
+Create a `.env.local` file in the root directory by copying `.env.example` or creating it from scratch. Add the following variables:
 
 ```
+# Google reCAPTCHA v3
 NEXT_PUBLIC_RECAPTCHA_SITE_KEY=xxx
 RECAPTCHA_SECRET_KEY=xxx
+
+# SendGrid Email Service
 SENDGRID_API_KEY=SG.xxx
 SENDGRID_FROM=demo@trymaitai.ai
+
+# Sentry Error Tracking
 SENTRY_DSN=https://...
+
+# Intercom Chat Widget
+NEXT_PUBLIC_INTERCOM_APP_ID=xxx
 ```
 
-Obtain the actual keys from the respective services (Google reCAPTCHA, SendGrid, Sentry).
+Obtain the actual keys from the respective services (Google reCAPTCHA, SendGrid, Sentry, Intercom).
 
 ## 4. Key Configuration Files & Concepts
 
@@ -161,3 +170,14 @@ Follow the workflow outlined in the technical blueprint (Section 8):
 ## 7. Deployment
 
 Deployment is handled via Vercel, connected to this GitHub repository. See the blueprint (Section 9) for Vercel project setup and environment variable configuration.
+
+## 8. Email Templates
+
+The following HTML email templates are available in the `lib/email-templates/` directory:
+
+*   `demo-request-notification.html`: Sent internally when a new demo request is submitted via the website form.
+    *   Used by: `lib/mailer.ts` (placeholder)
+    *   Requires data: `firstName`, `lastName`, `businessEmail`, `companyName`, `companySize`, `numSDRsAEs`, `whyMaitai` (optional), `currentDate`.
+
+---
+*Add new templates to this list as they are created.*

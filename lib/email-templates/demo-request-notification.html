@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Maitai Demo Request</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #343a40;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .header {
+            background-color: #255D70; /* Maitai Lagoon */
+            padding: 20px;
+            text-align: center;
+        }
+        .header img {
+            max-width: 150px;
+            height: auto;
+        }
+        .content {
+            padding: 30px;
+        }
+        .content h1 {
+            color: #255D70; /* Maitai Lagoon */
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .content p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        .content strong {
+            color: #090F0D; /* Maitai VampireBlack */
+        }
+        .field-label {
+            font-weight: bold;
+            color: #495057;
+            margin-bottom: 5px;
+            display: block;
+        }
+        .field-value {
+            background-color: #f1f3f5;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            font-size: 15px;
+        }
+        .footer {
+            background-color: #e9ecef;
+            padding: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <!-- Assuming logo is accessible at this URL on the deployed site -->
+            <img src="https://www.trymaitai.ai/logos/logo-all-white.svg" alt="Maitai Logo"> 
+        </div>
+        <div class="content">
+            <h1>New Demo Request Received</h1>
+            <p>A new demo request has been submitted via the website:</p>
+
+            <span class="field-label">Name:</span>
+            <div class="field-value">{{firstName}} {{lastName}}</div>
+
+            <span class="field-label">Email:</span>
+            <div class="field-value"><a href="mailto:{{businessEmail}}">{{businessEmail}}</a></div>
+
+            <span class="field-label">Company Name:</span>
+            <div class="field-value">{{companyName}}</div>
+
+            <span class="field-label">Company Size:</span>
+            <div class="field-value">{{companySize}}</div>
+
+            <span class="field-label">Number of SDRs + AEs:</span>
+            <div class="field-value">{{numSDRsAEs}}</div>
+
+            <span class="field-label">Why Maitai?:</span>
+            <div class="field-value">
+                {{#if whyMaitai}}
+                    {{whyMaitai}}
+                {{else}}
+                    (Not provided)
+                {{/if}}
+            </div>
+
+            <p>Please follow up with this lead promptly.</p>
+        </div>
+        <div class="footer">
+            Maitai Inc. | Generated on {{currentDate}}
+        </div>
+    </div>
+</body>
+</html> 

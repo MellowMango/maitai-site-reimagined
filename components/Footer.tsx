@@ -28,7 +28,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Column 1: Logo & Social */}
           <div className="md:col-span-1 space-y-6">
-            <Link href="/">
+            <Link href="/" legacyBehavior>
               <Image
                 src="/logos/logo-all-white.svg" // Use correct white logo filename
                 alt="Maitai Logo"
@@ -59,12 +59,12 @@ export default function Footer() {
               <ul className="space-y-3">
                 {links.map((link) => (
                   <li key={link.name}>
-                    <Link 
+                    <Link
                       href={link.href}
                       target={link.href.startsWith('http') ? '_blank' : '_self'}
                       rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                       className="text-sm text-gray-400 hover:text-white hover:underline"
-                    >
+                      legacyBehavior>
                       {link.name}
                     </Link>
                   </li>
@@ -74,7 +74,6 @@ export default function Footer() {
           ))}
         </div>
       </div>
-
       {/* Bottom Bar */}
       <div className="border-t border-gray-700 mt-8">
         <div className="container mx-auto px-6 lg:px-8 py-6 text-center text-sm text-gray-500">

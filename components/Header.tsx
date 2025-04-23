@@ -59,7 +59,7 @@ export default function Header() {
       {/* Apply padding only when scrolled to allow pill effect */}
       <div className={innerDivClasses}>
         {/* Logo - Always inverse */}
-        <Link href="/" className="flex-shrink-0 pl-2 pr-4"> {/* Added padding around logo inside pill */}
+        <Link href="/" className="flex-shrink-0 pl-2 pr-4">
           <Image
             src={logoSrc}
             alt="Maitai Logo"
@@ -82,7 +82,7 @@ export default function Header() {
                 // Re-introduce conditional text color
                 isScrolled ? 'text-white' : 'text-maitai-vampire-black'
               )}
-            >
+              legacyBehavior>
               {link.name}
             </Link>
           ))}
@@ -123,7 +123,7 @@ export default function Header() {
                       target={link.href.startsWith('http') ? '_blank' : '_self'}
                       rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                       className="text-lg text-maitai-vampire-black hover:text-maitai-lime"
-                    >
+                      legacyBehavior>
                       {link.name}
                     </Link>
                   </SheetClose>

@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 // Import Header and Footer
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { IntercomSetup } from "@/components/IntercomSetup";
 
 export const metadata: Metadata = {
   title: "Maitai", // Default title, will be customized by next-seo
@@ -28,6 +29,7 @@ export default function RootLayout({
         <Header />
         <main id="main" className="pt-16">{children}</main>
         <Footer />
+        <IntercomSetup />
       </body>
     </html>
   );

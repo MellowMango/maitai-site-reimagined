@@ -38,6 +38,12 @@ This document outlines the necessary third-party services and credentials requir
     *   **Environment Variables:** Potentially `NEXT_PUBLIC_GA_ID` if direct GA integration is chosen over Vercel's default.
     *   **Setup Link:** Vercel Dashboard -> Project -> Analytics Tab. Check Vercel documentation for GA4 integration steps if needed.
 
+7.  **Intercom**
+    *   **Purpose:** Live chat widget for user support and engagement.
+    *   **Credentials Needed:** `App ID`.
+    *   **Environment Variables:** `NEXT_PUBLIC_INTERCOM_APP_ID`
+    *   **Setup Link:** [https://app.intercom.com/](https://app.intercom.com/) -> Settings (bottom-left) -> Installation -> Web -> Get App ID.
+
 ## Potential / Future Integrations
 
 1.  **CRM Integration (e.g., HubSpot, Salesforce)**

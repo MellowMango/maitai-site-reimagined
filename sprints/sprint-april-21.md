@@ -137,7 +137,7 @@ Page (`app/demo/page.tsx`)
 
 API route (`app/api/demo/route.ts`)
   [ ] TODO: Verify reCAPTCHA token w/ Google
-  [ ] TODO: Send email via SendGrid (template in lib/mailer)
+  [ ] TODO: Send email via SendGrid (template in lib/mailer - NOTE: Template created at `lib/email-templates/demo-request-notification.html`)
   [ ] TODO: Return 200 | 400
 
 Checklist
@@ -208,5 +208,25 @@ Approach:
 [ ] Ensure responsive video sizing.
 [ ] Performance Check: Verify WebM usage, lazy-loading, poster fallback.
 (Consider incorporating AccuracyChart.tsx / TTFTComparison.tsx from /public/animations/phonely-case-study/ into relevant sections or a dedicated case study segment)
+
+# End of sprint.md
+
+────────────────────────────────────────────────────────────────────────────
+SEGMENT 12 | INTERCOM INTEGRATION (Added 2025-XX-XX)
+────────────────────────────────────────────────────────────────────────────
+Goal: Add Intercom live chat widget to the site.
+
+Files: components/IntercomSetup.tsx, app/layout.tsx, .env.example, integrations-setup.md, README.md
+
+[✓] Add Intercom script loading component (`components/IntercomSetup.tsx`)
+[✓] Add component to root layout (`app/layout.tsx`)
+[✓] Add `NEXT_PUBLIC_INTERCOM_APP_ID` to `.env.example`
+[✓] Update `README.md` (Tech Stack, Env Vars)
+[✓] Update `integrations-setup.md`
+[ ] Obtain Intercom App ID from Intercom settings.
+[ ] Add `NEXT_PUBLIC_INTERCOM_APP_ID=YOUR_APP_ID` to `.env.local` (DO NOT COMMIT).
+[ ] Test Intercom widget appears and functions correctly in development.
+
+Note: Requires Intercom account setup (likely needs company email).
 
 # End of sprint.md
