@@ -1,12 +1,28 @@
 'use client';
 
 import React from 'react';
+import dynamic from 'next/dynamic';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 
+// Feature flag for the new Orchestrator Constellation
+const SHOW_CONSTELLATION = process.env.NEXT_PUBLIC_SHOW_CONSTELLATION !== 'false';
+
+// Dynamically import the OrchestratorConstellation component with no SSR for WebGL support
+const OrchestratorConstellation = dynamic(
+  () => import('@/components/OrchestratorConstellation'),
+  { ssr: false }
+);
+
 export function Hero() {
+  // If the feature flag is enabled, use the new constellation component
+  if (SHOW_CONSTELLATION) {
+    return <OrchestratorConstellation />;
+  }
+  
+  // Otherwise, use the original Hero component
   return (
     // Updated background to light radial gradient and adjusted text/padding
     <section className="relative overflow-hidden bg-gradient-radial from-green-50 via-blue-50 to-neutral-50 text-maitai-vampire-black py-24 md:py-36">
