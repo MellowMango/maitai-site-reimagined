@@ -203,7 +203,7 @@ SEGMENT 10  | PERFORMANCE & DEPLOY
 ────────────────────────────────────────────────────────────────────────────
 SEGMENT 11 | INTERACTIVE PROOF MODULES
 ────────────────────────────────────────────────────────────────────────────
-# 11A  LATENCY RACE (Hero Canvas)
+# 11A  LATENCY RACE (Hero Canvas) [ARCHIVED - TO BE REIMAGINED]
 # ------------------------------------------------
 Files: components/LatencyRace.tsx, lib/benchmarks.json, public/textures/flare.png
 [ ] Build Three.js scene (react-three-fiber) → two spheres, animated pulse line
@@ -211,6 +211,8 @@ Files: components/LatencyRace.tsx, lib/benchmarks.json, public/textures/flare.pn
 [ ] Benchmarks hard-coded in lib/benchmarks.json; display numbers in corner HUD
 [ ] Fallback <picture><source srcSet="latency-race.gif"> on no WebGL
 [ ] Accessibility: prefers-reduced-motion ⇒ static image
+
+Note: Initial implementation archived. To be reimplemented with different approach.
 
 # 11B  DRAG SCRUB (Portal Storyboard)
 # ------------------------------------------------
@@ -248,7 +250,45 @@ Checklist (all 11x)
 ☐ Lighthouse <= 100 KB added JS per module (tree-shake lodash et al)
 ☐ GTM events: 'latency_slider', 'portal_drag', 'lora_swap', 'intent_edit'
 
-# End SEGMENT 11
+────────────────────────────────────────────────────────────────────────────
+SEGMENT 11E | HERO "ORCHESTRATOR CONSTELLATION"
+────────────────────────────────────────────────────────────────────────────
+Goal: Replace placeholder hero with interactive, top-down product map.
+
+Files:
+  components/OrchestratorConstellation.tsx
+  lib/hero-nodes.ts  # array of {id, title, kpi, copy}
+  public/textures/grid.png
+
+Steps
+[✓] 1. Canvas shell: 100% width, fixed 600-720 px height, Tailwind section id="hero".
+[✓] 2. Background: CSS parallax grid (transform: translateY on scroll, opacity .06).
+[~] 3. Three.js scene via react-three-fiber:
+      • Central sphere (Maitai core) with pulsating shaderMaterial.
+      • Five smaller Meshes on circular orbit; orbit radius animates with sine ease.
+      Note: Initial SVG placeholder implemented. Three.js version coming next.
+[✓] 4. Interaction:
+      • raycaster hover → setActiveNode(id)
+      • gsap.to(scale/opacity) for lift + glow
+      • Tooltip <div> positioned with threejs projected coords -> React Portal
+[✓] 5. Auto-tour:
+      • useEffect: loop through nodes every 3 s if isInteracting === false
+[✓] 6. Fallback:
+      • Prefers-reduced-motion → static SVG of constellation
+      • No WebGL → hero-static.png
+[✓] 7. CTA Dock:
+      • Radix ButtonGroup bottom-right inside absolute wrapper
+[✓] 8. Storybook story + Vitest render snapshot
+[✓] 9. Lighthouse check: additional JS ≤ 140 kB gzipped (tree-shake drei, gsap)
+
+Checklist
+☐ Interactive works on Safari iOS 17
+☐ Keyboard nav: Tab cycles nodes, Enter triggers tooltip
+☐ Announce tooltip via aria-live
+☐ Feature-flag `NEXT_PUBLIC_SHOW_CONSTELLATION` for staging toggle
+☐ Delete old hero placeholder after merge
+
+# END SEGMENT 11E
 ────────────────────────────────────────────────────────────────────────────
 
 # End of sprint.md

@@ -30,5 +30,16 @@
       "maitai_ms": 45,
       "competitor_ms": 800
     }
-  ]
+  ],
+  "maitai": {
+    "baseLatency": 24,
+    "maxLatency": 45,
+    "unit": "ms"
+  },
+  "competitor": {
+    "baseLatency": 85,
+    "maxLatency": 234,
+    "unit": "ms"
+  },
+  "loadImpactFactor": 0.015
 } 

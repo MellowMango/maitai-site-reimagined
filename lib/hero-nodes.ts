@@ -53,11 +53,11 @@ export const heroNodes: HeroNode[] = [
 ];
 
 // Central core data
-export const coreNode = {
+export const coreNode: Omit<HeroNode, 'id' | 'kpi'> & { id: string } = {
   id: 'core',
   title: 'Maitai Orchestrator',
   copy: 'The central AI orchestration layer that connects and optimizes your entire AI stack.',
-  position: [0, 0, 0],
+  position: [0, 0, 0] as [number, number, number],
   color: 'text-maitai-lime',
 };
 
