@@ -82,7 +82,7 @@ export default function Header() {
                 // Re-introduce conditional text color
                 isScrolled ? 'text-white' : 'text-maitai-vampire-black'
               )}
-              >
+            >
               {link.name}
             </Link>
           ))}
@@ -90,13 +90,12 @@ export default function Header() {
 
         {/* Single CTA Button - Wrap with Link */}
         <div className="hidden lg:flex items-center pl-4 pr-2">
-          <Link href="/demo" passHref legacyBehavior>
+          <Link href="/demo">
             <Button
-              asChild // Use asChild for Button within Link
               size="pill"
               variant={isScrolled ? 'lightPill' : 'darkPill'}
             >
-              <a>Get a Demo</a>
+              Get a Demo
             </Button>
           </Link>
         </div>
@@ -123,7 +122,7 @@ export default function Header() {
                       target={link.href.startsWith('http') ? '_blank' : '_self'}
                       rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                       className="text-lg text-maitai-vampire-black hover:text-maitai-lime"
-                      >
+                    >
                       {link.name}
                     </Link>
                   </SheetClose>
@@ -131,9 +130,9 @@ export default function Header() {
                 {/* Mobile CTA - Wrap with Link */}
                 <div className="flex flex-col space-y-3 pt-6 border-t">
                   <SheetClose asChild>
-                    <Link href="/demo" passHref legacyBehavior>
-                      <Button asChild variant="pineapple">
-                        <a>Get a Demo</a>
+                    <Link href="/demo">
+                      <Button variant="pineapple">
+                        Get a Demo
                       </Button>
                     </Link>
                   </SheetClose>

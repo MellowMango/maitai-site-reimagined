@@ -27,13 +27,12 @@ const PlanCard = ({ title, price, priceDetail, ctaLabel, bullets, isEnterprise =
         </li>
       ))}
     </ul>
-    <Link href="/demo" passHref legacyBehavior>
+    <Link href="/demo">
       <Button
-        asChild
         variant={isEnterprise ? 'default' : 'outline'}
         className={`mt-8 w-full ${isEnterprise ? 'bg-maitai-lime hover:bg-maitai-lime/90 text-white' : 'border-maitai-lagoon text-maitai-lagoon hover:bg-maitai-lagoon/10 hover:text-maitai-lagoon'}`}
       >
-        <a>{ctaLabel}</a>
+        {ctaLabel}
       </Button>
     </Link>
   </div>

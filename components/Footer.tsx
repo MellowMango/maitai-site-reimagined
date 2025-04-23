@@ -28,7 +28,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Column 1: Logo & Social */}
           <div className="md:col-span-1 space-y-6">
-            <Link href="/" legacyBehavior>
+            <Link href="/">
               <Image
                 src="/logos/logo-all-white.svg" // Use correct white logo filename
                 alt="Maitai Logo"
