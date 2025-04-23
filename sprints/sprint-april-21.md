@@ -123,7 +123,7 @@ Checklist
 [ ] TODO: Add tab underline animation (if Tabs are reintroduced)
 
 ────────────────────────────────────────────────────────────────────────────
-SEGMENT 6  | DEMO PAGE & FORM INFRA
+SEGMENT 6  | DEMO PAGE & FORM INFRA [ON HOLD - requires API keys]
 ────────────────────────────────────────────────────────────────────────────
 files: app/demo/page.tsx, app/api/demo/route.ts
 
@@ -132,17 +132,17 @@ Page (`app/demo/page.tsx`)
   [✓] react-hook-form + zod schema implemented
   [✓] Two-column layout with dark form inspired by screenshot
   [✓] Added tooltip for SDRs + AEs label
-  [ ] TODO: reCAPTCHA v3 integration (`execute('demo_submit')`)
-  [ ] TODO: Implement submit handler logic (call API, handle response)
+  [ ] TODO [ON HOLD]: reCAPTCHA v3 integration (`execute('demo_submit')`)
+  [ ] TODO [ON HOLD]: Implement submit handler logic (call API, handle response)
 
 API route (`app/api/demo/route.ts`)
-  [ ] TODO: Verify reCAPTCHA token w/ Google
-  [ ] TODO: Send email via SendGrid (template in lib/mailer - NOTE: Template created at `lib/email-templates/demo-request-notification.html`)
-  [ ] TODO: Return 200 | 400
+  [ ] TODO [ON HOLD]: Verify reCAPTCHA token w/ Google
+  [ ] TODO [ON HOLD]: Send email via SendGrid (template in lib/mailer - NOTE: Template created at `lib/email-templates/demo-request-notification.html`)
+  [ ] TODO [ON HOLD]: Return 200 | 400
 
 Checklist
-  [ ] TODO: Success state "Thank you 🎉 We'll reach out within 24 h"
-  [ ] TODO: Rate‑limit 3 req/IP/min (simple in‑memory Map on API route)
+  [ ] TODO [ON HOLD]: Success state "Thank you 🎉 We'll reach out within 24 h"
+  [ ] TODO [ON HOLD]: Rate‑limit 3 req/IP/min (simple in‑memory Map on API route)
   [✓] Pricing page CTAs link to `/demo`
   [✓] Header CTAs link to `/demo`
   [✓] Hero CTAs link to `/demo`
@@ -157,17 +157,24 @@ SEGMENT 7  | DOCS & CAREERS ROUTES (Revised)
     - [~] ~~Add badge "Backed by YC S24" beside logo on careers page~~ (MOVED TO HERO)
 
 ────────────────────────────────────────────────────────────────────────────
-SEGMENT 8  | FOOTER FINALIZATION & SOCIAL PROOF
+SEGMENT 8  | FOOTER & PARTNERS SECTION (Revised 2024-05-20)
 ────────────────────────────────────────────────────────────────────────────
-[✓] Insert partner logos from `/public/partner-companies` - Replaced customer logo placeholders
-[✓] Lazy‑load via `next/image` priority false - Standard practice for non-critical images
-[~] Add SOC 2, GDPR mini badges row (24 px tall) - Added available (SOC2, HIPAA, CCPA), GDPR asset needed. NOTE: Dark icons may be invisible on dark footer bg.
-[ ] TODO: Resolve compliance icon visibility (get light icons or add background strip).
+[✓] **Moved** partner logos from footer to new section
+    [✓] Created `components/PartnersMarquee.tsx` component
+    [✓] Component reads logos from `/public/partner-companies`
+    [✓] Implemented scrolling marquee effect on white background
+    [✓] Added `PartnersMarquee` to homepage (`app/page.tsx`)
+    [✓] Defined `marquee` animation in `tailwind.config.cjs` & `globals.css`
+[✓] Lazy‑load partner logos via `next/image` - Implemented in `PartnersMarquee.tsx`
+[✓] **Removed** compliance icons (SOC 2, HIPAA, CCPA) from footer.
+    [✓] Removed relevant code from `components/Footer.tsx`
+    [✓] ~~Add SOC 2, GDPR mini badges row (24 px tall)~~ (REMOVED)
+    [✓] ~~TODO: Resolve compliance icon visibility (get light icons or add background strip).~~ (REMOVED)
 
 ────────────────────────────────────────────────────────────────────────────
 SEGMENT 9  | ACCESSIBILITY & SEO HARDENING
 ────────────────────────────────────────────────────────────────────────────
-☐ Add skip‑link `a[href=\"#main\"]` visually hidden
+☐ Add skip‑link `a[href="#main"]` visually hidden
 ☐ Focus rings via Tailwind `ring-2 ring-Pineapple`
 ☐ Per‑page <title>/<meta description> with next-seo
 ☐ JSON‑LD Product schema in `next-seo.config.mjs`
@@ -176,44 +183,78 @@ SEGMENT 9  | ACCESSIBILITY & SEO HARDENING
 SEGMENT 10  | PERFORMANCE & DEPLOY
 ────────────────────────────────────────────────────────────────────────────
 ☐ `pnpm analyze` – any JS > 150 kB? → dynamic import
-☐ Preload Greycliff w/ `<link rel=\"preload\" as=\"font\">`
+☐ Preload Greycliff w/ `<link rel="preload" as="font">`
 ☐ Vercel production deploy
 ☐ Lighthouse: LCP < 1.2 s, FID < 100 ms, CLS < 0.1
-☐ Sentry captures front‑end errors, DSN set in env
+☐ Sentry captures front‑end errors, DSN set in env [ON HOLD]
 
 ────────────────────────────────────────────────────────────────────────────
 ## AGENT CHECKLIST (run every PR)
-[ ] Prettier/lint passes  
-[ ] `pnpm build` succeeds locally  
-[ ] Mobile < 375 px viewport screenshots taken  
-[ ] a11y checks via axe DevTools → no critical issues  
-[ ] Preview link added to PR description  
+[ ] Prettier/lint passes
+[ ] `pnpm build` succeeds locally
+[ ] Mobile < 375 px viewport screenshots taken
+[ ] a11y checks via axe DevTools → no critical issues
+[ ] Preview link added to PR description
 [ ] Reviewer checklist satisfied
 
 # End of sprint.md
 
 # New segment added 2024-05-16 based on UI Clip recommendations
 ────────────────────────────────────────────────────────────────────────────
-SEGMENT 11 | UI ANIMATION CLIPS (Hero/Features)
+SEGMENT 11 | INTERACTIVE PROOF MODULES
 ────────────────────────────────────────────────────────────────────────────
-Goal: Replace static hero image/placeholder with short, polished UI video clips.
+# 11A  LATENCY RACE (Hero Canvas)
+# ------------------------------------------------
+Files: components/LatencyRace.tsx, lib/benchmarks.json, public/textures/flare.png
+[ ] Build Three.js scene (react-three-fiber) → two spheres, animated pulse line
+[ ] Slider (Radix) alters concurrentRequests state; use useFrame to scale line count
+[ ] Benchmarks hard-coded in lib/benchmarks.json; display numbers in corner HUD
+[ ] Fallback <picture><source srcSet="latency-race.gif"> on no WebGL
+[ ] Accessibility: prefers-reduced-motion ⇒ static image
 
-Approach:
-[ ] Record short (3-5s) UI flow clips (60fps, WebM/MP4).
-[ ] Create static poster frame for each clip.
-[ ] Embed clips using `<video>` tag (autoplay, muted, loop, playsInline).
-[ ] Implement lazy-loading for videos.
-[ ] Add UI chrome (device frame) around video using React component.
-[ ] Add Framer Motion entrance animation (fade/scale) to frame.
-[ ] Optional: Add tiny Lottie/CSS overlay animations for clicks/feedback.
-[ ] Ensure responsive video sizing.
-[ ] Performance Check: Verify WebM usage, lazy-loading, poster fallback.
-(Consider incorporating AccuracyChart.tsx / TTFTComparison.tsx from /public/animations/phonely-case-study/ into relevant sections or a dedicated case study segment)
+# 11B  DRAG SCRUB (Portal Storyboard)
+# ------------------------------------------------
+Files: components/PortalScrub.tsx, public/portal-slices/*.webp
+[ ] Slice cleaned Figma-reskinned screenshots of 31-step flow (1024 × 640 max)
+[ ] Framer Motion draggable x; useTransform → opacity for caption sync
+[ ] Caption data array in same file: step, caption
+[ ] Mobile: free-scroll (momentum) + snap-x
+[ ] Lazy-load images via next/image with priority on first 3
+
+# 11C  LoRA HOT-SWAP CARD
+# ------------------------------------------------
+Files: components/LoRASwap.tsx, public/audio/lora-*.mp3
+[ ] Chips array [{label,mp3Src,transcript}] map → Radix ToggleGroup
+[ ] OnSelect: HTMLAudioElement.play(); transcript fades in (Framer)
+[ ] Preload MP3s on pointerenter
+[ ] Analytics: push 'lora_swap' event to Vercel/Segment
+
+# 11D  INTENT BUILDER PLAYGROUND
+# ------------------------------------------------
+Files: components/IntentPlayground.tsx
+Deps : monaco-editor, react-flow
+[ ] Split pane (CSS grid) – left Monaco YAML (readOnly=false), right React-Flow diagram
+[ ] Debounce 300 ms, parse YAML → nodes/edges (simple mapping)
+[ ] Guardrails: try/catch → show error toast not stack trace
+[ ] A11y: editor has aria-label, diagram has role="img"
+
+Checklist (all 11x)
+────────────────────────────────────────────────────────────────────────────
+☐ Each module exports <SectionWrapper> with internal padding, bg override option
+☐ Motion components respect prefers-reduced-motion
+☐ Storybook stories added for each component
+☐ Unit snapshot test (Vitest) for render
+☐ Add to homepage order in app/page.tsx; gate behind feature flag `NEXT_PUBLIC_SHOW_UI_DEMOS`
+☐ Lighthouse <= 100 KB added JS per module (tree-shake lodash et al)
+☐ GTM events: 'latency_slider', 'portal_drag', 'lora_swap', 'intent_edit'
+
+# End SEGMENT 11
+────────────────────────────────────────────────────────────────────────────
 
 # End of sprint.md
 
 ────────────────────────────────────────────────────────────────────────────
-SEGMENT 12 | INTERCOM INTEGRATION (Added 2025-XX-XX)
+SEGMENT 12 | INTERCOM INTEGRATION [ON HOLD - requires API key]
 ────────────────────────────────────────────────────────────────────────────
 Goal: Add Intercom live chat widget to the site.
 
@@ -224,9 +265,9 @@ Files: components/IntercomSetup.tsx, app/layout.tsx, .env.example, integrations-
 [✓] Add `NEXT_PUBLIC_INTERCOM_APP_ID` to `.env.example`
 [✓] Update `README.md` (Tech Stack, Env Vars)
 [✓] Update `integrations-setup.md`
-[ ] Obtain Intercom App ID from Intercom settings.
-[ ] Add `NEXT_PUBLIC_INTERCOM_APP_ID=YOUR_APP_ID` to `.env.local` (DO NOT COMMIT).
-[ ] Test Intercom widget appears and functions correctly in development.
+[ ] Obtain Intercom App ID from Intercom settings. [ON HOLD]
+[ ] Add `NEXT_PUBLIC_INTERCOM_APP_ID=YOUR_APP_ID` to `.env.local` (DO NOT COMMIT). [ON HOLD]
+[ ] Test Intercom widget appears and functions correctly in development. [ON HOLD]
 
 Note: Requires Intercom account setup (likely needs company email).
 

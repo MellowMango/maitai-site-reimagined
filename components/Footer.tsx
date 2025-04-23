@@ -93,28 +93,7 @@ export default function Footer() {
         {/* Compliance Badges Section */}
         {/* TODO: Compliance icons (SOC2.png, HIPAA.png, CCPA.png) are dark grey and may not be visible on the dark footer background. Consider using lighter versions or adding a contrasting background strip. */}
         <div className="mt-8 pt-8 border-t border-gray-700/50 flex justify-center items-center gap-x-6 gap-y-4">
-          <Image 
-            src="/compliance-icons/SOC2.png" 
-            alt="SOC 2 Compliant"
-            height={24} 
-            width={60} // Adjust width based on aspect ratio or use layout fill
-            className="opacity-80 hover:opacity-100 transition-opacity"
-          />
-          <Image 
-            src="/compliance-icons/HIPAA.png" 
-            alt="HIPAA Compliant"
-            height={24} 
-            width={60} // Adjust width based on aspect ratio or use layout fill
-            className="opacity-80 hover:opacity-100 transition-opacity"
-          />
-          <Image 
-            src="/compliance-icons/CCPA.png" 
-            alt="CCPA Compliant"
-            height={24} 
-            width={60} // Adjust width based on aspect ratio or use layout fill
-            className="opacity-80 hover:opacity-100 transition-opacity"
-          />
-          {/* Add GDPR badge here if/when available */}
+          {/* Compliance icons logic removed as per user request 2024-05-20 */}
         </div>
 
       </div>

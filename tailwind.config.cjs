@@ -1,3 +1,5 @@
+const { fontFamily } = require("tailwindcss/defaultTheme")
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ["class"],
@@ -17,7 +19,8 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        sans: ['Greycliff CF', 'sans-serif'], // Use font family name defined in @font-face
+        // sans: ["var(--font-sans)", ...fontFamily.sans],
+        sans: ['Greycliff CF', ...fontFamily.sans], // Use font family name defined in @font-face
       },
       colors: {
         // Custom Maitai Brand Colors from blueprint
@@ -61,6 +64,15 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        // Maitai Custom Colors
+        maitai: {
+          lagoon: "hsl(var(--maitai-lagoon))", // #255D70
+          lime: "hsl(var(--maitai-lime))",     // #21B892
+          mint: "hsl(var(--maitai-mint-cream))",// #F2FBF9 (adjusted name)
+          black: "hsl(var(--maitai-vampire-black))", // #090F0D (adjusted name)
+          pineapple: "hsl(var(--maitai-pineapple))", // #FFDB6A
+          rum: "hsl(var(--maitai-rum))",         // #EA5F40
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -76,13 +88,22 @@ module.exports = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: 0 },
         },
+        marquee: {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(-50%)" },
+        }
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        marquee: "marquee 40s linear infinite", // Adjust duration as needed
       },
       // Safelist placeholder - will add specific classes later if needed for header scroll
       // safelist: [], 
+      boxShadow: {
+        // Add custom shadows if needed, e.g., for header scroll state
+        header: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+      }
     },
   },
   plugins: [require("tailwindcss-animate")],

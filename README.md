@@ -36,13 +36,14 @@ maitai-site-v2/
 │   └── api/
 │       └── demo/route.ts           # API route for demo requests
 ├── components/
-│   ├── Header.tsx                  # Placeholder
-│   ├── Footer.tsx                  # Placeholder
-│   ├── Hero.tsx                    # Placeholder
-│   ├── Metrics.tsx                 # Placeholder
-│   ├── FeaturesGrid.tsx            # Placeholder
-│   ├── QuickStart.tsx              # Placeholder
-│   ├── PricingTable.tsx            # Placeholder
+│   ├── Header.tsx                  # Site header with scroll effects
+│   ├── Footer.tsx                  # Site footer (without compliance logos)
+│   ├── Hero.tsx                    # Homepage hero section
+│   ├── Metrics.tsx                 # Homepage metrics strip
+│   ├── FeaturesGrid.tsx            # Homepage features grid
+│   ├── QuickStart.tsx              # Homepage quick start section
+│   ├── PricingTable.tsx            # Pricing page component
+│   ├── PartnersMarquee.tsx         # Scrolling partner logos section
 │   └── ui/                         # shadcn-generated primitives (e.g., button, dialog)
 ├── content/
 │   └── trymaitai_content.md        # Placeholder for Markdown/JSON content
@@ -56,10 +57,10 @@ maitai-site-v2/
 │   ├── icons/                      # Placeholder for icon assets
 │   └── animations/                 # Animation assets
 │   ├── code-blocks/                # Reference images for code block styling
-│   ├── compliance-icons/          # Contains compliance badges displayed in the footer
-│   └── partner-companies/         # Contains logos of partner/integration companies displayed in the footer
+│   ├── compliance-icons/          # Compliance badges (DEPRECATED - no longer used in footer)
+│   └── partner-companies/         # Logos displayed in PartnersMarquee
 ├── styles/
-│   └── globals.css                 # @font-face rules, Tailwind base, shadcn variables
+│   └── globals.css                 # @font-face rules, Tailwind base, shadcn variables, marquee animation
 ├── .github/workflows/
 │   └── ci.yml                      # GitHub Actions CI pipeline (Lint, Build, Test)
 ├── .gitignore
@@ -71,7 +72,7 @@ maitai-site-v2/
 ├── package-lock.json / node_modules/
 ├── postcss.config.cjs              # PostCSS config (uses tailwindcss plugin)
 ├── README.md                       # This file
-├── tailwind.config.cjs             # Tailwind CSS v3 configuration (custom theme)
+├── tailwind.config.cjs             # Tailwind CSS v3 configuration (custom theme, marquee animation)
 └── tsconfig.json                   # TypeScript configuration
 ```
 
@@ -81,8 +82,8 @@ maitai-site-v2/
 - **`/logos/`**: Includes primary site logos (`logo-black-resized.svg`, `logo-all-white.svg`), a favicon/icon (`icon.svg`), and the `Backed by YC.png` badge.
 - **`/animations/`**: Holds animation assets. Specific subdirectories like `/phonely-case-study/` contain components for case study visualizations.
 - **`/code-blocks/`**: Contains reference images (`Code Block-1.png`, `Code Block-2.png`) that guided the styling of the code examples in the Quick Start section.
-- **`/compliance-icons/`**: Contains compliance badges displayed in the footer (e.g., `SOC2.png`, `HIPAA.png`). Note: Current versions may have visibility issues on dark backgrounds.
-- **`/partner-companies/`**: Contains logos of partner/integration companies displayed in the footer.
+- **`/compliance-icons/`**: Contains compliance badges (e.g., `SOC2.png`, `HIPAA.png`). **Note:** These are no longer displayed in the site footer as of 2024-05-20.
+- **`/partner-companies/`**: Contains logos of partner/integration companies displayed in the `PartnersMarquee` component.
 - **Missing Assets**: Note that the GDPR compliance badge mentioned in the sprint plan needs to be added.
 
 ## 3. Getting Started
@@ -170,6 +171,10 @@ Follow the workflow outlined in the technical blueprint (Section 8):
 3.  Open a Pull Request against `main`. CI checks (lint, build, test) will run automatically. Vercel preview deployment should be configured.
 4.  Require at least one approval + green CI to merge.
 5.  Merging to `main` triggers production deployment via Vercel.
+
+**Important Notes:**
+*   **`next/link` `legacyBehavior`:** After running `npx @next/codemod@latest new-link .`, double-check all `Link` components. The codemod might miss removing the `legacyBehavior` prop in some cases. If a `Link` only wraps text or a single component (like `Image`), `legacyBehavior` should be removed manually to avoid potential styling or hydration issues.
+*   **Environment Variables:** Ensure your `.env.local` file is correctly set up with the necessary API keys as described in the Environment Variables section. Remember not to commit `.env.local`.
 
 ## 7. Deployment
 
