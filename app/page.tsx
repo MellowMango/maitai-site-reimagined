@@ -5,6 +5,7 @@ import Footer from '@/components/Footer';
 import Metrics from '@/components/Metrics';
 import FeaturesGrid from '@/components/FeaturesGrid';
 import QuickStart from '@/components/QuickStart';
+import { ComplianceSection } from "@/components/ComplianceSection";
 
 export default function HomePage() {
   return (
@@ -13,6 +14,7 @@ export default function HomePage() {
       <Metrics />
       <FeaturesGrid />
       <QuickStart />
+      <ComplianceSection />
       {/* Other sections will go here */}
       {/* <div className=\"container mx-auto py-10\"> */}
       {/*   <h1 className=\"text-3xl font-bold\">Welcome to Maitai</h1> */}

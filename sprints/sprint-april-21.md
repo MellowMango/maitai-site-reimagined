@@ -159,9 +159,10 @@ SEGMENT 7  | DOCS & CAREERS ROUTES (Revised)
 ────────────────────────────────────────────────────────────────────────────
 SEGMENT 8  | FOOTER FINALIZATION & SOCIAL PROOF
 ────────────────────────────────────────────────────────────────────────────
-[ ] Insert 3 customer logos (png/svg from live site) horizontally - Assets needed
+[✓] Insert partner logos from `/public/partner-companies` - Replaced customer logo placeholders
 [✓] Lazy‑load via `next/image` priority false - Standard practice for non-critical images
-[ ] Add SOC 2, GDPR mini badges row (24 px tall) - Assets needed
+[~] Add SOC 2, GDPR mini badges row (24 px tall) - Added available (SOC2, HIPAA, CCPA), GDPR asset needed. NOTE: Dark icons may be invisible on dark footer bg.
+[ ] TODO: Resolve compliance icon visibility (get light icons or add background strip).
 
 ────────────────────────────────────────────────────────────────────────────
 SEGMENT 9  | ACCESSIBILITY & SEO HARDENING

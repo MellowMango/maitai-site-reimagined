@@ -56,6 +56,8 @@ maitai-site-v2/
 │   ├── icons/                      # Placeholder for icon assets
 │   └── animations/                 # Animation assets
 │   ├── code-blocks/                # Reference images for code block styling
+│   ├── compliance-icons/          # Contains compliance badges displayed in the footer
+│   └── partner-companies/         # Contains logos of partner/integration companies displayed in the footer
 ├── styles/
 │   └── globals.css                 # @font-face rules, Tailwind base, shadcn variables
 ├── .github/workflows/
@@ -77,9 +79,11 @@ maitai-site-v2/
 
 - **`/fonts/`**: Contains local `.otf` files for the Greycliff CF font family, loaded via `@font-face` in `styles/globals.css`.
 - **`/logos/`**: Includes primary site logos (`logo-black-resized.svg`, `logo-all-white.svg`), a favicon/icon (`icon.svg`), and the `Backed by YC.png` badge.
-- **`/animations/phonely-case-study/`**: Contains React components (`AccuracyChart.tsx`, `TTFTComparison.tsx`) used for visualizing data in the Phonely case study.
-- **`/code-blocks/`**: Holds reference images (`Code Block-1.png`, `Code Block-2.png`) that guided the styling of the code examples in the Quick Start section.
-- **Missing Assets**: Note that customer logos and compliance badges (e.g., SOC 2, GDPR) mentioned in the sprint plan need to be added to the appropriate `/public/` sub-directory.
+- **`/animations/`**: Holds animation assets. Specific subdirectories like `/phonely-case-study/` contain components for case study visualizations.
+- **`/code-blocks/`**: Contains reference images (`Code Block-1.png`, `Code Block-2.png`) that guided the styling of the code examples in the Quick Start section.
+- **`/compliance-icons/`**: Contains compliance badges displayed in the footer (e.g., `SOC2.png`, `HIPAA.png`). Note: Current versions may have visibility issues on dark backgrounds.
+- **`/partner-companies/`**: Contains logos of partner/integration companies displayed in the footer.
+- **Missing Assets**: Note that the GDPR compliance badge mentioned in the sprint plan needs to be added.
 
 ## 3. Getting Started
 

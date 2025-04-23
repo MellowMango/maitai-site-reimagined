@@ -73,6 +73,50 @@ export default function Footer() {
             </div>
           ))}
         </div>
+
+        {/* Partner & Integrations Logos Section */}
+        <div className="mt-12 pt-8 border-t border-gray-700/50 text-center">
+          <p className="text-sm font-semibold uppercase tracking-wider text-gray-400 mb-6">
+            Partners & Integrations
+          </p>
+          <div className="flex justify-center items-center flex-wrap gap-x-10 gap-y-6">
+            {/* Add partner logos using next/image */}
+            {/* TODO: Adjust width/height/layout as needed for visual balance */} 
+            <Image src="/partner-companies/groq_seeklogo.png" alt="Groq Logo" width={80} height={24} className="opacity-70 hover:opacity-100 transition-opacity" />
+            <Image src="/partner-companies/meta_logo.png" alt="Meta Logo" width={80} height={24} className="opacity-70 hover:opacity-100 transition-opacity" />
+            <Image src="/partner-companies/Companies-1.png" alt="Partner Logo 1" width={80} height={24} className="opacity-70 hover:opacity-100 transition-opacity" />
+            <Image src="/partner-companies/Companies-2.png" alt="Partner Logo 2" width={80} height={24} className="opacity-70 hover:opacity-100 transition-opacity" />
+            {/* Add more logos as needed */}
+          </div>
+        </div>
+
+        {/* Compliance Badges Section */}
+        {/* TODO: Compliance icons (SOC2.png, HIPAA.png, CCPA.png) are dark grey and may not be visible on the dark footer background. Consider using lighter versions or adding a contrasting background strip. */}
+        <div className="mt-8 pt-8 border-t border-gray-700/50 flex justify-center items-center gap-x-6 gap-y-4">
+          <Image 
+            src="/compliance-icons/SOC2.png" 
+            alt="SOC 2 Compliant"
+            height={24} 
+            width={60} // Adjust width based on aspect ratio or use layout fill
+            className="opacity-80 hover:opacity-100 transition-opacity"
+          />
+          <Image 
+            src="/compliance-icons/HIPAA.png" 
+            alt="HIPAA Compliant"
+            height={24} 
+            width={60} // Adjust width based on aspect ratio or use layout fill
+            className="opacity-80 hover:opacity-100 transition-opacity"
+          />
+          <Image 
+            src="/compliance-icons/CCPA.png" 
+            alt="CCPA Compliant"
+            height={24} 
+            width={60} // Adjust width based on aspect ratio or use layout fill
+            className="opacity-80 hover:opacity-100 transition-opacity"
+          />
+          {/* Add GDPR badge here if/when available */}
+        </div>
+
       </div>
       {/* Bottom Bar */}
       <div className="border-t border-gray-700 mt-8">
