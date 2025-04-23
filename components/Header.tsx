@@ -82,7 +82,7 @@ export default function Header() {
                 // Re-introduce conditional text color
                 isScrolled ? 'text-white' : 'text-maitai-vampire-black'
               )}
-              legacyBehavior>
+            >
               {link.name}
             </Link>
           ))}
