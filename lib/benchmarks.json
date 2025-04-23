@@ -1,0 +1,34 @@
+{
+  "latencyData": [
+    {
+      "requests": 1,
+      "maitai_ms": 5,
+      "competitor_ms": 50
+    },
+    {
+      "requests": 10,
+      "maitai_ms": 6,
+      "competitor_ms": 65
+    },
+    {
+      "requests": 50,
+      "maitai_ms": 8,
+      "competitor_ms": 90
+    },
+    {
+      "requests": 100,
+      "maitai_ms": 10,
+      "competitor_ms": 120
+    },
+    {
+      "requests": 500,
+      "maitai_ms": 25,
+      "competitor_ms": 450
+    },
+    {
+      "requests": 1000,
+      "maitai_ms": 45,
+      "competitor_ms": 800
+    }
+  ]
+} 
