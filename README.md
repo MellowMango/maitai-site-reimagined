@@ -29,7 +29,7 @@ This repository contains the source code for the rebuilt [trymaitai.ai](https://
 maitai-site-v2/
 ├── app/
 │   ├── layout.tsx                  # Root layout (global styles, font application)
-│   ├── page.tsx                    # Home page (/)
+│   ├── page.tsx                    # Home page (/) - Renders Hero component
 │   ├── pricing/page.tsx            # Pricing page (/pricing)
 │   ├── careers/page.tsx            # Careers page (/careers)
 │   ├── demo/page.tsx               # Demo page (/demo)
@@ -38,7 +38,8 @@ maitai-site-v2/
 ├── components/
 │   ├── Header.tsx                  # Site header with scroll effects
 │   ├── Footer.tsx                  # Site footer (without compliance logos)
-│   ├── Hero.tsx                    # Homepage hero section
+│   ├── Hero.tsx                    # Homepage hero section logic (may load OrchestratorConstellation)
+│   ├── OrchestratorConstellation.tsx # Interactive hero visualization
 │   ├── Metrics.tsx                 # Homepage metrics strip
 │   ├── FeaturesGrid.tsx            # Homepage features grid
 │   ├── QuickStart.tsx              # Homepage quick start section
@@ -47,7 +48,12 @@ maitai-site-v2/
 │   └── ui/                         # shadcn-generated primitives (e.g., button, dialog)
 ├── content/
 │   └── trymaitai_content.md        # Placeholder for Markdown/JSON content
+├── hooks/                          # Custom React hooks
+│   ├── useIsMobile.ts              # Detects mobile viewport
+│   └── useVoiceInput.ts            # Placeholder for voice input
 ├── lib/
+│   ├── hero-nodes.ts               # Data for hero constellation nodes
+│   ├── hero-utils.ts               # Utility functions for hero constellation
 │   ├── mailer.ts                   # Placeholder for SendGrid helper
 │   ├── recaptcha.ts                # Placeholder for reCAPTCHA verify helper
 │   └── utils.ts                    # shadcn/ui utility (cn function)

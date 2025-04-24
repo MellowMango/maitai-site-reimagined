@@ -203,16 +203,17 @@ SEGMENT 10  | PERFORMANCE & DEPLOY
 ────────────────────────────────────────────────────────────────────────────
 SEGMENT 11 | INTERACTIVE PROOF MODULES
 ────────────────────────────────────────────────────────────────────────────
-# 11A  LATENCY RACE (Hero Canvas) [ARCHIVED - TO BE REIMAGINED]
+# ~~11A  LATENCY RACE (Hero Canvas) [ARCHIVED - TO BE REIMAGINED]~~
 # ------------------------------------------------
 Files: components/LatencyRace.tsx, lib/benchmarks.json, public/textures/flare.png
-[ ] Build Three.js scene (react-three-fiber) → two spheres, animated pulse line
-[ ] Slider (Radix) alters concurrentRequests state; use useFrame to scale line count
-[ ] Benchmarks hard-coded in lib/benchmarks.json; display numbers in corner HUD
-[ ] Fallback <picture><source srcSet="latency-race.gif"> on no WebGL
-[ ] Accessibility: prefers-reduced-motion ⇒ static image
+~~[ ] Build Three.js scene (react-three-fiber) → two spheres, animated pulse line~~
+~~[ ] Slider (Radix) alters concurrentRequests state; use useFrame to scale line count~~
+~~[ ] Benchmarks hard-coded in lib/benchmarks.json; display numbers in corner HUD~~
+~~[ ] Fallback <picture><source srcSet="latency-race.gif"> on no WebGL~~
+~~[ ] Accessibility: prefers-reduced-motion ⇒ static image~~
 
-Note: Initial implementation archived. To be reimplemented with different approach.
+~~Note: This component is not currently planned for the primary hero section,~~
+      ~~which now uses the OrchestratorConstellation. Keeping tasks for potential future use.~~
 
 # 11B  DRAG SCRUB (Portal Storyboard)
 # ------------------------------------------------
@@ -253,62 +254,40 @@ Checklist (all 11x)
 ────────────────────────────────────────────────────────────────────────────
 SEGMENT 11E | HERO "ORCHESTRATOR CONSTELLATION"
 ────────────────────────────────────────────────────────────────────────────
-Goal: Replace placeholder hero with interactive, top-down product map.
+Goal: Replace placeholder hero with interactive, SVG-based product map.
 
 Files:
+  components/Hero.tsx (conditionally renders Constellation)
   components/OrchestratorConstellation.tsx
-  lib/hero-nodes.ts  # array of {id, title, kpi, copy}
-  public/textures/grid.png
+  hooks/useIsMobile.ts
+  hooks/useVoiceInput.ts (placeholder)
+  lib/hero-nodes.ts
+  lib/hero-utils.ts
 
 Steps
-[✓] 1. Canvas shell: 100% width, fixed 600-720 px height, Tailwind section id="hero".
-[✓] 2. Background: CSS parallax grid (transform: translateY on scroll, opacity .06).
-[~] 3. Three.js scene via react-three-fiber:
-      • Central sphere (Maitai core) with pulsating shaderMaterial.
-      • Five smaller Meshes on circular orbit; orbit radius animates with sine ease.
-      Note: Initial SVG placeholder implemented. Three.js version coming next.
+[✓] 1. Component Structure: Refactored into `OrchestratorConstellation.tsx` with hooks and utils.
+[✓] 2. Background: Added parallax grid CSS background.
+[✓] 3. SVG Scene: Built with SVG elements (nodes, lines, core) using Framer Motion.
 [✓] 4. Interaction:
-      • raycaster hover → setActiveNode(id)
-      • gsap.to(scale/opacity) for lift + glow
-      • Tooltip <div> positioned with threejs projected coords -> React Portal
-[✓] 5. Auto-tour:
-      • useEffect: loop through nodes every 3 s if isInteracting === false
-[✓] 6. Fallback:
-      • Prefers-reduced-motion → static SVG of constellation
-      • No WebGL → hero-static.png
-[✓] 7. CTA Dock:
-      • Radix ButtonGroup bottom-right inside absolute wrapper
-[✓] 8. Storybook story + Vitest render snapshot
-[✓] 9. Lighthouse check: additional JS ≤ 140 kB gzipped (tree-shake drei, gsap)
+      • Node hover/click activates state (`setActive`) with delay on leave.
+      • Integrated tooltip (`foreignObject`) shows title/KPI on active.
+      • SideNav hover highlights corresponding node (using arbitrary mapping).
+      • Keyboard navigation added (`onKeyDown`).
+      • Request input uses `findRelevantNode` and highlights node.
+[✓] 5. Narrative Intro:
+      • `useEffect` sequence simulates system boot, highlighting each node.
+[ ] 6. Fallback:
+      • TODO: Consider `prefers-reduced-motion` behavior.
+[✓] 7. Layout & CTA:
+      • Two-panel layout (text left, viz right).
+      • CTAs (Run Request, Demo) are in the left text panel.
+[ ] 8. Storybook/Tests:
+      • TODO: Add Storybook stories and Vitest tests.
+[ ] 9. Performance/Polish:
+      • TODO: Lighthouse checks, refine animations, review a11y.
 
 Checklist
-☐ Interactive works on Safari iOS 17
-☐ Keyboard nav: Tab cycles nodes, Enter triggers tooltip
-☐ Announce tooltip via aria-live
-☐ Feature-flag `NEXT_PUBLIC_SHOW_CONSTELLATION` for staging toggle
-☐ Delete old hero placeholder after merge
-
-# END SEGMENT 11E
-────────────────────────────────────────────────────────────────────────────
-
-# End of sprint.md
-
-────────────────────────────────────────────────────────────────────────────
-SEGMENT 12 | INTERCOM INTEGRATION [ON HOLD - requires API key]
-────────────────────────────────────────────────────────────────────────────
-Goal: Add Intercom live chat widget to the site.
-
-Files: components/IntercomSetup.tsx, app/layout.tsx, .env.example, integrations-setup.md, README.md
-
-[✓] Add Intercom script loading component (`components/IntercomSetup.tsx`)
-[✓] Add component to root layout (`app/layout.tsx`)
-[✓] Add `NEXT_PUBLIC_INTERCOM_APP_ID` to `.env.example`
-[✓] Update `README.md` (Tech Stack, Env Vars)
-[✓] Update `integrations-setup.md`
-[ ] Obtain Intercom App ID from Intercom settings. [ON HOLD]
-[ ] Add `NEXT_PUBLIC_INTERCOM_APP_ID=YOUR_APP_ID` to `.env.local` (DO NOT COMMIT). [ON HOLD]
-[ ] Test Intercom widget appears and functions correctly in development. [ON HOLD]
-
-Note: Requires Intercom account setup (likely needs company email).
-
-# End of sprint.md
+[ ] Interactive works on Safari iOS 17 (Needs testing)
+[✓] Keyboard nav: Tab cycles nodes, Enter/Space triggers activation.
+[~] Announce tooltip via aria-live (Needs verification/implementation for screen readers).
+[✓] Feature-flag `
