@@ -6,17 +6,19 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import OrchestratorConstellation from '@/components/OrchestratorConstellation';
 
 // Feature flag for the new Orchestrator Constellation
 const SHOW_CONSTELLATION = process.env.NEXT_PUBLIC_SHOW_CONSTELLATION !== 'false';
 
-// Dynamically import the OrchestratorConstellation component with no SSR for WebGL support
-const OrchestratorConstellation = dynamic(
-  () => import('@/components/OrchestratorConstellation'),
-  { ssr: false }
-);
+// Remove dynamic import
+// const OrchestratorConstellation = dynamic(async () => {
+//   const mod = await import('@/components/OrchestratorConstellation');
+//   return mod.default;
+// }, { ssr: false });
 
-export function Hero() {
+// Keep only the main functional component, will be default exported below
+function Hero() {
   // If the feature flag is enabled, use the new constellation component
   if (SHOW_CONSTELLATION) {
     return <OrchestratorConstellation />;

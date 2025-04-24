@@ -37,6 +37,7 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.56.1",
+    "react-hot-toast": "^2.5.2",
     "react-syntax-highlighter": "^15.6.1",
     "tailwind-merge": "^2.5.2",
     "three": "^0.176.0",
