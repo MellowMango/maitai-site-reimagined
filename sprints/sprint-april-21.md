@@ -237,11 +237,21 @@ Files: components/PortalScrub.tsx, public/portal-simlified-demo/*.png, lib/porta
 
 # 11C  LoRA HOT-SWAP CARD
 # ------------------------------------------------
-Files: components/LoRASwap.tsx, public/audio/lora-*.mp3
-[ ] Chips array [{label,mp3Src,transcript}] map → Radix ToggleGroup
-[ ] OnSelect: HTMLAudioElement.play(); transcript fades in (Framer)
-[ ] Preload MP3s on pointerenter
-[ ] Analytics: push 'lora_swap' event to Vercel/Segment
+Files: components/LoRASwap.tsx, lib/lora-chips.ts, public/audio/lora-*.mp3
+[✓] Data definition created (`lib/lora-chips.ts`)
+[✓] Component skeleton created (`components/LoRASwap.tsx`)
+[✓] Chips array (`loraChips`) mapped to Radix `ToggleGroup`
+[✓] `onValueChange` updates active state
+[✓] `useEffect` plays audio for active ID using `HTMLAudioElement`
+[✓] Transcript fades in/out using `AnimatePresence` and `motion`
+[✓] MP3s preloaded on `pointerEnter` / `onFocus`
+[✓] Analytics stub updated (checks `window.analytics` first, falls back to `dataLayer`)
+[✓] Styling polished: Uses theme colors (Lime, Lagoon, MintCream), hover effects added.
+[✓] Transcript keywords highlighted (using `HighlightedTranscript` component).
+[✓] Animated waveform placeholder added, displays when `isPlaying` state is true.
+[ ] Needs actual MP3 files added to `/public/audio/`.
+[ ] Consider mobile autoplay policy adaptations if needed.
+[ ] Refine waveform SVG animation.
 
 # 11D  INTENT BUILDER PLAYGROUND
 # ------------------------------------------------
