@@ -255,12 +255,22 @@ Files: components/LoRASwap.tsx, lib/lora-chips.ts, public/audio/lora-*.mp3
 
 # 11D  INTENT BUILDER PLAYGROUND
 # ------------------------------------------------
-Files: components/IntentPlayground.tsx
-Deps : monaco-editor, react-flow
-[ ] Split pane (CSS grid) – left Monaco YAML (readOnly=false), right React-Flow diagram
-[ ] Debounce 300 ms, parse YAML → nodes/edges (simple mapping)
-[ ] Guardrails: try/catch → show error toast not stack trace
-[ ] A11y: editor has aria-label, diagram has role="img"
+Files: components/IntentPlayground.tsx, lib/intent-yaml.ts
+Deps : @monaco-editor/react, reactflow, js-yaml, use-debounce
+[✓] Dependencies installed (using npm)
+[✓] Helper created (`lib/intent-yaml.ts`) with types and parsing function
+[✓] Component skeleton created (`components/IntentPlayground.tsx`)
+[✓] Split pane layout using CSS grid (`grid-cols-1 md:grid-cols-2`)
+[✓] Monaco editor integrated for YAML input
+[✓] React Flow integrated for graph display
+[✓] Debounce implemented using `use-debounce` (300ms)
+[✓] YAML parsing logic connects editor changes to graph data
+[✓] Basic error handling for YAML parsing (displays error message)
+[✓] Basic accessibility attributes added (`aria-label`, `role="img"`)
+[✓] Default YAML and header description updated for Maitai narrative.
+[ ] Styling refinement (using base styles + dark editor for now)
+[ ] Add custom node types/styles for different steps
+[ ] Add analytics tracking for edits
 
 Checklist (all 11x)
 ────────────────────────────────────────────────────────────────────────────
@@ -311,4 +321,4 @@ Checklist
 [ ] Interactive works on Safari iOS 17 (Needs testing)
 [✓] Keyboard nav: Tab cycles nodes, Enter/Space triggers activation.
 [~] Announce tooltip via aria-live (Needs verification/implementation for screen readers).
-[✓] Feature-flag `
+[✓] Feature-flag `NEXT_PUBLIC_SHOW_UI_DEMOS`
