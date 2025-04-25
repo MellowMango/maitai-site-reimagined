@@ -217,12 +217,23 @@ Files: components/LatencyRace.tsx, lib/benchmarks.json, public/textures/flare.pn
 
 # 11B  DRAG SCRUB (Portal Storyboard)
 # ------------------------------------------------
-Files: components/PortalScrub.tsx, public/portal-slices/*.webp
-[ ] Slice cleaned Figma-reskinned screenshots of 31-step flow (1024 × 640 max)
-[ ] Framer Motion draggable x; useTransform → opacity for caption sync
-[ ] Caption data array in same file: step, caption
-[ ] Mobile: free-scroll (momentum) + snap-x
-[ ] Lazy-load images via next/image with priority on first 3
+Files: components/PortalScrub.tsx, public/portal-simlified-demo/*.png, lib/portal-captions.ts
+[✓] Base component structure from skeleton
+[✓] Use images from `/public/portal-simlified-demo`
+[✓] Framer Motion draggable `x` implemented for desktop
+[~] Caption data array loaded from `lib/portal-captions.ts`
+[✓] Caption display logic with opacity fade based on centered state
+[✓] Progress dots implemented and sync with active slide
+[✓] Lazy-load images via `next/image` (priority on first 3)
+[✓] Increased image/card size (W: 560px)
+[✓] Prevented native image drag interference
+[✓] Added clickable prev/next arrow navigation (desktop)
+[ ] Mobile: Implement `overflow-x-auto` + `scroll-snap` (currently hardcoded `isMobile=false`)
+[ ] Add device chrome overlay (`/public/chrome-overlay/frame.svg`)
+[ ] Add Lottie sparkle effect on snap
+[ ] Add ARIA live region for caption announcements
+[ ] Add keyboard navigation (arrow keys)
+[ ] Slice cleaned Figma-reskinned screenshots (Using simplified demo images for now)
 
 # 11C  LoRA HOT-SWAP CARD
 # ------------------------------------------------
