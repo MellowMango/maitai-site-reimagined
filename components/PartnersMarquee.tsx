@@ -1,63 +1,43 @@
 import Image from "next/image";
-import fs from "fs";
-import path from "path";
 
-const partnerLogosDirectory = path.join(
-  process.cwd(),
-  "public/partner-companies",
-);
+// Hardcoded list of partner logos based on files in /public/partner-companies/
+const partnerLogos = [
+  "Image-1.png",
+  "Image-2.png",
+  "Image.png",
+  "groq_seeklogo.png",
+  "meta_logo.png",
+  "Companies-1.png",
+  "Companies-2.png",
+  "Companies-3.png",
+  "Companies-4.png",
+  "Companies.png",
+  "Group.png"
+];
 
 const PartnersMarquee = () => {
-  // Read filenames from the directory
-  let filenames = [];
-  try {
-    filenames = fs.readdirSync(partnerLogosDirectory);
-  } catch (error) {
-    console.error("Error reading partner logos directory:", error);
-    // Handle the error appropriately, maybe return null or an error message
-    return null;
-  }
+  // Removed fs.readdirSync logic
 
-  const logos = filenames
-    .filter(
-      (file) => !file.startsWith(".") && /\.(png|jpg|jpeg|svg|webp)$/.test(file),
-    )
-    .map((file) => ({
-      src: `/partner-companies/${file}`,
-      alt: file.replace(/\.[^/.]+$/, "").replace(/-/g, " "), // Basic alt text from filename
-    }));
-
-  // Duplicate logos for a seamless loop
-  const extendedLogos = [...logos, ...logos];
+  // Duplicate logos for seamless loop
+  const allLogos = [...partnerLogos, ...partnerLogos];
 
   return (
-    <section className="bg-white py-12 sm:py-16">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <h2 className="text-center text-lg font-semibold leading-8 text-gray-900">
-          Integrations with the tools you already use
-        </h2>
-        <div
-          className="mt-10 w-full overflow-hidden"
-          style={{
-            maskImage:
-              "linear-gradient(to right, transparent, black 20%, black 80%, transparent)",
-            WebkitMaskImage:
-              "linear-gradient(to right, transparent, black 20%, black 80%, transparent)",
-          }}
-        >
-          <div className="flex w-max animate-marquee motion-safe:animate-marqueeHoverPause">
-            {extendedLogos.map((logo, index) => (
-              <div
-                key={index}
-                className="mx-8 flex h-12 w-36 flex-shrink-0 items-center justify-center lg:mx-10 lg:w-40"
-              >
+    <section className="py-12 bg-white">
+      <div className="container mx-auto text-center">
+        <h4 className="text-sm font-semibold uppercase text-gray-500 tracking-wider mb-8">
+          Integrated With Your Favorite Platforms
+        </h4>
+        <div className="relative overflow-hidden w-full">
+          <div className="flex animate-marquee-infinite">
+            {allLogos.map((logoFile, index) => (
+              <div key={index} className="flex-shrink-0 mx-6 flex items-center justify-center h-12">
                 <Image
-                  className="max-h-full max-w-full object-contain"
-                  src={logo.src}
-                  alt={logo.alt}
-                  width={160}
-                  height={48}
-                  unoptimized
+                  // Construct the path relative to the /public directory
+                  src={`/partner-companies/${logoFile}`}
+                  alt={`Partner Logo ${index + 1}`}
+                  width={120} // Adjust width as needed, maintain aspect ratio
+                  height={48} // Adjust height as needed
+                  className="object-contain max-h-10"
                   loading="lazy"
                 />
               </div>

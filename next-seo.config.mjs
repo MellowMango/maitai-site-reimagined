@@ -12,8 +12,8 @@ const defaultSEOConfig = {
     locale: 'en_US',
     // url: 'https://trymaitai.ai',
     siteName: 'Maitai',
-    title: 'Maitai - AI-Powered Security',
-    description: 'Maitai provides cutting-edge AI solutions for enterprise security.',
+    title: 'Maitai: Run Better AI — Automatically.',
+    description: 'Maitai auto‑detects issues, optimizes tokens, and reroutes models in real time for text and voice AI.',
     // images: [
     //   {
     //     url: 'https://trymaitai.ai/og-image.png', // Replace with your OG image URL
