@@ -54,12 +54,12 @@ maitai-site-v2/
 │   │   ├── FeatureScroller.tsx
 │   │   └── FeatureItem.tsx
 │   ├── SignUpBanner.tsx            # NEW: Section #6 (Relabel/reuse of old CTA component logic likely)
-│   ├── DocsAndCode.tsx             # REUSED: Section #7 (Implementation unchanged as per blueprint)
+│   ├── DocsAndCode.tsx             # NEW: Section #7 (placeholder - implement content from previous design)
 │   ├── PartnerGrid.tsx             # NEW: Section #8
 │   │
 │   └── ui/                         # shadcn-generated primitives - REUSED
-├── content/                        # (Potentially unused/archived if data moves to lib/)
-│   └── trymaitai_content.md        # Placeholder - Likely ARCHIVED
+├── content/                        # ARCHIVED
+│   └── trymaitai_content.md        # ARCHIVED
 ├── hooks/                          # Custom React hooks - REUSED as needed
 │   ├── useIsMobile.ts
 │   └── useVoiceInput.ts            # Placeholder
@@ -98,20 +98,36 @@ maitai-site-v2/
 ```
 
 **Archived Components/Assets:**
-The following components and assets from the previous structure are being deprecated for the landing page and will be moved to `/archive`:
-*   `components/Hero.tsx`
-*   `components/OrchestratorConstellation.tsx`
-*   `components/Metrics.tsx`
-*   `components/FeaturesGrid.tsx`
-*   `components/QuickStart.tsx`
-*   `components/PartnersMarquee.tsx`
-*   `public/animations/` (If specific animations aren't reused)
-*   `public/code-blocks/` (Content now part of `DocsAndCode.tsx`)
-*   `public/compliance-icons/` (Replaced by `public/img/compliance/`)
-*   `public/partner-companies/` (Replaced by `public/img/partners/`)
-*   `lib/hero-nodes.ts`
-*   `lib/hero-utils.ts`
-*   Potentially others as the rebuild progresses.
+The following components, assets, and hooks from the previous structure are being deprecated/removed for the landing page rebuild and have been moved to `/archive` (or deleted):
+*   **Components:**
+    *   `components/Hero.tsx`
+    *   `components/HeroMaitai.tsx`
+    *   `components/OrchestratorConstellation.tsx`
+    *   `components/Metrics.tsx`
+    *   `components/FeaturesGrid.tsx`
+    *   `components/QuickStart.tsx`
+    *   `components/PartnersMarquee.tsx`
+    *   `components/HeroPanel.tsx`
+    *   `components/HeroActively.tsx`
+    *   `components/IntentPlayground.tsx`
+    *   `components/FocusModeWrappers.tsx`
+    *   `components/InteractiveDemos.tsx`
+    *   `components/LoRASwap.tsx`
+    *   `components/PortalScrub.tsx`
+    *   `components/ComplianceSection.tsx`
+    *   `components/ModeToggle.tsx` (Deleted, not archived)
+*   **Public Assets:**
+    *   `public/animations/`
+    *   `public/code-blocks/`
+    *   `public/compliance-icons/`
+    *   `public/partner-companies/`
+*   **Library Files:**
+    *   `lib/hero-nodes.ts`
+    *   `lib/hero-utils.ts`
+*   **Hooks:**
+    *   `hooks/useFocusModeStore.ts` (Deleted, not archived)
+*   **Content:**
+    *   `content/trymaitai_content.md`
 
 ### Public Assets (`/public/` directory - Target Structure)
 
