@@ -1,96 +1,129 @@
-# Maitai Marketing Site (v2)
+# Maitai Marketing Site (v2) - Landing Page Rebuild (CONCRETE-06-FULL)
 
-This repository contains the source code for the rebuilt [trymaitai.ai](https://trymaitai.ai) marketing website, based on the technical blueprint (Version 0.1 / 2025-04-21).
+This repository contains the source code for the [trymaitai.ai](https://trymaitai.ai) marketing website.
 
-## 1. Technology Stack
+**As of [Current Date], the landing page (`/`) is being rebuilt according to the "CONCRETE-06-FULL" blueprint.** This document reflects the *target* structure and components for this rebuild. Existing components not part of this blueprint will be archived to the `/archive` directory.
 
-| Layer          | Choice                    | Notes                                           |
-|----------------|---------------------------|-------------------------------------------------|
-| Framework      | Next.js 13 (App Router)   | React + file-system routing, edge-ready         |
-| Language       | TypeScript 5.x          | Strict mode (`"strict": true`), `"type": "module"` in package.json |
-| Styling        | Tailwind CSS v3           | Custom theme in `tailwind.config.cjs`           |
-| UI Primitives  | Radix UI                  | Accessible, unstyled base components            |
-| Component Kit  | shadcn/ui                 | Radix-powered, Tailwind-themed wrappers         |
-| Icons          | lucide-react              | 1-stroke icon set                               |
-| Animations     | Framer Motion v10         | Scroll/entrance + micro-interactions            |
-| Forms          | React-Hook-Form + Zod     | Client validation + schema sharing              |
-| Fonts          | Greycliff CF (local OTF)  | Loaded via `@font-face` in `styles/globals.css` |
-| Images         | next/image                | Automatic srcset / WebP / lazy                  |
-| Email          | SendGrid v3               | Triggered by `/api/demo` route                   |
-| Anti-spam      | reCAPTCHA v3              | Token verified in API route (`@google-recaptcha/react`) |
-| Live Chat      | Intercom                  | Via `next/script` in `app/layout.tsx`           |
-| SEO            | next-seo                  | Per-page Open Graph & meta                      |
-| Error Tracking | Sentry                    | `@sentry/nextjs`                                |
-| CI/CD          | GitHub Actions → Vercel   | Lint → type-check → test → preview              |
+## 1. Technology Stack (Largely Unchanged)
 
-## 2. Repository File Tree (Condensed)
+| Layer          | Choice                    | Notes                                                    |
+|----------------|---------------------------|----------------------------------------------------------|
+| Framework      | Next.js 13 (App Router)   | React + file-system routing, edge-ready                  |
+| Language       | TypeScript 5.x          | Strict mode (`"strict": true`), `"type": "module"`         |
+| Styling        | Tailwind CSS v3           | Custom theme in `tailwind.config.cjs`                    |
+| UI Primitives  | Radix UI                  | Accessible, unstyled base components (esp. for Tabs)     |
+| Component Kit  | shadcn/ui                 | Radix-powered, Tailwind-themed wrappers                  |
+| Icons          | lucide-react              | 1-stroke icon set                                        |
+| Animations     | Framer Motion v10         | Used for Hero Carousel, Performance toggles, scrolling   |
+| Forms          | React-Hook-Form + Zod     | Client validation + schema sharing (primarily for /demo) |
+| Fonts          | Greycliff CF (local OTF)  | Loaded via `@font-face` in `styles/globals.css`          |
+| Images         | next/image                | Automatic srcset / WebP / lazy                           |
+| Email          | SendGrid v3               | Triggered by `/api/demo` route (unchanged)               |
+| Anti-spam      | reCAPTCHA v3              | Token verified in API route (`@google-recaptcha/react`)  |
+| Live Chat      | Intercom                  | Via `next/script` in `app/layout.tsx` (unchanged)       |
+| SEO            | next-seo                  | Per-page Open Graph & meta (unchanged)                   |
+| Error Tracking | Sentry                    | `@sentry/nextjs` (unchanged)                             |
+| CI/CD          | GitHub Actions → Vercel   | Lint → type-check → test → preview (unchanged)           |
+
+## 2. Repository File Tree (Target Structure for Landing Page Rebuild)
 
 ```
 maitai-site-v2/
 ├── app/
-│   ├── layout.tsx                  # Root layout (global styles, font application)
-│   ├── page.tsx                    # Home page (/) - Renders Hero component
-│   ├── pricing/page.tsx            # Pricing page (/pricing)
-│   ├── careers/page.tsx            # Careers page (/careers)
-│   ├── demo/page.tsx               # Demo page (/demo)
+│   ├── layout.tsx                  # Root layout (global styles, font application) - REUSED
+│   ├── page.tsx                    # Home page (/) - Renders NEW landing page sections
+│   ├── pricing/page.tsx            # Pricing page (/pricing) - Existing, potentially needs style updates
+│   ├── careers/page.tsx            # Careers page (/careers) - Existing, potentially needs style updates
+│   ├── demo/page.tsx               # Demo page (/demo) - Existing
 │   └── api/
-│       └── demo/route.ts           # API route for demo requests
+│       └── demo/route.ts           # API route for demo requests - REUSED
 ├── components/
-│   ├── Header.tsx                  # Site header with scroll effects
-│   ├── Footer.tsx                  # Site footer (without compliance logos)
-│   ├── Hero.tsx                    # Homepage hero section logic (may load OrchestratorConstellation)
-│   ├── OrchestratorConstellation.tsx # Interactive hero visualization
-│   ├── Metrics.tsx                 # Homepage metrics strip
-│   ├── FeaturesGrid.tsx            # Homepage features grid
-│   ├── QuickStart.tsx              # Homepage quick start section
-│   ├── PricingTable.tsx            # Pricing page component
-│   ├── PartnersMarquee.tsx         # Scrolling partner logos section
-│   └── ui/                         # shadcn-generated primitives (e.g., button, dialog)
-├── content/
-│   └── trymaitai_content.md        # Placeholder for Markdown/JSON content
-├── hooks/                          # Custom React hooks
-│   ├── useIsMobile.ts              # Detects mobile viewport
-│   └── useVoiceInput.ts            # Placeholder for voice input
+│   ├── Header.tsx                  # Site header - REUSED (potentially minor scroll effect adjustments)
+│   ├── Footer.tsx                  # Site footer - REUSED (unchanged as per blueprint)
+│   │
+│   ├── HeroCarousel/               # NEW: Section #1
+│   │   ├── HeroCarousel.tsx
+│   │   └── HeroCard.tsx
+│   ├── PerformanceSection/         # NEW: Section #2
+│   │   ├── PerformanceSection.tsx
+│   │   ├── ToggleTabs.tsx
+│   │   └── MetricCard.tsx
+│   ├── ComplianceStrip.tsx         # NEW: Section #3
+│   ├── BlogEventsCTA.tsx           # NEW: Section #4
+│   ├── FeatureScroller/            # NEW: Section #5
+│   │   ├── FeatureScroller.tsx
+│   │   └── FeatureItem.tsx
+│   ├── SignUpBanner.tsx            # NEW: Section #6 (Relabel/reuse of old CTA component logic likely)
+│   ├── DocsAndCode.tsx             # REUSED: Section #7 (Implementation unchanged as per blueprint)
+│   ├── PartnerGrid.tsx             # NEW: Section #8
+│   │
+│   └── ui/                         # shadcn-generated primitives - REUSED
+├── content/                        # (Potentially unused/archived if data moves to lib/)
+│   └── trymaitai_content.md        # Placeholder - Likely ARCHIVED
+├── hooks/                          # Custom React hooks - REUSED as needed
+│   ├── useIsMobile.ts
+│   └── useVoiceInput.ts            # Placeholder
 ├── lib/
-│   ├── hero-nodes.ts               # Data for hero constellation nodes
-│   ├── hero-utils.ts               # Utility functions for hero constellation
-│   ├── mailer.ts                   # Placeholder for SendGrid helper
-│   ├── recaptcha.ts                # Placeholder for reCAPTCHA verify helper
-│   └── utils.ts                    # shadcn/ui utility (cn function)
+│   ├── heroCards.ts                # NEW: Data for HeroCarousel
+│   ├── metrics.ts                  # NEW: Data for PerformanceSection
+│   ├── features.ts                 # NEW: Data for FeatureScroller
+│   ├── partners.ts                 # NEW: Data for PartnerGrid
+│   │
+│   ├── mailer.ts                   # Placeholder for SendGrid helper - REUSED
+│   ├── recaptcha.ts                # Placeholder for reCAPTCHA verify helper - REUSED
+│   └── utils.ts                    # shadcn/ui utility (cn function) - REUSED
 ├── public/
-│   ├── fonts/Greycliff-*.otf     # Local font files
-│   ├── logos/                      # Site logos
-│   ├── icons/                      # Placeholder for icon assets
-│   └── animations/                 # Animation assets
-│   ├── code-blocks/                # Reference images for code block styling
-│   ├── compliance-icons/          # Compliance badges (DEPRECATED - no longer used in footer)
-│   └── partner-companies/         # Logos displayed in PartnersMarquee
+│   ├── fonts/Greycliff-*.otf     # Local font files - REUSED
+│   ├── logos/                      # Site logos (Header/Footer) - REUSED
+│   └── img/                        # NEW: Specific assets for landing page sections
+│       ├── compliance/             # (soc2.svg, hipaa.svg, ccpa.svg)
+│       ├── partners/               # (*.svg or *.png)
+│       ├── metrics/                # (placeholder svgs/charts)
+│       └── hero/                   # (event thumbs, card illustrations etc.)
 ├── styles/
-│   └── globals.css                 # @font-face rules, Tailwind base, shadcn variables, marquee animation
-├── .github/workflows/
-│   └── ci.yml                      # GitHub Actions CI pipeline (Lint, Build, Test)
+│   └── globals.css                 # @font-face, Tailwind base, shadcn vars - REUSED
+├── archive/                        # NEW: Deprecated components/assets moved here
+├── .github/workflows/ci.yml        # CI pipeline - REUSED
 ├── .gitignore
-├── components.json                 # shadcn/ui CLI configuration
+├── components.json                 # shadcn/ui CLI config - REUSED
 ├── next-env.d.ts
-├── next.config.js                  # Next.js configuration
-├── next-seo.config.mjs             # Default next-seo configuration
-├── package.json                    # Note: "type": "module"
+├── next.config.js                  # Next.js config - REUSED
+├── next-seo.config.mjs             # Default SEO config - REUSED
+├── package.json                    # Note: "type": "module" - REUSED
 ├── package-lock.json / node_modules/
-├── postcss.config.cjs              # PostCSS config (uses tailwindcss plugin)
-├── README.md                       # This file
-├── tailwind.config.cjs             # Tailwind CSS v3 configuration (custom theme, marquee animation)
-└── tsconfig.json                   # TypeScript configuration
+├── postcss.config.cjs              # PostCSS config - REUSED
+├── README.md                       # This file (Updated)
+├── tailwind.config.cjs             # Tailwind config - REUSED (May need minor breakpoint/theme tweaks)
+└── tsconfig.json                   # TypeScript config - REUSED
 ```
 
-### Public Assets (`/public/` directory)
+**Archived Components/Assets:**
+The following components and assets from the previous structure are being deprecated for the landing page and will be moved to `/archive`:
+*   `components/Hero.tsx`
+*   `components/OrchestratorConstellation.tsx`
+*   `components/Metrics.tsx`
+*   `components/FeaturesGrid.tsx`
+*   `components/QuickStart.tsx`
+*   `components/PartnersMarquee.tsx`
+*   `public/animations/` (If specific animations aren't reused)
+*   `public/code-blocks/` (Content now part of `DocsAndCode.tsx`)
+*   `public/compliance-icons/` (Replaced by `public/img/compliance/`)
+*   `public/partner-companies/` (Replaced by `public/img/partners/`)
+*   `lib/hero-nodes.ts`
+*   `lib/hero-utils.ts`
+*   Potentially others as the rebuild progresses.
 
-- **`/fonts/`**: Contains local `.otf` files for the Greycliff CF font family, loaded via `@font-face` in `styles/globals.css`.
-- **`/logos/`**: Includes primary site logos (`logo-black-resized.svg`, `logo-all-white.svg`), a favicon/icon (`icon.svg`), and the `Backed by YC.png` badge.
-- **`/animations/`**: Holds animation assets. Specific subdirectories like `/phonely-case-study/` contain components for case study visualizations.
-- **`/code-blocks/`**: Contains reference images (`Code Block-1.png`, `Code Block-2.png`) that guided the styling of the code examples in the Quick Start section.
-- **`/compliance-icons/`**: Contains compliance badges (e.g., `SOC2.png`, `HIPAA.png`). **Note:** These are no longer displayed in the site footer as of 2024-05-20.
-- **`/partner-companies/`**: Contains logos of partner/integration companies displayed in the `PartnersMarquee` component.
-- **Missing Assets**: Note that the GDPR compliance badge mentioned in the sprint plan needs to be added.
+### Public Assets (`/public/` directory - Target Structure)
+
+- **`/fonts/`**: Contains local `.otf` files for Greycliff CF (unchanged).
+- **`/logos/`**: Includes primary site logos for Header/Footer, favicon, etc. (unchanged).
+- **`/img/`**: **NEW** location for landing-page-specific visual assets:
+    - **`/img/compliance/`**: Contains `soc2.svg`, `hipaa.svg`, `ccpa.svg` for the `ComplianceStrip`.
+    - **`/img/partners/`**: Contains partner logos (`*.svg`, `*.png`) for the `PartnerGrid`.
+    - **`/img/metrics/`**: Contains placeholder charts/SVGs for `PerformanceSection`.
+    - **`/img/hero/`**: Contains event thumbnails, card illustrations, etc., for `HeroCarousel`.
+
+Assets under `public/img/` should be optimized using `next/image`.
 
 ## 3. Getting Started
 
@@ -141,23 +174,19 @@ NEXT_PUBLIC_INTERCOM_APP_ID=xxx
 
 Obtain the actual keys from the respective services (Google reCAPTCHA, SendGrid, Sentry, Intercom).
 
-## 4. Key Configuration Files & Concepts
+## 4. Key Configuration Files & Concepts (Largely Unchanged)
 
-- **`package.json`**: Note the presence of `"type": "module"`. This makes Node.js treat `.js` files as ES Modules by default.
-- **Config File Extensions**: Due to `"type": "module"`, configuration files using CommonJS syntax (`module.exports`) **must** use the `.cjs` extension (e.g., `tailwind.config.cjs`, `postcss.config.cjs`).
-- **`styles/globals.css`**: 
-    - **Font Loading**: Contains standard CSS `@font-face` rules to load the local Greycliff CF font files from `/public/fonts/`. The `url()` uses absolute paths from the public root.
-    - **Tailwind**: Imports Tailwind's base, components, and utilities using `@tailwind` directives.
-    - **Theming**: Defines root CSS variables (`:root` and `.dark`) for colors and theming used by `shadcn/ui` components.
-    - **Base Styles**: Applies minimal base styles (e.g., `body` background/text color) directly using CSS properties and variables (e.g., `background-color: hsl(var(--background));`) within `@layer base`. 
-- **`tailwind.config.cjs`**: Configures Tailwind CSS v3. Includes `content` paths, defines `fontFamily.sans` using the font name (`'Greycliff CF'`) defined in `@font-face`, and sets up theme extensions (colors, etc.) compatible with `shadcn/ui`.
-- **`postcss.config.cjs`**: Configures PostCSS, correctly loading the `tailwindcss` plugin (for v3) and `autoprefixer`.
-- **`app/layout.tsx`**: Defines the root HTML structure and imports `styles/globals.css`. It does **not** use `next/font/local` for Greycliff CF due to encountered stability issues; font application relies on Tailwind's `font-sans` utility class inheriting the family defined in the config.
-- **`components.json`**: Configures the `shadcn/ui` CLI, referencing `tailwind.config.cjs`.
-- **`next-seo.config.mjs`**: Sets default SEO metadata (title, description, Open Graph tags) used by `next-seo`.
-- **`.github/workflows/ci.yml`**: Defines the continuous integration pipeline run on GitHub Actions for pull requests and pushes to `main`. It installs dependencies, lints, builds, and runs tests.
+- **`package.json`**: `"type": "module"` remains crucial.
+- **Config File Extensions**: `.cjs` for CommonJS files (`tailwind.config.cjs`, `postcss.config.cjs`) remains necessary.
+- **`styles/globals.css`**: Continues to handle `@font-face`, Tailwind directives, shadcn theming, and base styles.
+- **`tailwind.config.cjs`**: Defines theme, fonts (`'Greycliff CF'`), and content paths. May require minor updates for new component paths or styles.
+- **`postcss.config.cjs`**: Unchanged.
+- **`app/layout.tsx`**: Root structure, imports `globals.css`. Font loading strategy remains the same.
+- **`components.json`**: shadcn/ui config, unchanged.
+- **`next-seo.config.mjs`**: Default SEO settings, unchanged.
+- **`.github/workflows/ci.yml`**: CI pipeline, unchanged.
 
-## 5. Scripts & Tooling
+## 5. Scripts & Tooling (Unchanged)
 
 | Command          | What it Does                                  |
 |------------------|-----------------------------------------------|
@@ -169,7 +198,7 @@ Obtain the actual keys from the respective services (Google reCAPTCHA, SendGrid,
 | `npm run test`   | Runs unit tests with Vitest                   |
 | `npm run analyze`| Runs bundle analyzer (requires build profile) |
 
-## 6. Contribution Workflow
+## 6. Contribution Workflow (Unchanged)
 
 Follow the workflow outlined in the technical blueprint (Section 8):
 1.  Branch from `main` (`feat/<topic>`).
@@ -179,14 +208,15 @@ Follow the workflow outlined in the technical blueprint (Section 8):
 5.  Merging to `main` triggers production deployment via Vercel.
 
 **Important Notes:**
-*   **`next/link` `legacyBehavior`:** After running `npx @next/codemod@latest new-link .`, double-check all `Link` components. The codemod might miss removing the `legacyBehavior` prop in some cases. If a `Link` only wraps text or a single component (like `Image`), `legacyBehavior` should be removed manually to avoid potential styling or hydration issues.
-*   **Environment Variables:** Ensure your `.env.local` file is correctly set up with the necessary API keys as described in the Environment Variables section. Remember not to commit `.env.local`.
+*   **`next/link` `legacyBehavior`:** Continue to check `Link` components after any codemods.
+*   **Environment Variables:** Ensure `.env.local` is set up correctly.
+*   **Blueprint:** Refer to the "CONCRETE-06-FULL" blueprint for detailed component specifications.
 
-## 7. Deployment
+## 7. Deployment (Unchanged)
 
 Deployment is handled via Vercel, connected to this GitHub repository. See the blueprint (Section 9) for Vercel project setup and environment variable configuration.
 
-## 8. Email Templates
+## 8. Email Templates (Unchanged)
 
 The following HTML email templates are available in the `lib/email-templates/` directory:
 

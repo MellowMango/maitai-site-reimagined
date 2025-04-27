@@ -1,31 +1,35 @@
-'use client'; // Required for ModeToggle and its hooks
+'use client';
 
-import HeroMaitai from '@/components/HeroMaitai';
 import { Button } from '@/components/ui/button';
-import Metrics from '@/components/Metrics';
-import FeaturesGrid from '@/components/FeaturesGrid';
-import QuickStart from '@/components/QuickStart';
-import { ComplianceSection } from "@/components/ComplianceSection";
-import PartnersMarquee from "@/components/PartnersMarquee";
-import InteractiveDemos from '@/components/InteractiveDemos';
-import { ModeToggle } from '@/components/ModeToggle'; // Import the ModeToggle
+// import { ModeToggle } from '@/components/ModeToggle'; // Removed
+
+// NEW Imports for Landing Page Sections (CONCRETE-06-FULL)
+import HeroCarousel from '@/components/HeroCarousel/HeroCarousel';
+import PerformanceSection from '@/components/PerformanceSection/PerformanceSection';
+import ComplianceStrip from '@/components/ComplianceStrip';
+import BlogEventsCTA from '@/components/BlogEventsCTA';
+import FeatureScroller from '@/components/FeatureScroller/FeatureScroller';
+import SignUpBanner from '@/components/SignUpBanner';
+import DocsAndCode from '@/components/DocsAndCode';
+import PartnerGrid from '@/components/PartnerGrid';
 
 export default function HomePage() {
   return (
     <>
       <main className="flex flex-col">
-        <HeroMaitai />
-        <div className="container mx-auto px-6 lg:px-10 py-8 flex justify-center">
+        {/* ModeToggle container removed */}
+        {/* <div className="container mx-auto px-6 lg:px-10 py-8 flex justify-center">
           <ModeToggle />
-        </div>
-        <Metrics />
-        <FeaturesGrid />
-        <QuickStart />
+        </div> */}
 
-        <InteractiveDemos />
-
-        <PartnersMarquee />
-        {/* <ComplianceSection /> */ /* Temporarily commented out as it might be removed/reworked? */}
+        <HeroCarousel />
+        <PerformanceSection />
+        <ComplianceStrip />
+        <BlogEventsCTA />
+        <FeatureScroller />
+        <SignUpBanner />
+        <DocsAndCode />
+        <PartnerGrid />
       </main>
     </>
   );
