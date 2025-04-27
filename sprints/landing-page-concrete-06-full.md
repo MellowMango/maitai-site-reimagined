@@ -29,7 +29,7 @@ This plan follows the section numbering from the blueprint.
 *   **Data:**
     *   `lib/heroCards.ts` (Define `HeroCardData`, `HeroCardVariant`; add sample data)
 *   **Assets:**
-    *   `public/img/hero/` (Placeholder images/SVGs for event thumbs, partnership logos, illustrative SVGs)
+    *   `public/img/hero/` (Placeholder gradients used initially; actual assets can be added later)
 *   **Key Requirements:**
     *   Layout: Full-width, `max-w-[1600px]`, specific min-heights.
     *   Navigation: Absolute positioned arrows, bottom pagination dots.
@@ -39,16 +39,16 @@ This plan follows the section numbering from the blueprint.
     *   Data Handling: Inject 'snapshot' card at index 0.
     *   Responsive: Adapt layout and text truncation for mobile.
 *   **Tasks:**
-    *   [ ] Define data structures in `lib/heroCards.ts`.
-    *   [ ] Create placeholder data in `lib/heroCards.ts`.
-    *   [ ] Add placeholder assets to `public/img/hero/`.
-    *   [ ] Implement `HeroCard.tsx` layouts for all variants.
-    *   [ ] Implement `HeroCarousel.tsx` core structure and styling.
-    *   [ ] Implement `framer-motion` carousel logic (state, pagination, arrows).
-    *   [ ] Implement `framer-motion` drag-to-swipe interaction.
-    *   [ ] Implement `framer-motion` animations.
-    *   [ ] Ensure accessibility (focus states, ARIA roles).
-    *   [ ] Responsive styling adjustments.
+    *   [x] Define data structures in `lib/heroCards.ts`.
+    *   [x] Create placeholder data in `lib/heroCards.ts`.
+    *   [x] Add placeholder assets/gradients to `public/img/hero/`.
+    *   [x] Implement `HeroCard.tsx` layouts for all variants (using full-width gradient approach).
+    *   [x] Implement `HeroCarousel.tsx` core structure and styling.
+    *   [x] Implement `framer-motion` carousel logic (state, pagination, arrows).
+    *   [x] Implement `framer-motion` drag-to-swipe interaction.
+    *   [x] Implement `framer-motion` animations.
+    *   [x] Ensure accessibility (focus states, ARIA roles).
+    *   [x] Responsive styling adjustments.
 
 ---
 
@@ -58,25 +58,29 @@ This plan follows the section numbering from the blueprint.
     *   `components/PerformanceSection/PerformanceSection.tsx`
     *   `components/PerformanceSection/ToggleTabs.tsx`
     *   `components/PerformanceSection/MetricCard.tsx`
+    *   `components/PerformanceSection/charts/AccuracyChart.tsx` (Moved & Cleaned)
+    *   `components/PerformanceSection/charts/TTFTComparison.tsx` (Moved & Cleaned)
 *   **Data:**
-    *   `lib/metrics.ts` (Define `MetricCard` type; add `text` and `voice` arrays)
+    *   `lib/metrics.ts` (Updated `MetricCardData`; use specific PNGs/TSX components)
 *   **Assets:**
-    *   `public/img/metrics/` (Placeholder chart SVGs/PNGs)
+    *   `public/animations/phonely-case-study/continuously-improving-v2.png`
+    *   `public/animations/phonely-case-study/tps-graph-v2.png`
+    *   (Removed old placeholder SVGs from `public/img/metrics/`)
 *   **Key Requirements:**
-    *   Layout: Main section wrapper, grid for cards (2x2 desktop, column mobile).
+    *   Layout: Main section wrapper, grid for cards (2x1 or 2x2 desktop, column mobile - adjusted to 2 cards).
     *   Tabs: Radix UI Tabs for "Text" / "Voice". Active state styling.
-    *   Card: Simple structure (title, subhead, image).
+    *   Card: Renders `next/image` or React component based on data.
     *   Interaction: Toggle tabs changes displayed metric grid.
     *   Animation: Fade transition on grid change (`AnimatePresence`).
 *   **Tasks:**
-    *   [ ] Define data structures and add placeholder data in `lib/metrics.ts`.
-    *   [ ] Add placeholder assets to `public/img/metrics/`.
-    *   [ ] Implement `MetricCard.tsx`.
-    *   [ ] Implement `ToggleTabs.tsx` using Radix UI Tabs.
-    *   [ ] Implement `PerformanceSection.tsx` layout.
-    *   [ ] Connect Tabs to conditionally render metric grids.
-    *   [ ] Add `AnimatePresence` for fade animation between grids.
-    *   [ ] Responsive grid styling.
+    *   [x] Define/Update data structures and add specific data in `lib/metrics.ts`.
+    *   [x] Move and clean chart components (`AccuracyChart`, `TTFTComparison`).
+    *   [x] Update `MetricCard.tsx` to render images or components.
+    *   [x] Implement `ToggleTabs.tsx` using Radix UI Tabs.
+    *   [x] Implement `PerformanceSection.tsx` layout.
+    *   [x] Connect Tabs to conditionally render metric grids.
+    *   [x] Add `AnimatePresence` for fade animation between grids.
+    *   [x] Responsive grid styling.
 
 ---
 

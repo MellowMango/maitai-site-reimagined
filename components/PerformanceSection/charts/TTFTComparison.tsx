@@ -1,9 +1,14 @@
-// ───────────────────────────────────────────────────────────────────────────
-//  TTFTComparison.tsx  – Build 2025‑04‑20 RevAlign Final
-// ───────────────────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────
+//  TTFTComparison.tsx
+// ─────────────────────────────────────────────────
 import * as React from "react"
 import { useEffect, useRef, useCallback, MutableRefObject } from "react"
-import { addPropertyControls, ControlType } from "framer"
+// Removed Framer-specific imports
+// import { addPropertyControls, ControlType } from "framer"
+
+// Import the specific logo
+// Note: We use a relative path from /public here
+const MAITAI_LOGO_PATH = '/logos/logo-black-resized.svg';
 
 /* ------------------------------------------------------------------ */
 /* 1. INLINE CSS – responsive, overflow clipped, grouped logos         */
@@ -17,7 +22,8 @@ const css = `
 }
 .ttft {
   width: 100%;
-  padding: 24px 16px;
+  /* Removed fixed padding, let parent control */
+  /* padding: 24px 16px; */
   background: #fff;
   font-family: var(--ff);
   box-sizing: border-box;
@@ -41,10 +47,10 @@ const css = `
   gap: 14px;
 }
 .conn {
-  width: 75%;
+  width: 100%;
   max-width: 1040px;
   display: grid;
-  grid-template-columns: 200px 1fr 60px 48px;
+  grid-template-columns: auto 1fr auto auto;
   align-items: center;
   gap: 12px 18px;
   padding: 10px 0;
@@ -52,21 +58,28 @@ const css = `
 }
 @media (max-width: 768px) {
   .conn {
-    width: clamp(300px, 90%, 100%);
-    grid-template-columns: 1fr 3fr  auto;
+    width: 100%;
+    grid-template-columns: auto 1fr auto;
     gap: 8px 12px;
     padding: 8px 0;
+  }
+  .latency {
+    display: block;
+    font-size: 14px;
   }
 }
 @media (max-width: 480px) {
   .conn {
     width: 100%;
-    grid-template-columns: 1fr  auto;
+    grid-template-columns: auto 1fr;
     gap: 6px 8px;
     padding: 6px 0;
   }
   .logos-right, .latency, .user, .disclaimer-note {
     display: none;
+  }
+  .logos .legacy-text {
+    display: inline-block;
   }
   .line {
     height: 20px;
@@ -76,7 +89,8 @@ const css = `
 .logos {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  /* justify-content: space-between; */ /* Adjust for potential single logo */
+  justify-content: flex-start; /* Align left */
   width: 100%;
 }
 .logos-left,
@@ -87,7 +101,7 @@ const css = `
 }
 .logos-left img,
 .logos-right img {
-  width: 90px;
+  width: 90px; /* Consider making this configurable or smaller */
   height: auto;
   object-fit: contain;
 }
@@ -105,13 +119,34 @@ const css = `
   background: var(--pri);
   border-radius: 12px;
   position: relative;
-  overflow: hidden; /* clip ripples cleanly */
+  overflow: hidden;
   box-shadow: 0 3px 10px rgba(33,184,146,0.22);
 }
 .legacy .line {
   background: #888;
   box-shadow: 0 3px 10px rgba(136,136,136,0.25);
 }
+
+/* Restore original grow/collapse keyframes */
+@keyframes growLeft   { from{width:0;left:0;} to{width:100%;left:0;} }
+@keyframes growRight  { from{width:0;right:0;}to{width:100%;right:0;} }
+@keyframes collapseLeft  { from{transform-origin:left;transform:scaleX(1);} to{transform-origin:left;transform:scaleX(0);} }
+@keyframes collapseRight { from{transform-origin:right;transform:scaleX(1);}to{transform-origin:right;transform:scaleX(0);} }
+
+/* Restore original .msg styles */
+.msg {
+  position: absolute;
+  top: 50%;
+  height: 5px;
+  border-radius: 3px;
+  transform: translateY(-50%); /* Only vertical transform initially */
+  background: #fff;
+  box-shadow: 0 0 10px 2px rgba(255,255,255,0.7);
+  opacity: 0.9;
+  pointer-events: none;
+  /* Width and position controlled by animation */
+}
+
 .latency {
   font: 700 16px var(--ff);
   color: var(--txt);
@@ -144,36 +179,6 @@ const css = `
   60%  { transform: translate(-50%,-50%) scale(1.6); opacity:0.35; }
   100% { transform: translate(-50%,-50%) scale(2.3); opacity:0; }
 }
-@keyframes growLeft   { from{width:0;left:0;} to{width:100%;left:0;} }
-@keyframes growRight  { from{width:0;right:0;}to{width:100%;right:0;} }
-@keyframes collapseLeft  { from{transform-origin:left;transform:scaleX(1);} to{transform-origin:left;transform:scaleX(0);} }
-@keyframes collapseRight { from{transform-origin:right;transform:scaleX(1);}to{transform-origin:right;transform:scaleX(0);} }
-
-.msg {
-  position: absolute;
-  top: 50%;
-  height: 5px;
-  border-radius: 3px;
-  transform: translateY(-50%);
-  background: #fff;
-  box-shadow: 0 0 10px 2px rgba(255,255,255,0.7);
-  opacity: 0.9;
-  pointer-events: none;
-}
-.anim-endpoint {
-  position: absolute;
-  top: 50%;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  transform: translate(-50%,-50%);
-  animation: ping 0.65s ease-out forwards;
-  pointer-events: none;
-  z-index: 5;
-  background: var(--pri);
-}
-.legacy .anim-endpoint { background: #888; }
-
 @keyframes holdIn  { from{opacity:0;}to{opacity:0.9;} }
 @keyframes holdOut { from{opacity:0.9;}to{opacity:0;} }
 .hold-dot {
@@ -196,8 +201,8 @@ const css = `
   .ttft .title { font-size: 24px; line-height: 1.2; }
   .ttft .desc  { font-size: 16px; max-width: 90%; }
   .conn {
-    width: clamp(300px, 90%, 100%);
-    grid-template-columns: 1fr 3fr  auto;
+    width: 100%;
+    grid-template-columns: auto 1fr auto;
     gap: 8px 12px;
     padding: 8px 0;
   }
@@ -211,12 +216,15 @@ const css = `
   .ttft .desc  { font-size: 14px; }
   .conn {
     width: 100%;
-    grid-template-columns: 1fr  auto;
+    grid-template-columns: auto 1fr;
     gap: 6px 8px;
     padding: 6px 0;
   }
   .logos-right, .latency, .user, .disclaimer-note {
     display: none;
+  }
+  .logos .legacy-text {
+    display: inline-block;
   }
   .line {
     height: 20px;
@@ -228,6 +236,8 @@ const css = `
 .disclaimer-note {
   margin-top: 20px;
   font-style: italic;
+  font-size: 12px; /* Smaller disclaimer */
+  color: var(--sub);
 }
 `
 
@@ -262,16 +272,17 @@ const addEndpoints = (line: HTMLElement | null) => {
 interface Props {
     maitaiLatency?: number
     legacyLatency?: number
-    maitaiLogo?: string
-    phonelyLogo?: string
+    // maitaiLogo?: string // Removed
+    // phonelyLogo?: string // Removed
     className?: string
 }
 
-export function TTFTComparison({
+// Changed export to default for easier dynamic import if needed
+export default function TTFTComparison({
     maitaiLatency = 179,
     legacyLatency = 661,
-    maitaiLogo,
-    phonelyLogo,
+    // maitaiLogo, // Removed
+    // phonelyLogo, // Removed
     className = "",
 }: Props): React.ReactElement {
     const mLine = useRef<HTMLDivElement>(null)
@@ -279,105 +290,121 @@ export function TTFTComparison({
     const timersM = useRef<NodeJS.Timeout[]>([])
     const timersL = useRef<NodeJS.Timeout[]>([])
 
-    const setRowWidth = useCallback(() => {
-        // Width is now handled by CSS clamp(), this function might be removable
-        // or adjusted if needed for other dynamic calculations.
-        // For now, let's keep it minimal or comment out if unused.
-        const rows = document.querySelectorAll(
-            ".conn"
-        ) as NodeListOf<HTMLElement>
-        // Original logic (potentially remove if CSS handles all width):
-        // const parent = rows[0]?.closest(".ttft") as HTMLElement | null
-        // const w = parent ? Math.floor(parent.offsetWidth * 0.75) : 0;
-        // rows.forEach((r) => (r.style.width = `${w}px`))
-        // No-op for now, as CSS handles width
-    }, [])
+    // Removed setRowWidth as CSS handles responsiveness now
+    // const setRowWidth = useCallback(() => { ... }, [])
 
     const bar = (line: HTMLElement, right: boolean, hop: number) => {
         const b = document.createElement("div")
         b.className = "msg"
         const grow = right ? "growRight" : "growLeft"
         const collapse = right ? "collapseLeft" : "collapseRight"
-        b.style.animation = `${grow} ${hop}ms linear forwards, ${collapse} 200ms ${hop}ms ease-in forwards`
-        line.appendChild(b)
+        // Apply original combined animation
+        b.style.animation = `${grow} ${hop}ms linear forwards, ${collapse} 200ms ${hop}ms ease-in forwards`;
+        line.appendChild(b);
+        // Schedule removal based on total animation time (hop + collapse duration)
+        // Need access to timers ref for proper cleanup
     }
 
     const run = useCallback(
         (line: HTMLDivElement | null, isM: boolean) => {
-            if (!line) return
-            line.querySelectorAll(".msg,.anim-endpoint").forEach((e) =>
-                e.remove()
-            )
-            const timers = isM ? timersM : timersL
+            if (!line || !line.isConnected) return
+            // Ensure .msg is cleaned up along with others
+            line.querySelectorAll(".msg,.anim-endpoint,.hold-dot").forEach((e) => e.remove())
+            
+            const timers = isM ? timersM : timersL;
+            clearTimers(timers); 
+
             const hop = 300
-            const think = (isM ? maitaiLatency : legacyLatency) * 3
+            const think = (isM ? maitaiLatency : legacyLatency) * 3 
 
             const ping = (side: "left" | "right", hold: number) => {
-                if (!line.isConnected) return
-                const f = document.createElement("div")
-                f.className = "anim-endpoint"
-                f.style[side] = "0px"
-                line.appendChild(f)
-                addTimer(timers, () => f.remove(), 700)
+                if (!line || !line.isConnected) return 
+                 const f = document.createElement("div")
+                 f.className = "anim-endpoint"
+                 f.style[side] = "0px"
+                 line.appendChild(f)
+                 addTimer(timers, () => { if (f.isConnected) f.remove() }, 700)
 
-                const d = document.createElement("div")
-                d.className = "hold-dot"
-                d.style[side] = "0px"
-                line.appendChild(d)
-                d.style.animation = "holdIn 120ms ease-out forwards"
-                addTimer(
-                    timers,
-                    () => {
-                        d.style.animation = "holdOut 180ms ease-in forwards"
-                        addTimer(timers, () => d.remove(), 200)
-                    },
-                    hold
-                )
+                 const d = document.createElement("div")
+                 d.className = "hold-dot"
+                 d.style[side] = "0px"
+                 line.appendChild(d)
+                 d.style.animation = "holdIn 120ms ease-out forwards"
+                 addTimer(
+                     timers,
+                     () => {
+                         if (d.isConnected) {
+                             d.style.animation = "holdOut 180ms ease-in forwards"
+                             addTimer(timers, () => { if (d.isConnected) d.remove() }, 200)
+                         }
+                     },
+                     hold
+                 )
             }
 
-            bar(line, true, hop)
+            // Call original bar function (no timers ref needed here)
+            bar(line, true, hop) 
             addTimer(timers, () => ping("left", think), hop)
             addTimer(
                 timers,
                 () => {
-                    bar(line, false, hop)
+                    bar(line, false, hop) 
                     addTimer(timers, () => ping("right", 300), hop)
                 },
                 hop + think
             )
 
-            addTimer(timers, () => run(line, isM), hop + think + hop + 500)
+            addTimer(timers, () => {
+                 if (line && line.isConnected) {
+                     run(line, isM)
+                 }
+             }, hop + think + hop + 500)
         },
-        [maitaiLatency, legacyLatency]
+        [maitaiLatency, legacyLatency] 
     )
 
     useEffect(() => {
-        let raf: number
+        let raf: number | null = null;
+        let ro: ResizeObserver | null = null;
+
         const start = () => {
+            if (!mLine.current || !lLine.current) return;
             addEndpoints(mLine.current)
             addEndpoints(lLine.current)
-            setRowWidth()
+            // setRowWidth() // Removed
             run(mLine.current, true)
             run(lLine.current, false)
         }
+
         const container = mLine.current?.closest(".ttft") as HTMLElement | null
-        const ro = new ResizeObserver(() => setRowWidth())
+        // Removed ResizeObserver logic as CSS handles width
+        // const ro = new ResizeObserver(() => setRowWidth())
+
         const init = () => {
             if (mLine.current && lLine.current && container) {
-                ro.observe(container)
+                // if (ro && container) ro.observe(container) // Removed
                 start()
             } else {
                 raf = requestAnimationFrame(init)
             }
         }
         raf = requestAnimationFrame(init)
+
+        // Cleanup function
         return () => {
-            cancelAnimationFrame(raf)
-            ro.disconnect()
+            if (raf !== null) cancelAnimationFrame(raf);
+            // if (ro) ro.disconnect(); // Removed
             clearTimers(timersM)
             clearTimers(timersL)
+             // Clean up animation elements on unmount
+             if (mLine.current) {
+                 mLine.current.querySelectorAll(".msg,.anim-endpoint,.hold-dot,.endpoint").forEach((e) => e.remove());
+             }
+             if (lLine.current) {
+                 lLine.current.querySelectorAll(".msg,.anim-endpoint,.hold-dot,.endpoint").forEach((e) => e.remove());
+             }
         }
-    }, [setRowWidth, run])
+    }, [run]) // useEffect depends on the 'run' callback
 
     return (
         <div className={`ttft ${className}`}>
@@ -386,15 +413,7 @@ export function TTFTComparison({
                 <div className="conn maitai">
                     <span className="logos">
                         <span className="logos-left">
-                            {maitaiLogo ? (
-                                <img src={maitaiLogo} alt="Maitai" />
-                            ) : null}
-                        </span>
-                        <span className="logos-right">
-                            <span className="plus">+</span>
-                            {phonelyLogo ? (
-                                <img src={phonelyLogo} alt="Phonely" />
-                            ) : null}
+                            <img src={MAITAI_LOGO_PATH} alt="Maitai" />
                         </span>
                     </span>
                     <div className="line" ref={mLine} />
@@ -406,24 +425,20 @@ export function TTFTComparison({
                         <span className="logos-left">
                             <span className="legacy-text">Legacy</span>
                         </span>
-                        <span className="logos-right">
-                            <span className="plus">+</span>
-                            {phonelyLogo ? (
-                                <img src={phonelyLogo} alt="Phonely" />
-                            ) : null}
-                        </span>
                     </span>
                     <div className="line" ref={lLine} />
                     <span className="latency">{legacyLatency} ms</span>
                     <UserIcon />
                 </div>
             </div>
-            {/* Disclaimer Note */}
+            <p className="chart-note"> 
+                Faster Time-To-First-Token (TTFT). Significantly lower latency than legacy systems.
+            </p>
             <p className="disclaimer-note">
                 Note: Animation speed slowed 3x for demonstration.
             </p>
         </div>
-    )
+    );
 }
 
 /* ------------------------------------------------------------------ */
@@ -445,36 +460,11 @@ const UserIcon: React.FC = () => (
 )
 
 /* ------------------------------------------------------------------ */
-/* 5. DEFAULTS & PROPERTY CONTROLS                                   */
+/* 5. DEFAULTS (Removed logo defaults)                               */
 /* ------------------------------------------------------------------ */
-TTFTComparison.defaultProps = {
-    maitaiLatency: 179,
-    legacyLatency: 661,
-    maitaiLogo: "",
-    phonelyLogo: "",
-} as Partial<Props>
+// TTFTComparison.defaultProps = {
+//     maitaiLatency: 179,
+//     legacyLatency: 661,
+// } as Partial<Props>
 
-addPropertyControls(TTFTComparison, {
-    maitaiLatency: {
-        type: ControlType.Number,
-        title: "Maitai Latency",
-        defaultValue: 179,
-        min: 50,
-    },
-    legacyLatency: {
-        type: ControlType.Number,
-        title: "Legacy Latency",
-        defaultValue: 661,
-        min: 100,
-    },
-    maitaiLogo: {
-        type: ControlType.File,
-        title: "Maitai Logo",
-        allowedFileTypes: ["png", "jpg", "jpeg", "svg", "webp"],
-    },
-    phonelyLogo: {
-        type: ControlType.File,
-        title: "Phonely Logo",
-        allowedFileTypes: ["png", "jpg", "jpeg", "svg", "webp"],
-    },
-})
+// Removed Framer Property Controls
