@@ -431,11 +431,13 @@ export default function TTFTComparison({
                     <UserIcon />
                 </div>
             </div>
-            <p className="chart-note"> 
-                Faster Time-To-First-Token (TTFT). Significantly lower latency than legacy systems.
-            </p>
-            <p className="disclaimer-note">
+            <div className="disclaimer-note pb-4" style={{ opacity: 0.5, fontSize: '14px' }}>
                 Note: Animation speed slowed 3x for demonstration.
+            </div>
+            <p className="text-lg font-medium text-gray-600 text-center max-w-3xl mx-auto mt-6 leading-relaxed">
+                Maitai's optimized inference stack achieves a Time-To-First-Token
+                over 3.5 times faster than legacy systems, significantly enhancing
+                responsiveness.
             </p>
         </div>
     );

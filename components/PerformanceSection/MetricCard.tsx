@@ -59,8 +59,8 @@ const MetricCard: React.FC<MetricCardProps> = ({ metric, className }) => {
                     <p className="text-sm text-gray-500 pt-1">{metric.subhead}</p>
                 )}
             </CardHeader>
-            {/* Remove data-chart-type specific styling, rely on default flex centering */}
-            <CardContent className="flex-grow flex pt-2 overflow-hidden items-center justify-center"> 
+            {/* Increase padding-top for more space above chart */}
+            <CardContent className="flex-grow flex pt-6 overflow-hidden items-center justify-center"> 
                  <div className="w-full h-full flex items-center justify-center">
                     {renderChart()}
                  </div>

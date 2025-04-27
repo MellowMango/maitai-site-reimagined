@@ -111,19 +111,6 @@ const css = `
   /* Will be positioned via JS */
 }
 
-.accuracy-chart-component .chart-note {
-  font-size: 18px;
-  color: var(--subtext-color);
-  text-align: center;
-  margin-top: 8px;
-  font-weight: 500;
-  line-height: 1.5;
-  max-width: 750px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 0 15px;
-}
-
 /* Stats Section Container - match HTML version styling */
 .stats-section-container {
   min-height: auto;
@@ -206,11 +193,6 @@ const css = `
 
   .accuracy-chart-component .stat-description {
     font-size: 18px;
-  }
-
-  .accuracy-chart-component .chart-note {
-    font-size: 17px;
-    margin-top: 6px;
   }
 }
 
@@ -651,10 +633,10 @@ export default function AccuracyChart({
                 ref={chartRef}
                 // Height is controlled by CSS variable set in createAccuracyChart
             ></div>
-            {/* Chart Note */}
-            <p className="chart-note">
-                Maitai's iterative fine‑tuning hits 99.2% accuracy on the
-                4th iteration, surpassing GPT‑4o‑mini by 4.5%.
+            {/* Apply standardized Tailwind classes, set margin to mt-2 */}
+            <p className="font-sans text-lg font-medium text-gray-600 text-center max-w-3xl mx-auto mt-2 leading-relaxed">
+                Maitai's iterative fine-tuning hits 99.2% accuracy on the 4th
+                iteration, surpassing GPT-4o-mini by 4.5%.
             </p>
              {/* Tooltip will be appended here by JS */}
         </div>
