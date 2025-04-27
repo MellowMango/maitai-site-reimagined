@@ -319,12 +319,15 @@ export default function AccuracyChart({
 
         let chartHeight = dynamicHeight
 
-        let margin = { top: 60, right: 80, bottom: 80, left: 80 }
+        // Increase top margin, decrease bottom margin
+        let margin = { top: 90, right: 80, bottom: 60, left: 80 } 
         if (isMobile) {
-            margin = { top: 60, right: 40, bottom: 90, left: 80 }
+            // Adjust mobile proportionally (approx +30 top, -20 bottom)
+            margin = { top: 90, right: 40, bottom: 70, left: 80 } 
         }
         if (isSmallMobile) {
-            margin = { top: 50, right: 30, bottom: 100, left: 85 }
+            // Adjust small mobile proportionally
+            margin = { top: 80, right: 30, bottom: 80, left: 85 } 
         }
 
         const width = chartWidth - margin.left - margin.right
@@ -633,8 +636,8 @@ export default function AccuracyChart({
                 ref={chartRef}
                 // Height is controlled by CSS variable set in createAccuracyChart
             ></div>
-            {/* Apply standardized Tailwind classes, set margin to mt-2 */}
-            <p className="font-sans text-lg font-medium text-gray-600 text-center max-w-3xl mx-auto mt-2 leading-relaxed">
+            {/* Increase margin-top to mt-6 */}
+            <p className="font-sans text-lg font-medium text-gray-600 text-center max-w-3xl mx-auto mt-6 leading-relaxed">
                 Maitai's iterative fine-tuning hits 99.2% accuracy on the 4th
                 iteration, surpassing GPT-4o-mini by 4.5%.
             </p>
