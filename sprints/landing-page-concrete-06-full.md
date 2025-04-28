@@ -91,10 +91,9 @@ This plan follows the section numbering from the blueprint.
 *   **Assets:**
     *   `public/img/compliance/` (`soc2.svg`, `hipaa.svg`, `ccpa.svg`)
 *   **Key Requirements:**
-    *   Layout: Centered flex row, specific gap, logo heights.
+    *   Layout: Horizontal bar with 3 cards + heading (Responsive)
 *   **Tasks:**
-    *   [ ] Add compliance logo assets to `public/img/compliance/`.
-    *   [ ] Implement `ComplianceStrip.tsx` with layout and image rendering (`next/image`).
+    *   [x] Implement `ComplianceStrip.tsx` with layout and content.
 
 ---
 
@@ -103,13 +102,16 @@ This plan follows the section numbering from the blueprint.
 *   **Component:**
     *   `components/BlogEventsCTA.tsx`
 *   **Key Requirements:**
-    *   Layout: Horizontal card structure (desktop), vertical stack (mobile).
-    *   Content: Two distinct callouts ("View Blog", "Upcoming Events").
+    *   Layout: Two stacked colored panels (vertical).
+    *   Content: Two distinct callouts ("Explore our Blog", "Explore Upcoming Events").
+    *   Interaction: Hover triggers gradient and arrow visibility/slide.
     *   Routing: Use `next/link` to `/blog?cat=all` and `/blog?cat=events`.
 *   **Tasks:**
-    *   [ ] Implement `BlogEventsCTA.tsx` structure and styling.
-    *   [ ] Add `next/link` components with correct routes.
-    *   [ ] Responsive styling adjustments.
+    *   [x] Implement `BlogEventsCTA.tsx` structure and styling.
+    *   [x] Add `next/link` components with correct routes.
+    *   [x] Implement hover effects (gradient, arrow).
+    *   [x] Responsive styling adjustments.
+    *   (Note: Hover animation smoothness can be revisited if needed)
 
 ---
 
@@ -117,28 +119,28 @@ This plan follows the section numbering from the blueprint.
 
 *   **Components:**
     *   `components/FeatureScroller/FeatureScroller.tsx`
-    *   `components/FeatureScroller/FeatureItem.tsx` (May just be `<li>` elements within `FeatureScroller.tsx`)
 *   **Data:**
-    *   `lib/features.ts` (Define `Feature` type; add feature list)
+    *   `lib/features.ts`
 *   **Assets:**
-    *   `public/img/features/` (Placeholder images for each feature - TBD, blueprint mentions `/public/img/...` generally but not a specific `/features` subdir, confirm asset paths)
+    *   `public/img/features/` (Placeholders used in right column for now)
 *   **Key Requirements:**
     *   Layout: Two-column grid (lg+), left column sticky.
-    *   Left Column: List (`ul`) of feature titles/links. Active state styling.
-    *   Right Column: Relative container for images. Images fade based on scroll position.
-    *   Interaction: Clicking list item scrolls to corresponding section (or syncs view), scrolling right column updates active item in left list.
-    *   Scroll Behavior: Use IntersectionObserver (or Framer Motion `whileInView`) to trigger image fades and active state. Scroll snapping/margin.
+    *   Left Column: List (`ul`) of feature titles/links. Active state styling (bold, color, bg tint, border).
+    *   Right Column: Placeholder content sections for each feature.
+    *   Interaction:
+        *   Clicking list item smoothly scrolls to corresponding right column section.
+        *   Scrolling right column updates active item in left list (Scroll Spy).
+    *   Scroll Behavior: Use IntersectionObserver for scroll spy.
 *   **Tasks:**
-    *   [ ] Define data structure and add placeholder data in `lib/features.ts`.
-    *   [ ] Add placeholder assets to `public/img/features/` (or appropriate location).
-    *   [ ] Implement `FeatureScroller.tsx` base layout (grid, sticky column).
-    *   [ ] Implement left column list rendering.
-    *   [ ] Implement right column image container.
-    *   [ ] Implement scroll spy logic (IntersectionObserver or Framer Motion) to:
-        *   Fade images in/out.
-        *   Update active state in the left list.
-    *   [ ] Implement smooth scrolling on list item click (optional but good UX).
-    *   [ ] Responsive styling adjustments.
+    *   [x] Define data structure and add placeholder data in `lib/features.ts`.
+    *   [x] Add placeholder assets (text content) to right column.
+    *   [x] Implement `FeatureScroller.tsx` base layout (grid, sticky column).
+    *   [x] Implement left column list rendering and active state styling.
+    *   [x] Implement right column placeholder content rendering.
+    *   [x] Implement scroll spy logic (IntersectionObserver) to update active state in the left list.
+    *   [x] Implement smooth scrolling on list item click.
+    *   [x] Responsive styling adjustments.
+    *   (Note: Right column needs actual images/visualizations)
 
 ---
 
