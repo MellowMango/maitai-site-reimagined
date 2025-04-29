@@ -34,7 +34,6 @@ const formSchema = z.object({
   businessEmail: z.string().email({ message: "Please enter a valid email address." }),
   companyName: z.string().min(1, { message: "Company name is required." }),
   companySize: z.string().min(1, { message: "Please select a company size." }), // Assuming value is string ID
-  numSDRsAEs: z.string().min(1, { message: "Please select the number of SDRs + AEs." }), // Assuming value is string ID
   whyMaitai: z.string().optional(), // Optional textarea
 });
 
@@ -47,14 +46,6 @@ const companySizeOptions = [
   { value: "51-200", label: "51-200 employees" },
   { value: "201-1000", label: "201-1,000 employees" },
   { value: "1001+", label: "1,001+ employees" },
-];
-
-const numSDRsAEsOptions = [
-  { value: "0-5", label: "0-5" },
-  { value: "6-10", label: "6-10" },
-  { value: "11-25", label: "11-25" },
-  { value: "26-50", label: "26-50" },
-  { value: "51+", label: "51+" },
 ];
 
 // --- Form Component --- 
@@ -71,7 +62,6 @@ function DemoForm() {
       businessEmail: "",
       companyName: "",
       companySize: "",
-      numSDRsAEs: "",
       whyMaitai: "",
     },
   });
@@ -188,40 +178,6 @@ function DemoForm() {
                 </FormItem>
               )}
             />
-            <FormField
-              control={form.control}
-              name="numSDRsAEs"
-              render={({ field }) => (
-                <FormItem>
-                  <div className="flex items-center gap-1.5"> {/* Wrap label and icon */}
-                    <FormLabel className="text-gray-300">Number of SDRs + AEs *</FormLabel>
-                    <Tooltip delayDuration={100}> {/* Added Tooltip */}
-                      <TooltipTrigger type="button"> {/* Button trigger for accessibility */}
-                        <Info className="h-4 w-4 text-gray-400 hover:text-gray-200" />
-                      </TooltipTrigger>
-                      <TooltipContent className="max-w-xs bg-gray-900 text-white border-gray-700">
-                        Sales Development Representatives + Account Executives
-                      </TooltipContent>
-                    </Tooltip>
-                  </div>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
-                    <FormControl>
-                      <SelectTrigger className="bg-gray-800 border-gray-700 text-white focus:border-maitai-lime focus:ring-maitai-lime">
-                        <SelectValue placeholder="Select..." />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent className="bg-gray-800 border-gray-700 text-white">
-                      {numSDRsAEsOptions.map((option) => (
-                        <SelectItem key={option.value} value={option.value} className="focus:bg-maitai-lime/20">
-                          {option.label}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
           </div>
           <FormField
             control={form.control}
@@ -267,9 +223,9 @@ export default function DemoPage() {
   }
 
   return (
-    <GoogleReCaptchaProvider 
-      type="v3"
+    <GoogleReCaptchaProvider
       siteKey={recaptchaSiteKey}
+      type="v3"
     >
       <TooltipProvider>
         {/* Main container for the page section */}

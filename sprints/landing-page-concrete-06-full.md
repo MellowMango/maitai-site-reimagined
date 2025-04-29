@@ -147,15 +147,25 @@ This plan follows the section numbering from the blueprint.
 ### Section #6: Sign-Up Banner
 
 *   **Component:**
-    *   `components/SignUpBanner.tsx`
+    *   `components/SignUpBanner.tsx` (Implemented as an embedded form)
+*   **API Route:**
+    *   `app/api/signup/route.ts` (Placeholder, accepts form data)
 *   **Key Requirements:**
-    *   Reuse existing CTA component structure if applicable.
-    *   Update copy: "Ready to build reliable AI? → Sign Up".
-    *   Update route: Link to `/signup`.
+    *   Implement as an embedded form (email input + submit).
+    *   Capture fields: `firstName`, `lastName`, `businessEmail`, `companyName`, `companySize`, `whyMaitai`.
+    *   Use `react-hook-form`, `zod` for validation.
+    *   Integrate `reCAPTCHA v3`.
+    *   Submit data + token to `/api/signup` route.
+    *   Layout should be wider, potentially using a grid structure.
 *   **Tasks:**
-    *   [ ] Identify and potentially rename/copy the old CTA component logic.
-    *   [ ] Create `SignUpBanner.tsx`.
-    *   [ ] Implement the banner with the new copy and link (`/signup`).
+    *   [x] Create `components/SignUpBanner.tsx` with form logic.
+    *   [x] Create placeholder `app/api/signup/route.ts`.
+    *   [x] Integrate reCAPTCHA.
+    *   [x] Remove `numSDRsAEs` field from `app/demo/page.tsx`.
+    *   [x] Expand banner form fields and layout.
+    *   [x] Update API route schema.
+    *   [x] Ensure component is rendered in `app/page.tsx`.
+    *   [x] Update documentation (`README.md`, this file).
 
 ---
 
@@ -164,33 +174,43 @@ This plan follows the section numbering from the blueprint.
 *   **Component:**
     *   `components/DocsAndCode.tsx`
 *   **Key Requirements:**
-    *   No changes needed from existing implementation (as per blueprint).
+    *   Replicate content from previous design (heading, text, docs link, code snippet).
+    *   Use Python code snippet from `old-site-copy.md`.
+    *   Basic code styling/highlighting.
 *   **Tasks:**
-    *   [ ] Verify component exists and is correctly placed/imported in the main page. (Covered by README update).
+    *   [x] Create/Implement `DocsAndCode.tsx` with content and layout.
+    *   [x] Verify component exists and is correctly placed/imported in `app/page.tsx`.
 
 ---
 
-### Section #8: Partner Grid
+### Section #8: Client Grid
+
+*   **Note:** Renamed from "Partner Grid" to reflect focus on customers/clients.
 
 *   **Component:**
-    *   `components/PartnerGrid.tsx`
+    *   `components/ClientGrid.tsx`
 *   **Data:**
-    *   `lib/partners.ts` (Define data structure for logo + link; add partner data)
+    *   `lib/clients.ts` (Define data structure for multiple item types: logo, quote, image; add placeholder data)
 *   **Assets:**
-    *   `public/img/partners/` (Partner logos as SVG/PNG)
+    *   `public/img/clients/` (Client logos, images as SVG/PNG)
 *   **Key Requirements:**
-    *   Layout: Responsive grid (`grid-cols-2 sm:grid-cols-3 lg:grid-cols-4`).
-    *   Image Styling: `object-contain`, specific aspect ratio.
-    *   Loading State: Placeholder skeleton with shimmer effect.
+    *   Layout: Responsive grid (e.g., `lg:grid-cols-4`) mimicking reference, allowing items to span rows/columns based on type.
+    *   Card Types: Implement visual variations for Logo, Quote, and Image cards.
+    *   Image Styling: Use `next/image`, `object-contain` for logos, `object-cover` for images.
+    *   Interaction: Decorative '+' elements on quote/image cards link to specific `blogUrl` defined in `lib/clients.ts` (with fallback).
+    *   Loading State: (Deferred - Basic implementation complete without loading state).
     *   Performance: Lazy load images (`next/image` `loading="lazy"`).
-    *   Interaction: Clicking logo links to `/blog/[slug]` (Confirm slug source - likely from `lib/partners.ts`).
 *   **Tasks:**
-    *   [ ] Define data structure and add placeholder data (including slugs) in `lib/partners.ts`.
-    *   [ ] Add partner logo assets to `public/img/partners/`.
-    *   [ ] Implement `PartnerGrid.tsx` grid layout.
-    *   [ ] Implement image rendering with `next/image`, `loading="lazy"`, and styling.
-    *   [ ] Implement linking logic using `next/link`.
-    *   [ ] Implement loading skeleton/shimmer effect (e.g., using Tailwind `animate-pulse`).
+    *   [x] Rename component, data file, assets dir to `Client*`.
+    *   [x] Update `README.md`, `app/page.tsx` references.
+    *   [x] Define data structure (`ClientGridItem` union type, including `blogUrl`) and add placeholder data in `lib/clients.ts`.
+    *   [x] Add placeholder assets to `public/img/clients/` (Phonely logo, headshot path).
+    *   [x] Implement `ClientGrid.tsx` responsive grid layout.
+    *   [x] Implement conditional rendering for different card types (Logo, Quote, Image).
+    *   [x] Implement styling for each card type using `next/image`.
+    *   [x] Add decorative '+' elements.
+    *   [x] Link '+' buttons to `blogUrl` from data.
+    *   [ ] Implement loading skeleton/shimmer effect (Deferred).
 
 ---
 
@@ -215,7 +235,7 @@ This plan follows the section numbering from the blueprint.
     *   [ ] Use semantic HTML and ARIA attributes where necessary.
 *   **Performance (Ongoing):**
     *   [ ] Optimize images (`next/image`).
-    *   [ ] Lazy load components or assets where appropriate (e.g., `PartnerGrid` images).
+    *   [ ] Lazy load components or assets where appropriate (e.g., `ClientGrid` images).
     *   [ ] Monitor bundle size.
     *   [ ] Target Lighthouse score ≥ 90.
 *   **Data Placeholders:**

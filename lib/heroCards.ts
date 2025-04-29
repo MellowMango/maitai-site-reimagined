@@ -41,9 +41,9 @@ export const heroCardsData: HeroCardData[] = [
   {
     id: 'event-webinar-q3',
     variant: 'event',
-    title: 'Webinar: Scaling LLMs in Production Environments',
-    date: 'October 26, 2024',
-    location: 'Virtual Event',
+    title: 'LlamaCon 2025: Meet us at the Groq booth!',
+    date: 'April 29, 2025',
+    location: 'San Francisco',
     // thumb: PlaceholderThumb, // Removed - Handled by gradient
   },
   // Why Card Example (Content TBD)

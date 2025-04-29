@@ -11,7 +11,7 @@ import BlogEventsCTA from '@/components/BlogEventsCTA';
 import FeatureScroller from '@/components/FeatureScroller/FeatureScroller';
 import SignUpBanner from '@/components/SignUpBanner';
 import DocsAndCode from '@/components/DocsAndCode';
-import PartnerGrid from '@/components/PartnerGrid';
+import ClientGrid from '@/components/ClientGrid';
 
 export default function HomePage() {
   return (
@@ -29,7 +29,7 @@ export default function HomePage() {
         <FeatureScroller />
         <SignUpBanner />
         <DocsAndCode />
-        <PartnerGrid />
+        <ClientGrid />
       </main>
     </>
   );

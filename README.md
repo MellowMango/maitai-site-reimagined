@@ -37,6 +37,7 @@ maitai-site-v2/
 │   ├── demo/page.tsx               # Demo page (/demo) - Existing
 │   └── api/
 │       └── demo/route.ts           # API route for demo requests - REUSED
+│       └── signup/route.ts         # NEW: API route for landing page signup form
 ├── components/
 │   ├── Header.tsx                  # Site header - REUSED (potentially minor scroll effect adjustments)
 │   ├── Footer.tsx                  # Site footer - REUSED (unchanged as per blueprint)
@@ -54,8 +55,9 @@ maitai-site-v2/
 │   │   ├── FeatureScroller.tsx
 │   │   └── FeatureItem.tsx
 │   ├── SignUpBanner.tsx            # NEW: Section #6 (Relabel/reuse of old CTA component logic likely)
+│   │                               # (Implemented as multi-field embedded form)
 │   ├── DocsAndCode.tsx             # NEW: Section #7 (placeholder - implement content from previous design)
-│   ├── PartnerGrid.tsx             # NEW: Section #8
+│   ├── ClientGrid.tsx              # NEW: Section #8 (Renamed from PartnerGrid)
 │   │
 │   └── ui/                         # shadcn-generated primitives - REUSED
 ├── content/                        # ARCHIVED
@@ -67,7 +69,7 @@ maitai-site-v2/
 │   ├── heroCards.ts                # NEW: Data for HeroCarousel
 │   ├── metrics.ts                  # NEW: Data for PerformanceSection
 │   ├── features.ts                 # NEW: Data for FeatureScroller
-│   ├── partners.ts                 # NEW: Data for PartnerGrid
+│   ├── clients.ts                  # NEW: Data for ClientGrid (Renamed from partners.ts)
 │   │
 │   ├── mailer.ts                   # Placeholder for SendGrid helper - REUSED
 │   ├── recaptcha.ts                # Placeholder for reCAPTCHA verify helper - REUSED
@@ -77,7 +79,7 @@ maitai-site-v2/
 │   ├── logos/                      # Site logos (Header/Footer) - REUSED
 │   └── img/                        # NEW: Specific assets for landing page sections
 │       ├── compliance/             # (soc2.svg, hipaa.svg, ccpa.svg)
-│       ├── partners/               # (*.svg or *.png)
+│       ├── clients/                # Client logos, images (*.svg or *.png)
 │       ├── metrics/                # (placeholder svgs/charts)
 │       └── hero/                   # (event thumbs, card illustrations etc.)
 ├── styles/
@@ -135,7 +137,7 @@ The following components, assets, and hooks from the previous structure are bein
 - **`/logos/`**: Includes primary site logos for Header/Footer, favicon, etc. (unchanged).
 - **`/img/`**: **NEW** location for landing-page-specific visual assets:
     - **`/img/compliance/`**: Contains `soc2.svg`, `hipaa.svg`, `ccpa.svg` for the `ComplianceStrip`.
-    - **`/img/partners/`**: Contains partner logos (`*.svg`, `*.png`) for the `PartnerGrid`.
+    - **`/img/clients/`**: Contains client logos (`*.svg`, `*.png`) for the `ClientGrid`.
     - **`/img/metrics/`**: Contains placeholder charts/SVGs for `PerformanceSection`.
     - **`/img/hero/`**: Contains event thumbnails, card illustrations, etc., for `HeroCarousel`.
 
@@ -238,7 +240,7 @@ The following HTML email templates are available in the `lib/email-templates/` d
 
 *   `demo-request-notification.html`: Sent internally when a new demo request is submitted via the website form.
     *   Used by: `lib/mailer.ts` (placeholder)
-    *   Requires data: `firstName`, `lastName`, `businessEmail`, `companyName`, `companySize`, `numSDRsAEs`, `whyMaitai` (optional), `currentDate`.
+    *   Requires data: `firstName`, `lastName`, `businessEmail`, `companyName`, `companySize`, `whyMaitai` (optional), `currentDate`. (Note: `numSDRsAEs` removed)
 
 ---
 *Add new templates to this list as they are created.*
