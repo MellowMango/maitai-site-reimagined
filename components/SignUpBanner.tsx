@@ -4,10 +4,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { useState, useTransition } from "react";
-import {
-  GoogleReCaptchaProvider,
-} from "@google-recaptcha/react";
-import { useGoogleReCaptcha } from '@google-recaptcha/react';
+// import { GoogleReCaptchaProvider } from "@google-recaptcha/react";
+// import { useGoogleReCaptcha } from '@google-recaptcha/react';
 
 import { Button } from "@/components/ui/button";
 import {
@@ -28,6 +26,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { motion } from "framer-motion"; // Import motion
 
 // Define the form schema using Zod
 const SignUpFormSchema = z.object({
@@ -50,11 +49,37 @@ const companySizeOptions = [
   { value: "1001+", label: "1,001+ employees" },
 ];
 
+// Animation Variants
+const sectionVariants = {
+  hidden: { opacity: 0 },
+  visible: { 
+    opacity: 1,
+    transition: { duration: 0.5, staggerChildren: 0.2 } // Stagger children slightly
+  }
+};
+
+const underlineVariants = {
+  hidden: { scaleX: 0 },
+  visible: { 
+    scaleX: 1, 
+    transition: { duration: 1.5, ease: 'linear' }
+  }
+};
+
+// New Variants for SVG path drawing
+const svgLineVariants = {
+  hidden: { pathLength: 0 },
+  visible: { 
+    pathLength: 1, 
+    transition: { duration: 1.5, ease: 'linear' } // Reading speed
+  }
+};
+
 // Main component content
 function SignUpBannerContent() {
   const [isPending, startTransition] = useTransition();
   const [formMessage, setFormMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
-  const { executeV3 } = useGoogleReCaptcha();
+  // const { executeV3 } = useGoogleReCaptcha(); // Temporarily comment out
 
   const form = useForm<SignUpFormValues>({
     resolver: zodResolver(SignUpFormSchema),
@@ -69,22 +94,23 @@ function SignUpBannerContent() {
   });
 
   const onSubmit = async (data: SignUpFormValues) => {
-    if (!executeV3) {
-      console.error("reCAPTCHA not ready");
-      setFormMessage({ type: 'error', text: "reCAPTCHA not ready. Please try again." });
-      return;
-    }
+    // if (!executeV3) { // Temporarily comment out reCAPTCHA check
+    //   console.error("reCAPTCHA not ready");
+    //   setFormMessage({ type: 'error', text: "reCAPTCHA not ready. Please try again." });
+    //   return;
+    // }
 
-    setFormMessage(null); // Clear previous messages
+    setFormMessage(null); 
 
     startTransition(async () => {
       try {
-        const token = await executeV3("signup_form");
+        // const token = await executeV3("signup_form"); // Temporarily comment out token generation
 
         const response = await fetch("/api/signup", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ ...data, recaptchaToken: token }),
+          // body: JSON.stringify({ ...data, recaptchaToken: token }), // Temporarily remove token
+          body: JSON.stringify({ ...data }), 
         });
 
         const result = await response.json();
@@ -109,14 +135,54 @@ function SignUpBannerContent() {
   };
 
   return (
-    <section className="w-full bg-white py-16 md:py-20">
-      <div className="container mx-auto px-4 md:px-6 max-w-5xl text-center">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
+    // Wrap section with motion, apply variants and gradient
+    <motion.section 
+      // Apply subtle Mint Cream -> Light Purple gradient
+      className="w-full py-16 md:py-20 relative overflow-hidden bg-gradient-to-br from-[#F2FBF9] to-[#ECE6F3]" // Added gradient, relative, overflow
+      variants={sectionVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }} // Trigger slightly earlier
+    >
+      {/* Radial Animation Overlay */}
+      <motion.div
+        className="absolute inset-0 -z-10 bg-[radial-gradient(circle,theme('colors.maitai.lagoon')/15_0%,transparent_60%)]"
+        animate={{
+          scale: [1, 1.3, 1],
+          opacity: [0.2, 0.4, 0.2] // Subtle opacity pulse
+        }}
+        transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+        style={{ transformOrigin: 'center' }}
+      />
+
+      <div className="container mx-auto px-4 md:px-6 max-w-5xl text-center relative z-10"> {/* Ensure content is above overlay */}
+        <motion.h2 
+          className="text-3xl md:text-4xl font-bold mb-4 text-gray-900"
+          variants={sectionVariants} // Inherit fade-in from parent
+        >
           Get Started with Maitai
-        </h2>
-        <p className="text-lg md:text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-          Ready to see how Maitai can help your team? Fill out the form below to get started or request a demo.
-        </p>
+        </motion.h2>
+        
+        {/* Wrapper for subheading - motion.div no longer strictly needed for animation trigger */}
+        <div 
+          className="relative inline-block mb-8"
+          // Remove motion props if not needed for other children animations
+        > 
+          <motion.p 
+            className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto pb-1 bg-gradient-to-r from-maitai-lagoon to-maitai-lagoon bg-no-repeat bg-left-bottom bg-[length:0%_2px]" // Added background gradient underline styles
+            variants={sectionVariants} // Keep fade-in from section
+            // Add direct whileInView and transition for backgroundSize animation
+            whileInView={{ backgroundSize: "100% 2px" }}
+            viewport={{ once: true, amount: 0.8 }}
+            transition={{ duration: 1.5, ease: 'linear', delay: 0.2 }}
+          >
+            Ready to see how Maitai can help your team? Fill out the form below to get started or request a demo.
+          </motion.p>
+          
+          {/* Remove the SVG underline */}
+          {/* <svg ...> ... </svg> */}
+
+        </div>
 
         <Form {...form}>
           <form
@@ -269,43 +335,44 @@ function SignUpBannerContent() {
                   "Get Started"
                 )}
               </Button>
-
-               {/* Optional: Display general success/error message below button */}
-                {formMessage && !isPending && (
-                   <div className={`mt-4 text-sm flex items-center justify-center gap-2 px-3 py-2 rounded w-full max-w-md ${formMessage.type === 'success' ? 'bg-green-100 text-green-700 border border-green-300' : 'bg-red-100 text-red-700 border border-red-300'}`}>
-                      {formMessage.type === 'success' ? <CheckCircle className="h-5 w-5" /> : <AlertTriangle className="h-5 w-5" />}
-                      {formMessage.text}
-                  </div>
-                )}
             </div>
 
           </form>
         </Form>
+
+        {/* Form Message Display */}
+         {formMessage && (
+           <motion.div 
+             className={`mt-6 p-3 rounded-md text-center text-sm font-medium ${formMessage.type === 'success' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}
+             initial={{ opacity: 0, y: 10 }}
+             animate={{ opacity: 1, y: 0 }}
+             exit={{ opacity: 0 }}
+           >
+             {formMessage.type === 'success' ? <CheckCircle className="inline-block mr-2 h-5 w-5" /> : <AlertTriangle className="inline-block mr-2 h-5 w-5" />}
+             {formMessage.text}
+           </motion.div>
+         )}
       </div>
-    </section>
+    </motion.section>
   );
 }
 
+// Temporarily export SignUpBannerContent directly
+export default SignUpBannerContent;
 
-// Wrapper component providing the reCAPTCHA context
+/* // Temporarily commented out Provider Wrapper
 export default function SignUpBanner() {
-  const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+  const recaptchaKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
-  if (!siteKey) {
-    console.error("NEXT_PUBLIC_RECAPTCHA_SITE_KEY is not set in environment variables.");
-    // Render a fallback or null if reCAPTCHA is essential and missing
-    return (
-        <div className="w-full bg-gradient-to-r from-brand-600 to-brand-700 py-16 md:py-20 text-white">
-             <div className="container mx-auto px-4 md:px-6 max-w-4xl text-center">
-                <p className="text-red-300">Signup form configuration error. Please contact support.</p>
-             </div>
-        </div>
-    );
+  if (!recaptchaKey) {
+    console.warn("Missing NEXT_PUBLIC_RECAPTCHA_SITE_KEY");
+    return <SignUpBannerContent />;
   }
 
   return (
-    <GoogleReCaptchaProvider siteKey={siteKey} type="v3">
+    <GoogleReCaptchaProvider reCaptchaKey={recaptchaKey} language="en">
       <SignUpBannerContent />
     </GoogleReCaptchaProvider>
   );
 }
+*/

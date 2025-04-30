@@ -15,11 +15,12 @@ import {
   SheetClose // Import SheetClose for closing on link click
 } from "@/components/ui/sheet";
 
+// NAV-1: Update nav items order and labels
 const NAV_LINKS = [
-  { name: 'Features', href: '/#features' }, // Example internal link
+  { name: 'Blog', href: '/blog' }, 
   { name: 'Pricing', href: '/pricing' },
-  { name: 'Docs', href: 'https://docs.trymaitai.ai' }, // External link
-  { name: 'Careers', href: 'https://www.ycombinator.com/companies/maitai/jobs' }, // Updated Careers link to external YC page
+  { name: 'Careers', href: '/careers' }, // Assuming internal /careers path exists
+  { name: 'Portal', href: '/portal' },   // Assuming /portal path, update if external
 ];
 
 export default function Header() {
