@@ -23,32 +23,30 @@ export const metricsData: {
 } = {
   text: [
     {
-      id: 'text-improvement',
-      title: 'Continuously Improving Accuracy',
-      subhead: 'Fine-tuned models outperform base LLMs',
-      // Use correct public URL path for the image
-      chart: '/performance/continuously-improving-v2.png', // Updated path
-    },
-    {
       id: 'text-throughput',
       title: 'High Throughput & Low Latency',
       subhead: 'Scales efficiently under load',
-      // Use correct public URL path for the image
-      chart: '/performance/tps-graph-v2.png', // Updated path
+      chart: '/performance/tps-graph-v2.png',
+    },
+    {
+      id: 'text-improvement',
+      title: 'Continuously Improving Accuracy',
+      subhead: 'Fine-tuned models outperform base LLMs',
+      chart: '/performance/continuously-improving-v2.png',
     },
   ],
   voice: [
     {
-      id: 'voice-accuracy-iterations',
-      title: 'Accuracy Across Iterations',
-      subhead: 'Surpassing GPT-4o with fine-tuning',
-      chart: AccuracyChart, // Use imported TSX component
-    },
-    {
       id: 'voice-ttft-comparison',
       title: 'Faster Time-To-First-Token (TTFT)',
       subhead: 'Significantly lower latency than legacy systems',
-      chart: TTFTComparison, // Use imported TSX component
+      chart: TTFTComparison,
+    },
+    {
+      id: 'voice-accuracy-iterations',
+      title: 'Accuracy Across Iterations',
+      subhead: 'Surpassing GPT-4o with fine-tuning',
+      chart: AccuracyChart,
     },
   ],
 };

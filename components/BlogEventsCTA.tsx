@@ -26,23 +26,23 @@ const BlogEventsCTA = () => {
 
           <div className="flex-1 md:max-w-[680px] mb-4 md:mb-0">
             <CTACard
-              href="/blog?cat=all"
-              baseColor="#EA5F40"
-              highlightColor="#FFA658"
-              focusRingColor="focus-visible:ring-[#EA5F40]"
-            >
-              Explore our Blog
-            </CTACard>
-          </div>
-
-          <div className="flex-1 md:max-w-[680px]">
-            <CTACard
               href="/blog?cat=events"
               baseColor="#a78bfa"
               highlightColor="#ddd6fe"
               focusRingColor="focus-visible:ring-violet-400"
             >
               Explore Upcoming Events
+            </CTACard>
+          </div>
+
+          <div className="flex-1 md:max-w-[680px]">
+            <CTACard
+              href="/blog?cat=all"
+              baseColor="#EA5F40"
+              highlightColor="#FFA658"
+              focusRingColor="focus-visible:ring-[#EA5F40]"
+            >
+              Explore our Blog
             </CTACard>
           </div>
 

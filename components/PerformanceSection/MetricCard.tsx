@@ -54,9 +54,16 @@ const MetricCard: React.FC<MetricCardProps> = ({ metric, className }) => {
         <Card className={cn("flex flex-col", className)}> 
             <CardHeader className="pb-2">
                 {/* Use a smaller title size for potentially complex charts */}
-                <CardTitle className="text-base font-semibold text-gray-800">{metric.title}</CardTitle>
+                <CardTitle 
+                  className="text-base font-semibold text-gray-800"
+                  dangerouslySetInnerHTML={{ __html: metric.title }}
+                />
                 {metric.subhead && (
-                    <p className="text-sm text-gray-500 pt-1">{metric.subhead}</p>
+                    /* PERF-3: Use dangerouslySetInnerHTML for subhead */
+                    <p 
+                      className="text-sm text-gray-500 pt-1"
+                      dangerouslySetInnerHTML={{ __html: metric.subhead }}
+                    />
                 )}
             </CardHeader>
             {/* Increase padding-top for more space above chart */}

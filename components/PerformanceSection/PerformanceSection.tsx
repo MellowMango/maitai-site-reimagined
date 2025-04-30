@@ -9,8 +9,8 @@ import { cn } from '@/lib/utils';
 
 // Define the tabs configuration
 const performanceTabs = [
-    { value: 'text', label: '⌨️ Text' },
     { value: 'voice', label: '☎️ Voice' },
+    { value: 'text', label: '⌨️ Text' },
 ];
 
 const gridFadeVariants = {
@@ -20,7 +20,7 @@ const gridFadeVariants = {
 };
 
 const PerformanceSection: React.FC = () => {
-    const [activeTab, setActiveTab] = useState<keyof typeof metricsData>('text'); // Default to 'text'
+    const [activeTab, setActiveTab] = useState<keyof typeof metricsData>('voice');
 
     const handleTabChange = (value: string) => {
         if (value === 'text' || value === 'voice') {
@@ -55,7 +55,7 @@ const PerformanceSection: React.FC = () => {
                         animate="visible"
                         exit="exit"
                         transition={{ duration: 0.3 }}
-                        className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 max-w-4xl mx-auto"
+                        className="mt-8 md:mt-12 grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 max-w-4xl mx-auto"
                     >
                         {currentMetrics.map((metric) => (
                             <MetricCard key={metric.id} metric={metric} />
