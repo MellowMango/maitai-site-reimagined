@@ -38,9 +38,9 @@ const HeroCard: React.FC<HeroCardProps> = ({ card }) => {
                         {/* Add a subtle overlay for text readability if needed */}
                         {/* <div className="absolute inset-0 bg-black/10 z-0"></div> */}
                         <div className="relative z-10 max-w-2xl space-y-4">
-                            <h2 className="text-3xl lg:text-4xl font-bold">{card.title}</h2>
+                            <h2 className="text-4xl md:text-6xl font-bold">{card.title}</h2>
                             {card.body && (
-                                <p className="text-base lg:text-lg opacity-90">{card.body}</p>
+                                <p className="text-lg md:text-xl max-w-[60ch] mx-auto opacity-90">{card.body}</p>
                             )}
                         </div>
                     </div>
@@ -54,7 +54,7 @@ const HeroCard: React.FC<HeroCardProps> = ({ card }) => {
                                 <span className="text-xs font-medium text-slate-600">Logo</span>
                              </div>
                             <div className="space-y-2 flex-grow">
-                                <h3 className="text-xl lg:text-2xl font-semibold">{card.title}</h3>
+                                <h3 className="text-4xl md:text-6xl font-semibold">{card.title}</h3>
                                 {card.stat && (
                                     <span className="inline-block bg-blue-200/80 text-blue-900 text-sm font-medium px-3 py-1 rounded">
                                         {card.stat}
@@ -69,9 +69,9 @@ const HeroCard: React.FC<HeroCardProps> = ({ card }) => {
                     <div className={cn(baseCardClasses, getGradientClasses(card.variant))}>
                          {/* Can add image as background via style prop if needed later */}
                         <div className="relative z-10 max-w-2xl space-y-2">
-                            <h3 className="text-2xl lg:text-3xl font-semibold">{card.title}</h3>
+                            <h3 className="text-4xl md:text-6xl font-semibold">{card.title}</h3>
                              {(card.date || card.location) && (
-                                <p className="text-sm lg:text-base font-medium opacity-80">
+                                <p className="text-lg md:text-xl font-medium opacity-80">
                                     {card.date}{card.date && card.location && ' • '}{card.location}
                                 </p>
                             )}
@@ -84,7 +84,7 @@ const HeroCard: React.FC<HeroCardProps> = ({ card }) => {
                 return (
                     <div className={cn(baseCardClasses, getGradientClasses(card.variant))}>
                          <div className="relative z-10 max-w-2xl">
-                            <h2 className="text-3xl lg:text-4xl font-bold">{card.title}</h2>
+                            <h2 className="text-4xl md:text-6xl font-bold">{card.title}</h2>
                             {/* Body is intentionally omitted per spec for now */}
                         </div>
                     </div>

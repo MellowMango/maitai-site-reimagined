@@ -25,8 +25,8 @@ export const heroCardsData: HeroCardData[] = [
   {
     id: 'snapshot',
     variant: 'snapshot',
-    title: 'Build AI applications that work every time.',
-    body: 'Maitai ensures your voice and text AI is reliable, scalable, and ready for production. Stop babysitting fickle models.',
+    title: 'High Performance AI For Enterprise',
+    body: 'The fastest, highest accuracy, low latency inference to power serious production AI applications.',
     // illustrative SVG handled by gradient in component
   },
   // Partnership Card Example

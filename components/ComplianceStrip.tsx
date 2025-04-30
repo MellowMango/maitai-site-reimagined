@@ -21,8 +21,8 @@ const ComplianceStrip = () => {
   return (
     <section
       aria-labelledby="compliance-heading"
-      // Using dark purple tones from brand guidelines for the gradient
-      className="py-8 md:py-10 bg-gradient-to-r from-[#200F34] to-[#31174F] text-white"
+      // COMP-1: Restyle for light mode
+      className="py-8 md:py-10 bg-slate-100 text-gray-900" // Updated bg and default text
     >
       <div className="container mx-auto px-4">
         {/* Main horizontal layout: flex row, wrap items, justify center/between */}
@@ -36,19 +36,23 @@ const ComplianceStrip = () => {
               <div
                 key={card.title}
                 // Reduced padding, set a flex-basis/max-width for better wrapping control
-                className="border border-gray-600 rounded-md p-4 md:p-5 flex flex-col space-y-2 flex-1 min-w-[240px] sm:min-w-[200px] max-w-xs"
+                // COMP-1: Updated border
+                className="border border-slate-200 rounded-md p-4 md:p-5 flex flex-col space-y-2 flex-1 min-w-[240px] sm:min-w-[200px] max-w-xs"
               >
                 <div className="flex items-center space-x-2.5">
-                  <span className="block w-2.5 h-2.5 bg-white rounded-full flex-shrink-0"></span>
+                  {/* COMP-1: Updated dot color */}
+                  <span className="block w-2.5 h-2.5 bg-gray-900 rounded-full flex-shrink-0"></span>
                   <h3
                     id={`compliance-card-heading-${card.title.toLowerCase().replace(/\s+/g, '-')}`}
                     // Slightly smaller title text
+                    // COMP-1: Text color inherited from section
                     className="text-sm md:text-base font-semibold tracking-wide uppercase"
                   >
                     {card.title}
                   </h3>
                 </div>
-                <p className="text-xs md:text-sm text-gray-300 leading-snug">
+                {/* COMP-1: Updated description text color */}
+                <p className="text-xs md:text-sm text-gray-600 leading-snug">
                   {card.description}
                 </p>
               </div>
@@ -58,10 +62,11 @@ const ComplianceStrip = () => {
           {/* Heading Text */}
           {/* Adjusted text alignment and size */}
           <div className="text-center lg:text-right flex-shrink-0 mt-6 lg:mt-0">
-            <h2 id="compliance-heading" className="text-2xl md:text-3xl lg:text-4xl font-semibold text-gray-100 mb-1">
+            {/* COMP-1: Updated heading text colors */}
+            <h2 id="compliance-heading" className="text-2xl md:text-3xl lg:text-4xl font-semibold text-gray-900 mb-1">
               Enterprise-grade security
             </h2>
-            <h3 className="text-xl md:text-2xl lg:text-3xl font-medium text-gray-400">
+            <h3 className="text-xl md:text-2xl lg:text-3xl font-medium text-gray-600">
               and data governance
             </h3>
           </div>

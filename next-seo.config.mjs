@@ -14,14 +14,14 @@ const defaultSEOConfig = {
     siteName: 'Maitai',
     title: 'Maitai: Run Better AI — Automatically.',
     description: 'Maitai auto‑detects issues, optimizes tokens, and reroutes models in real time for text and voice AI.',
-    // images: [
-    //   {
-    //     url: 'https://trymaitai.ai/og-image.png', // Replace with your OG image URL
-    //     width: 1200,
-    //     height: 630,
-    //     alt: 'Maitai AI Security',
-    //   },
-    // ],
+    images: [
+      {
+        url: '/img/index/Social Preview-5.png', // Updated URL 
+        width: 1200,
+        height: 630,
+        alt: 'Maitai - AI Infrastructure that Heals Itself', // Updated Alt Text
+      },
+    ],
   },
   // twitter: {
   //   handle: '@trymaitai', // Optional: Your Twitter handle

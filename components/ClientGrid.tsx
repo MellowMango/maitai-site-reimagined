@@ -39,9 +39,9 @@ const QuoteCard = ({ item }: { item: Extract<ClientGridItem, { type: 'quote' }> 
       <p>{item.title}, {item.company}</p>
     </div>
     {/* Decorative Plus Button - Link to specific blog post or default */}
-    <Link href={item.blogUrl || "/blog/stories"} passHref legacyBehavior>
+    <Link href={item.blogUrl || "/blog/stories"}>
       <Button asChild variant="outline" size="icon" className="absolute bottom-4 right-4 h-8 w-8 rounded-full border-current text-current bg-transparent hover:bg-current/10 cursor-pointer" >
-        <a><Plus className="h-4 w-4" /></a>
+        <Plus className="h-4 w-4" />
       </Button>
     </Link>
   </div>
@@ -63,9 +63,9 @@ const ImageCard = ({ item }: { item: Extract<ClientGridItem, { type: 'image' }> 
        <p className="text-xs opacity-90">{item.company}</p>
     </div>
      {/* Decorative Plus Button - Link to specific blog post or default */}
-     <Link href={item.blogUrl || "/blog/stories"} passHref legacyBehavior>
+     <Link href={item.blogUrl || "/blog/stories"}>
        <Button asChild variant="outline" size="icon" className="absolute bottom-4 right-4 h-8 w-8 rounded-full border-white text-white bg-black/30 hover:bg-black/50 backdrop-blur-sm cursor-pointer">
-          <a><Plus className="h-4 w-4" /></a>
+          <Plus className="h-4 w-4" />
        </Button>
      </Link>
   </div>

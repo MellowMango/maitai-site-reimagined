@@ -1,4 +1,3 @@
-
 import type { Metadata } from 'next'
 import { Inter, DM_Sans } from 'next/font/google'
 import "../styles/globals.css";
@@ -16,6 +15,13 @@ const dmSans = DM_Sans({ subsets: ['latin'], display: 'swap', variable: '--font-
 export const metadata: Metadata = {
   title: 'Maitai — AI Infrastructure that Heals Itself',
   description: 'Resilient AI infrastructure that automatically adapts, recovers, and optimizes itself in real-time.',
+  icons: {
+    icon: [
+      { url: '/favicon.ico', type: 'image/x-icon', sizes: 'any' }, // Link for .ico
+      { url: '/favicon.svg', type: 'image/svg+xml' }, // Link for .svg
+    ],
+    // Optionally add apple-touch-icon, shortcut icon etc. here
+  },
 }
 
 export default function RootLayout({

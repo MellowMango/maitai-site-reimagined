@@ -1,54 +1,54 @@
 import React from 'react';
-import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import { motion } from 'framer-motion';
+import CTACard from './CTACard';
 
 const BlogEventsCTA = () => {
+  const sectionVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.3, ease: 'easeInOut', staggerChildren: 0.1 }
+    },
+  };
+
   return (
-    <section
+    <motion.section
       aria-labelledby="cta-heading"
-      // Removed background color from section, added vertical padding
       className="py-12 md:py-16"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.3 }}
+      variants={sectionVariants}
     >
       <div className="container mx-auto px-4">
-        {/* Stack the two panels vertically */}
-        <div className="flex flex-col space-y-4 md:space-y-6 max-w-3xl mx-auto">
+        <div className="flex flex-col md:flex-row md:space-y-0 md:space-x-6 justify-center items-stretch">
 
-          {/* Blog CTA Panel */}
-          <Link
-            href="/blog?cat=all"
-            className={cn(
-              'group relative flex items-center justify-center p-8 md:p-10 lg:p-12 rounded-lg transition-all duration-300 ease-in-out overflow-hidden',
-              'bg-[#EA5F40] text-white', // Base color (Rum #EA5F40)
-              'hover:bg-gradient-to-r hover:from-[#EA5F40] hover:to-[#FFA658]/80', // Rum to Marnier/80
-              'focus:outline-none focus-visible:ring-4 focus-visible:ring-offset-2 focus-visible:ring-[#EA5F40]'
-            )}
-          >
-            <span className="text-xl md:text-2xl lg:text-3xl font-semibold z-10">
+          <div className="flex-1 md:max-w-[680px] mb-4 md:mb-0">
+            <CTACard
+              href="/blog?cat=all"
+              baseColor="#EA5F40"
+              highlightColor="#FFA658"
+              focusRingColor="focus-visible:ring-[#EA5F40]"
+            >
               Explore our Blog
-            </span>
-            <ArrowRight className="absolute right-8 top-1/2 -translate-y-1/2 h-6 w-6 text-white opacity-0 transition-all duration-300 ease-in-out group-hover:opacity-100 group-hover:right-6 md:group-hover:right-8" />
-          </Link>
+            </CTACard>
+          </div>
 
-          {/* Events CTA Panel */}
-          <Link
-            href="/blog?cat=events"
-            className={cn(
-              'group relative flex items-center justify-center p-8 md:p-10 lg:p-12 rounded-lg transition-all duration-300 ease-in-out overflow-hidden',
-              'bg-[#FC9EB5] text-white', // Base color (Pink #FC9EB5)
-              'hover:bg-gradient-to-r hover:from-[#FC9EB5] hover:to-pink-400/80', // Pink to slightly darker pink/80
-              'focus:outline-none focus-visible:ring-4 focus-visible:ring-offset-2 focus-visible:ring-[#FC9EB5]'
-            )}
-          >
-             <span className="text-xl md:text-2xl lg:text-3xl font-semibold z-10">
+          <div className="flex-1 md:max-w-[680px]">
+            <CTACard
+              href="/blog?cat=events"
+              baseColor="#a78bfa"
+              highlightColor="#ddd6fe"
+              focusRingColor="focus-visible:ring-violet-400"
+            >
               Explore Upcoming Events
-            </span>
-            <ArrowRight className="absolute right-8 top-1/2 -translate-y-1/2 h-6 w-6 text-white opacity-0 transition-all duration-300 ease-in-out group-hover:opacity-100 group-hover:right-6 md:group-hover:right-8" />
-          </Link>
+            </CTACard>
+          </div>
 
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 
