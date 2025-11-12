@@ -46,12 +46,12 @@ import React, {
 } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { toast } from 'react-hot-toast'
-import { heroNodes, coreNode } from '@/lib/hero-nodes'
+import { heroNodes, coreNode } from '@/archive/hero-nodes'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { useIsMobile } from '@/hooks/useIsMobile'
 import { useVoiceInput } from '@/hooks/useVoiceInput'
-import { getColor, findRelevantNode } from '@/lib/hero-utils'
+import { getColor, findRelevantNode } from '@/archive/hero-utils'
 import HeroActively from './HeroActively'
 
 // Constants for SVG layout

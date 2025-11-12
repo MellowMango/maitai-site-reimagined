@@ -4,7 +4,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ShieldCheck, Zap, BadgeDollarSign, Camera, Mic, MessageSquare } from 'lucide-react'; // Added Mic, MessageSquare
 import { cn } from '@/lib/utils';
-import { IfVoice, IfText, IfBoth } from '@/components/FocusModeWrappers'; // Import wrappers
+import { IfVoice, IfText, IfBoth } from '@/archive/FocusModeWrappers'; // Import wrappers
 
 // Define features for different modes
 const voiceFeatures = [

@@ -2,7 +2,7 @@
 
 import React, { Suspense, useState, useEffect, useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { SectionWrapper } from '@/components/SectionWrapper';
+import { SectionWrapper } from '@/archive/sprint-11A/SectionWrapper';
 import benchmarkData from '@/lib/benchmarks.json';
 import * as THREE from 'three';
 

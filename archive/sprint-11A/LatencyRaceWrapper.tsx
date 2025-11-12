@@ -3,7 +3,7 @@
 import dynamic from 'next/dynamic';
 
 // Dynamically import the LatencyRace component with no SSR to avoid webGL issues during SSR
-const LatencyRace = dynamic(() => import('@/components/LatencyRace'), { ssr: false });
+const LatencyRace = dynamic(() => import('@/archive/sprint-11A/LatencyRace'), { ssr: false });
 
 export default function LatencyRaceWrapper() {
   // Feature flag for UI demos from sprint docs

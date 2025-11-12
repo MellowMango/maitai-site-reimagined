@@ -4,10 +4,10 @@ import dynamic from 'next/dynamic';
 import React from 'react';
 
 // Dynamically import components that might use client-only features or need SSR disabled
-const PortalScrub = dynamic(() => import('@/components/PortalScrub')); // ssr: false not needed if component itself is client-side
-const LoRASwap = dynamic(() => import('@/components/LoRASwap'), { ssr: false }); // Keep ssr: false here as it uses Audio
+const PortalScrub = dynamic(() => import('@/archive/PortalScrub')); // ssr: false not needed if component itself is client-side
+const LoRASwap = dynamic(() => import('@/archive/LoRASwap'), { ssr: false }); // Keep ssr: false here as it uses Audio
 // Import IntentPlayground normally as it's already a client component
-import IntentPlayground from '@/components/IntentPlayground';
+import IntentPlayground from '@/archive/IntentPlayground';
 
 export default function InteractiveDemos() {
   // Feature flag to show interactive UI demos

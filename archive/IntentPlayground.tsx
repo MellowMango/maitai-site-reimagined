@@ -18,7 +18,6 @@ import { Textarea } from '@/components/ui/textarea';
 //   MarkerType
 // } from 'reactflow'; 
 // // Removed React Flow CSS import as the library is uninstalled
-import { PlayIcon } from '@radix-ui/react-icons';
 import { yamlToGraph, IntentGraph } from '@/lib/intent-yaml'; // Keep this if intent-yaml is still relevant
 import { motion } from 'framer-motion';
 import { toast } from 'react-hot-toast'; // Assuming react-hot-toast is installed

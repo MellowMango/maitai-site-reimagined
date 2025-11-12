@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image'; // Using next/image for optimization
 import usePrefersReducedMotion from '@/hooks/usePrefersReducedMotion';
-import { phrases, panels } from '@/lib/heroCopy'; // Assuming icon filenames match pngs
+import { heroPhrases as phrases, heroPanels as panels } from '@/lib/heroCopy'; // Assuming icon filenames match pngs
 import { cn } from '@/lib/utils';
 
 const ASSET_ROOT = '/hero-flow-assets'; // Corrected asset path
@@ -154,13 +154,13 @@ const HeroActively = () => {
               <Image
                 // Confirm exact filenames in public/hero-actively-assets/
                 src={`${ASSET_ROOT}/${currentPanel.icon.replace('.svg', '.png')}`} 
-                alt={currentPanel.label}
+                alt={currentPanel.title}
                 width={48} // Slightly larger icon
                 height={48}
                 className="mb-3 object-contain"
               />
               <span className="text-base font-semibold text-maitai-vampire-black">
-                {currentPanel.label}
+                {currentPanel.title}
               </span>
             </motion.div>
           )}

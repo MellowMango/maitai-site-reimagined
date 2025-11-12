@@ -2,7 +2,7 @@
 
 import React from 'react';
 // Removed unused imports: dynamic, motion, Image, Button, Link
-import OrchestratorConstellation from '@/components/OrchestratorConstellation';
+import OrchestratorConstellation from '@/archive/OrchestratorConstellation';
 
 // Removed feature flag logic
 
